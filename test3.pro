@@ -16,14 +16,14 @@ SOURCES += main.cpp\
     mylistwidget.cpp \
     mylistwidgetreceptor.cpp \
     images.cpp \
-    database.cpp \
-    model.cpp
+    imageinsequence.cpp \
+    sequence.cpp
 
 HEADERS  += mainwindow.h \
     mylistwidget.h \
     mylistwidgetreceptor.h \
     images.h \
-    database.h \
-    model.h
+    imageinsequence.h \
+    sequence.h
 
 FORMS    += mainwindow.ui

@@ -1,0 +1,2 @@
+#include "imageinsequence.h"
+
