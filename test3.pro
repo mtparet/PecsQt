@@ -4,8 +4,6 @@
 #
 #-------------------------------------------------
 
-include (/home/mtparet3/dquest/src/dquest.pri)
-
 QT       += core gui sql
 
 TARGET = test3

@@ -9,9 +9,8 @@ class Util
 {
 public:
     static QString folderImage;
-    static bool saveFile(QStringList fileList);
+    static bool saveFiles(QStringList fileList);
     static bool createSequence(QMap<QString,int> mapOrder,QString name);
-    static QMap<QString,int>  getListImageInSequence(Sequence* f);
 
 };
 

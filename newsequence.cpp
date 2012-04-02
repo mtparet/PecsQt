@@ -23,7 +23,7 @@ void NewSequence::on_pushButton_clicked()
 
 void NewSequence::on_buttonBox_accepted()
 {
-    Util::saveFile(fileList);
+    Util::saveFiles(fileList);
     Util::createSequence(mapOrder,name);
 
 }
