@@ -20,7 +20,7 @@ bool Util::saveFiles(QStringList fileList){
     return check;
 }
 
-bool Util::createSequence(QMap<QString,int> mapOrder,QString name){
+Sequence Util::createSequence(QMap<QString,int> mapOrder,QString name){
     Sequence sq;
     sq.name = name;
 
@@ -38,7 +38,10 @@ bool Util::createSequence(QMap<QString,int> mapOrder,QString name){
         is.orderIn = mapOrder.value(str);
         is.img = image;
 
+        sq.listImageInSequence << is;
+
     }
 
-    return true;
+
+    return sq;
 }

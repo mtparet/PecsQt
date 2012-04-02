@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     imageinsequence.cpp \
     sequence.cpp \
     newsequence.cpp \
-    util.cpp
+    util.cpp \
+    memory.cpp
 
 HEADERS  += mainwindow.h \
     mylistwidget.h \
@@ -26,7 +27,8 @@ HEADERS  += mainwindow.h \
     imageinsequence.h \
     sequence.h \
     newsequence.h \
-    util.h
+    util.h \
+    memory.h
 
 FORMS    += mainwindow.ui \
     newsequence.ui

@@ -10,7 +10,7 @@ class Util
 public:
     static QString folderImage;
     static bool saveFiles(QStringList fileList);
-    static bool createSequence(QMap<QString,int> mapOrder,QString name);
+    static Sequence createSequence(QMap<QString,int> mapOrder,QString name);
 
 };
 

@@ -2,6 +2,9 @@
 #include "ui_newsequence.h"
 #include "util.h"
 #include <QFileDialog>
+#include "memory.h"
+
+extern Memory *myMem;
 
 NewSequence::NewSequence(QWidget *parent) :
     QDialog(parent),
