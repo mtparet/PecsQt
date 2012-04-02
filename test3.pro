@@ -28,7 +28,8 @@ HEADERS  += mainwindow.h \
     sequence.h \
     newsequence.h \
     util.h \
-    memory.h
+    memory.h \
+    global.h
 
 FORMS    += mainwindow.ui \
     newsequence.ui

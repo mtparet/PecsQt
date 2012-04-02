@@ -5,10 +5,11 @@
 #include "util.h"
 #include "imageinsequence.h"
 #include "memory.h"
+#include "global.h"
 #include <QDebug>
 #include <QMetaObject>
 
-static Memory myMem;
+Memory myMem;
 
 int main(int argc, char *argv[])
 {

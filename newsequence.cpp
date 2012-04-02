@@ -3,8 +3,7 @@
 #include "util.h"
 #include <QFileDialog>
 #include "memory.h"
-
-extern Memory *myMem;
+#include "global.h"
 
 NewSequence::NewSequence(QWidget *parent) :
     QDialog(parent),
@@ -27,8 +26,13 @@ void NewSequence::on_pushButton_clicked()
 void NewSequence::on_buttonBox_accepted()
 {
     Util::saveFiles(fileList);
-    Util::createSequence(mapOrder,name);
+    QString str;
+    foreach(str, fileList){
+        mapOrder.insert(str,4);
+    }
 
+    Sequence sq = Util::createSequence(mapOrder,name);
+    myMem.listSequence << sq;
 }
 
 void NewSequence::on_lineEdit_textEdited(const QString &arg1)
