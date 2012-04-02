@@ -11,6 +11,12 @@ class ImageInSequence
   Images img;
   QByteArray toJson();
   QVariantMap toVariantMap();
+  bool fromJson(QByteArray json);
+  bool fromVariant(QVariantMap variantMap);
+
+
+
+
 
 };
 

@@ -14,6 +14,10 @@ public:
       QList<ImageInSequence> listImageInSequence;
       QByteArray toJson();
       QVariantMap toVariantMap();
+      bool fromVariant(QVariantMap variantMap);
+      bool fromJson(QByteArray json);
+
+
 
 
 private:

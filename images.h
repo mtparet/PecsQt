@@ -12,6 +12,8 @@ class Images
     QString image_file;
     QByteArray toJson();
     QVariantMap toVariantMap();
+    bool fromJson(QByteArray json);
+    bool fromVariant(QVariantMap variantMap);
 
 
 };
