@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui
 
 TARGET = test3
 TEMPLATE = app
@@ -30,3 +30,7 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui \
     newsequence.ui
+
+LIBS += -L/home/mtparet3/qjson/build/lib -lqjson
+INCLUDEPATH = /home/mtparet3/qjson/src/
+

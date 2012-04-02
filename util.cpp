@@ -36,7 +36,7 @@ bool Util::createSequence(QMap<QString,int> mapOrder,QString name){
 
         ImageInSequence is;
         is.orderIn = mapOrder.value(str);
-        is.a = image;
+        is.img = image;
 
     }
 
