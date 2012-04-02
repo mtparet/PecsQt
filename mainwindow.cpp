@@ -1,12 +1,38 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "newsequence.h"
+#include <QMenu>
+#include <QMenuBar>
 #include <QLabel>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+
     ui->setupUi(this);
+
+    /* menu */
+
+      // Creating a menu "File"
+      QMenu* menuFile = new QMenu("Fichier");
+
+      // And adding the menu "File" in the menu bar
+      ui->menuBar->addMenu(menuFile);
+
+      // Now we add our items
+      // Add an item "Open"
+      menuFile->addAction(QString("Nouvelle sequence"), this, SLOT(open_newsequence()));
+
+      // Add a separator
+      menuFile->addSeparator();
+
+      // Add an item "Bye" connected to the slot  "close" of the mainWindow
+      menuFile->addAction("Quitter", this, SLOT(close()) );
+
+    /* ---- */
+
     QIcon *icon = new QIcon("/home/mtparet3/QtSDK/test3/images/1.jpg");
     QIcon *icon1 = new QIcon("/home/mtparet3/QtSDK/test3/images/2.jpg");
     QIcon *icon2 = new QIcon("/home/mtparet3/QtSDK/test3/images/3.jpg");
@@ -51,3 +77,10 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::open_newsequence()
+{
+    NewSequence *newSequence = new NewSequence(this);
+    newSequence->show();
+}
+

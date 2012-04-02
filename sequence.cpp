@@ -5,32 +5,16 @@ void Sequence::addImageInSequence(ImageInSequence is){
         initIs();
     }
     int i = 0;
-
+    DQForeignKey<ImageInSequence> *istest;
     do{
-        DQForeignKey<ImageInSequence> *is2 = listIs.value(i);
+        istest = listIs.value(i);
         i++;
-    }while(is2.isLoaded() && (listIs.count() > i));
+    }while( istest->isLoaded() && (listIs.count() > i));
 
     if(listIs.count() > i){
         i--;
         *listIs[i] = is;
     }
-}
-
-QList<DQForeignKey<ImageInSequence>*> Sequence::getListImageInSequence(){
-
-    QList<DQForeignKey<ImageInSequence>*> iis;
-
-    int i = 0;
-    while((listIs.count() > i)){
-        if(listIs.value(i)->isLoaded()){
-            iis.insert(iis.count(),listIs.value(i));
-        }
-
-        i++;
-    }
-
-    return iis;
 }
 
 bool Sequence::initIs(){

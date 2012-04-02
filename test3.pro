@@ -17,13 +17,18 @@ SOURCES += main.cpp\
     mylistwidgetreceptor.cpp \
     images.cpp \
     imageinsequence.cpp \
-    sequence.cpp
+    sequence.cpp \
+    newsequence.cpp \
+    util.cpp
 
 HEADERS  += mainwindow.h \
     mylistwidget.h \
     mylistwidgetreceptor.h \
     images.h \
     imageinsequence.h \
-    sequence.h
+    sequence.h \
+    newsequence.h \
+    util.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    newsequence.ui

@@ -3,6 +3,7 @@
 #include "mainwindow.h"
 #include "images.h"
 #include "sequence.h"
+#include "util.h"
 #include "imageinsequence.h"
 #include <QDebug>
 #include <QMetaObject>
@@ -27,8 +28,12 @@ int main(int argc, char *argv[])
 
     connection.createTables(); // Create table for all added model
 
+    QMap<QString,int> listImage;
+    listImage.insert("keybonjour",5);
+    listImage.insert("key2",10);
+    Util::createSequence(listImage,"essai");
 
-    //Images.metaObject()->
+/*
     Images image;
     image.image_file = "testaz";
     image.name ="ici";
@@ -36,32 +41,38 @@ int main(int argc, char *argv[])
     qDebug() << image.save();
     qDebug() << image.id;
 
+
     ImageInSequence is;
     is.orderIn = 0;
-    qDebug() << "loaded";
-    qDebug() << is.a.isLoaded();
+
     is.a = image;
-     qDebug() << is.a.isLoaded();
     qDebug() << is.save();
+
 
     Sequence sq;
     sq.name = "sequence1";
     sq.addImageInSequence(is);
     qDebug() << sq.save();
-    sq.getListImageInSequence();
+    //sq.getListImageInSequence();
 
 
-    DQList<ImageInSequence> list = ImageInSequence::objects().all();
+    DQList<Sequence> list = Sequence::objects().all();
 
        qDebug() << list;
 
        int n = list.size();
        qDebug() << "The friend of tester1: ";
        for (int i = 0 ; i < n;i++) {
-           ImageInSequence* f = list.at(i);
-
-           qDebug() << f->a->image_file;
-           /*
+           Sequence* f = list.at(i);
+            qDebug() << "is1" <<  "sequence" << f->is1.isLoaded();
+           qDebug() << "is1" <<  "sequence" << f->is1->orderIn;
+           qDebug() << "is1" <<  "sequence" << f->is1.isLoaded();
+           qDebug() << "is2" <<  "sequence" << f->is2.isLoaded();
+          qDebug() << "is2" <<  "sequence" << f->is2->orderIn;
+          qDebug() << "is2" <<  "sequence" << f->is2.isLoaded();
+          QMap<QString,int> listImage =  Util::getListImageInSequence(f);
+          qDebug() << listImage;
+          /*
              f->b is a DQForeignKey field. DQForeignKey support -> operation overloading
              and you can access the field of the foreign  table. In this case,
              it is User. So f->b->userId is the equivalent to user.userId.
@@ -70,8 +81,31 @@ int main(int argc, char *argv[])
 
              Morever, the query above will not access the "user" table. DQForeignKey will
              load the foreign table's record on request automatically.
-            */
+
        }
+
+       DQList<ImageInSequence> list2 = ImageInSequence::objects().all();
+
+          qDebug() << list2;
+
+          n = list2.size();
+          qDebug() << "The friend of tester1: ";
+          for (int i = 0 ; i < n;i++) {
+              ImageInSequence* f = list2.at(i);
+
+              qDebug() << "imagesequence" << f->a->image_file;
+              /*
+                f->b is a DQForeignKey field. DQForeignKey support -> operation overloading
+                and you can access the field of the foreign  table. In this case,
+                it is User. So f->b->userId is the equivalent to user.userId.
+
+                  FriendShip::objects().filter(DQWhere("a = ", tester1.id )).all()
+
+                Morever, the query above will not access the "user" table. DQForeignKey will
+                load the foreign table's record on request automatically.
+
+          }
+*/
 
     MainWindow w;
     w.show();
