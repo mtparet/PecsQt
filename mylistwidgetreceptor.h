@@ -1,9 +1,10 @@
 #ifndef MYLISTWIDGETRECEPTOR_H
 #define MYLISTWIDGETRECEPTOR_H
 
-#include <QListWidget>
+#include "mybaselistwidget.h"
 
-class MyListWidgetReceptor : public QListWidget
+
+class MyListWidgetReceptor : public MyBaseListWidget
 {
     Q_OBJECT
 public:

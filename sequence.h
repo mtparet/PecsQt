@@ -3,7 +3,6 @@
 #include <imageinsequence.h>
 #include <QString>
 #include <QVariantMap>
-
 #include <QMap>
 
 class Sequence
@@ -14,6 +13,9 @@ public:
       QList<ImageInSequence> listImageInSequence;
       QByteArray toJson();
       QVariantMap toVariantMap();
+      bool fromQMap(QList<QString> listName,QString name);
+      bool setOrder(QMap<QString,int> orderMap);
+      bool changeOrderOf(QString name, int orderIn);
       bool fromVariant(QVariantMap variantMap);
       bool fromJson(QByteArray json);
 

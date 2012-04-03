@@ -33,31 +33,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     /* ---- */
 
-    QIcon *icon = new QIcon("/home/mtparet3/QtSDK/test3/images/1.jpg");
-    QIcon *icon1 = new QIcon("/home/mtparet3/QtSDK/test3/images/2.jpg");
-    QIcon *icon2 = new QIcon("/home/mtparet3/QtSDK/test3/images/3.jpg");
-    QListWidgetItem *a = new QListWidgetItem("aa");
-    a->setIcon(*icon);
-    ui->listWidget_2->addItem(a);
+    QString name = "/home/mtparet3/QtSDK/test3/images/1.jpg";
+    QString name1 = "/home/mtparet3/QtSDK/test3/images/2.jpg";
+    QString name2 = "/home/mtparet3/QtSDK/test3/images/3.jpg";
 
-    QListWidgetItem *c = new QListWidgetItem("aa");
-    c->setIcon(*icon1);
-    ui->listWidget_2->addItem(c);
+    ui->listWidget_2->addImage(name2,QIcon(name2),1);
+    ui->listWidget_2->addImage(name1,QIcon(name1),1);
+    ui->listWidget_2->addImage(name,QIcon(name),1);
 
-    QListWidgetItem *b = new QListWidgetItem("aa");
-    b->setIcon(*icon2);
-    ui->listWidget_2->addItem(b);
-
-    QSize *image_size = new QSize(100,100);
-
-
-    ui->listWidget_2->setIconSize(*image_size);
-    ui->listWidget_2->setMaximumHeight(image_size->height()+10);
-    ui->listWidget_2->setGridSize(*image_size);
-
-    ui->listWidget->setMaximumHeight(image_size->height()+10);
-    ui->listWidget->setIconSize(*image_size);
-    ui->listWidget->setGridSize(*image_size);
 
     /* TODO réimpliément QDropEvent
     fonction */

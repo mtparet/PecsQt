@@ -3,7 +3,7 @@
 #include <QDropEvent>
 
 MyListWidgetReceptor::MyListWidgetReceptor(QWidget *parent) :
-    QListWidget(parent)
+    MyBaseListWidget(parent)
 {
     setDragDropMode(QAbstractItemView::DragDrop);
     setDefaultDropAction(Qt::MoveAction);

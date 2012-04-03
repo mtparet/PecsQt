@@ -1,9 +1,9 @@
 #ifndef MYLISTWIDGET_H
 #define MYLISTWIDGET_H
 
-#include <QListWidget>
+#include "mybaselistwidget.h"
 
-class MyListWidget : public QListWidget
+class MyListWidget : public MyBaseListWidget
 {
     Q_OBJECT
 public:

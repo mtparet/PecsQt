@@ -2,7 +2,7 @@
 #include <QDebug>
 
 MyListWidget::MyListWidget(QWidget *parent) :
-    QListWidget(parent)
+   MyBaseListWidget(parent)
 {
     setDragDropMode(QAbstractItemView::DragDrop);
     setDefaultDropAction(Qt::MoveAction);

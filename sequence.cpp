@@ -46,6 +46,53 @@ bool Sequence::fromVariant(QVariantMap variantMap){
     return true;
 }
 
+bool Sequence::changeOrderOf(QString name, int orderIn){
+    ImageInSequence imgSeq;
+    int i = 0;
+    for(i = 0; i < listImageInSequence.count(); i++){
+        imgSeq = listImageInSequence.value(i);
+        if(imgSeq.img.name == name){
+            imgSeq.orderIn = orderIn;
+            listImageInSequence.replace(i,imgSeq);
+        }
+    }
+
+    return true;
+}
+
+bool Sequence::setOrder(QMap<QString,int> orderMap){
+
+    QList<QString> keysList = orderMap.keys();
+    QString str;
+    foreach(str,keysList){
+        this->changeOrderOf(str,orderMap.value(str));
+    }
+
+    return true;
+}
+
+bool  Sequence::fromQMap(QList<QString> listName,QString name){
+
+    this->name = name;
+
+    QString str;
+    int order = 1;
+    foreach(str, listName){
+        Images image;
+        image.image_file = str;
+        image.name = str;
+
+        ImageInSequence is;
+        is.orderIn = order;
+        is.img = image;
+
+        listImageInSequence << is;
+        order++;
+    }
+
+    return true;
+}
+
 
 
 
