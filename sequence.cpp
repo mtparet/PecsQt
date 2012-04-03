@@ -1,4 +1,5 @@
 #include <sequence.h>
+#include <QStringList>
 #include "serializer.h"
 #include "parser.h"
 
@@ -71,7 +72,7 @@ bool Sequence::setOrder(QMap<QString,int> orderMap){
     return true;
 }
 
-bool  Sequence::fromQMap(QList<QString> listName,QString name){
+bool  Sequence::fromQMap(QStringList listName,QString name){
 
     this->name = name;
 

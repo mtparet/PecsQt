@@ -12,7 +12,8 @@ MyBaseListWidget::MyBaseListWidget(QWidget *parent) :
 
 void MyBaseListWidget::addImage(QString name,QIcon image, int order){
     QIcon *icon = new QIcon(image);
-    QListWidgetItem *a = new QListWidgetItem(QString::number(order));
+    QListWidgetItem *a = new QListWidgetItem("");
+    a->setData(31,name);
     a->setIcon(*icon);
     this->addItem(a);
 

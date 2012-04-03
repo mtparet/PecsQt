@@ -52,7 +52,7 @@
     <string>Nom de la séquence :</string>
    </property>
   </widget>
-  <widget class="QListWidget" name="listWidget">
+  <widget class="MyListWidgetInternalChange" name="listWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -76,6 +76,13 @@
    </property>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MyListWidgetInternalChange</class>
+   <extends>QListWidget</extends>
+   <header>mylistwidgetinternalchange.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

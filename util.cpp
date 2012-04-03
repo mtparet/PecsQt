@@ -17,6 +17,7 @@ QStringList Util::getFileName(QStringList fileList){
         QFileInfo fileInfo(file);
         nameList << fileInfo.fileName();
     }
+    return nameList;
 }
 
 bool Util::saveFiles(QStringList fileList){

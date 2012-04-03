@@ -13,7 +13,7 @@ public:
       QList<ImageInSequence> listImageInSequence;
       QByteArray toJson();
       QVariantMap toVariantMap();
-      bool fromQMap(QList<QString> listName,QString name);
+      bool fromQMap(QStringList listName,QString name);
       bool setOrder(QMap<QString,int> orderMap);
       bool changeOrderOf(QString name, int orderIn);
       bool fromVariant(QVariantMap variantMap);

@@ -4,6 +4,7 @@
 #include <QFileDialog>
 #include "memory.h"
 #include "globval.h"
+#include "editordersequence.h"
 
 NewSequence::NewSequence(QWidget *parent) :
     QDialog(parent),
@@ -26,10 +27,13 @@ void NewSequence::on_pushButton_clicked()
 void NewSequence::on_buttonBox_accepted()
 {
     Util::saveFiles(fileList);
-    QList<QString> listeName = Util::getFileName(fileList);
+    QStringList listeName = Util::getFileName(fileList);
     Sequence sq;
     sq.fromQMap(listeName,name);
     myMem.listSequence << sq;
+
+    EditOrderSequence *editOrder = new EditOrderSequence(this,&sq);
+    editOrder->show();
 }
 
 void NewSequence::on_lineEdit_textEdited(const QString &arg1)
