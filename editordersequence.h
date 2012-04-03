@@ -15,9 +15,13 @@ class EditOrderSequence : public QDialog
 public:
     explicit EditOrderSequence(QWidget *parent = 0, Sequence *f = 0);
     ~EditOrderSequence();
+signals:
+   void updateNewSeq();
     
 private slots:
     void on_buttonBox_accepted();
+
+
 
 private:
     Ui::EditOrderSequence *ui;

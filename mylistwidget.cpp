@@ -8,6 +8,7 @@ MyListWidget::MyListWidget(QWidget *parent) :
     setDefaultDropAction(Qt::MoveAction);
     setFlow(QListView::LeftToRight);
     setAlternatingRowColors(true);
+    setSizePolicy(QSizePolicy::Minimum,QSizePolicy::Minimum);
 }
 
 void MyListWidget::dropEvent(QDropEvent *event)

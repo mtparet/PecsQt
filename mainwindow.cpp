@@ -1,10 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "newsequence.h"
+#include "mylistwidget.h"
+#include "sequence.h"
+#include "widgetinselector.h"
+#include "globval.h"
+#include "util.h"
 #include <QMenu>
 #include <QMenuBar>
 #include <QLabel>
-
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -33,13 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     /* ---- */
 
-    QString name = "/home/mtparet3/QtSDK/test3/images/1.jpg";
-    QString name1 = "/home/mtparet3/QtSDK/test3/images/2.jpg";
-    QString name2 = "/home/mtparet3/QtSDK/test3/images/3.jpg";
-
-    ui->listWidget_2->addImage(name2,QIcon(name2),1);
-    ui->listWidget_2->addImage(name1,QIcon(name1),1);
-    ui->listWidget_2->addImage(name,QIcon(name),1);
+    refreshData();
 
 
     /* TODO réimpliément QDropEvent
@@ -61,9 +59,37 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::refreshData(){
+    chargeListSequenceInSelector(myMem.listSequence);
+
+
+    QWidget *viewport = new QWidget;
+    viewport->setLayout(ui->verticalLayout);
+
+    ui->scrollArea->setWidget(viewport);
+
+}
+
+void MainWindow::chargeListSequenceInSelector(QList<Sequence> listSeq){
+
+    ui->verticalLayout = new QVBoxLayout (ui->centralWidget);
+    Sequence seq;
+    foreach(seq,listSeq){
+        widgetInSelector *mylistSelector = new widgetInSelector(ui->centralWidget,&seq);
+        ui->verticalLayout->addWidget(mylistSelector);
+    }
+}
+
+
+
 void MainWindow::open_newsequence()
 {
     NewSequence *newSequence = new NewSequence(this);
+    connect(newSequence, SIGNAL(updateUi()), this, SLOT(updateUi()));
     newSequence->show();
+}
+
+void MainWindow::updateUi(){
+    this->refreshData();
 }
 

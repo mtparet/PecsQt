@@ -1,6 +1,7 @@
 #include "editordersequence.h"
 #include "ui_editordersequence.h"
 #include "globval.h"
+#include "util.h"
 
 
 EditOrderSequence::EditOrderSequence(QWidget *parent, Sequence *f) :
@@ -27,7 +28,7 @@ void EditOrderSequence::on_buttonBox_accepted()
     }
 
     f->setOrder(orderMap);
-    Sequence s = myMem.listSequence.first();
-    s.name;
+    Util::saveOneSeq(*f);
+    this->updateNewSeq();
 
 }

@@ -22,7 +22,9 @@ SOURCES += main.cpp\
     editordersequence.cpp \
     mylistwidgetinternalchange.cpp \
     mybaselistwidget.cpp \
-    globval.cpp
+    globval.cpp \
+    mylistselector.cpp \
+    widgetinselector.cpp
 
 HEADERS  += mainwindow.h \
     mylistwidget.h \
@@ -36,11 +38,14 @@ HEADERS  += mainwindow.h \
     editordersequence.h \
     mylistwidgetinternalchange.h \
     mybaselistwidget.h \
-    globval.h
+    globval.h \
+    mylistselector.h \
+    widgetinselector.h
 
 FORMS    += mainwindow.ui \
     newsequence.ui \
-    editordersequence.ui
+    editordersequence.ui \
+    widgetinselector.ui
 
 LIBS += -L/home/mtparet3/qjson/build/lib -lqjson
 INCLUDEPATH = /home/mtparet3/qjson/src/

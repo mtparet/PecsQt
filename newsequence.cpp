@@ -28,15 +28,20 @@ void NewSequence::on_buttonBox_accepted()
 {
     Util::saveFiles(fileList);
     QStringList listeName = Util::getFileName(fileList);
-    Sequence sq;
+
     sq.fromQMap(listeName,name);
     myMem.listSequence << sq;
 
     EditOrderSequence *editOrder = new EditOrderSequence(this,&sq);
+    connect(editOrder, SIGNAL(updateNewSeq()), this, SLOT(updateNewSeq()));
     editOrder->show();
 }
 
 void NewSequence::on_lineEdit_textEdited(const QString &arg1)
 {
     name = arg1;
+}
+
+void NewSequence::updateNewSeq(){
+    this->updateUi();
 }
