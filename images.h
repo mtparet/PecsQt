@@ -8,6 +8,8 @@ class Images
 {
 
   public:
+    Images();
+    Images(Images *img);
     QString name;
     QString image_file;
     QByteArray toJson();

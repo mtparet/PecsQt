@@ -7,6 +7,9 @@ class Memory
 {
 public:
     QList<Sequence> listSequence;
+    bool replace(Sequence f);
+    bool remove(Sequence f);
+
 };
 
 #endif // MEMORY_H

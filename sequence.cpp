@@ -3,6 +3,20 @@
 #include "serializer.h"
 #include "parser.h"
 
+Sequence::Sequence(){
+
+}
+
+Sequence::Sequence(Sequence *sq){
+    this->name = sq->name;
+    ImageInSequence is;
+    foreach(is,sq->listImageInSequence){
+        ImageInSequence is2 = new ImageInSequence(is);
+        this->listImageInSequence << is2;
+    }
+
+}
+
 QByteArray Sequence::toJson(){
     QVariantMap sequence = this->toVariantMap();
     QJson::Serializer serializer;

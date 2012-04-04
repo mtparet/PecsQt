@@ -10,8 +10,8 @@ OneReorganizeWidget::OneReorganizeWidget(QWidget *parent,Sequence *f) :
     ui(new Ui::OneReorganizeWidget)
 {
     ui->setupUi(this);
-    this->f = f;
-    ui->listWidget->chargeListImageInsequence(f->listImageInSequence);
+    this->myS = new Sequence(f);
+    ui->listWidget->chargeListImageInsequence(myS->listImageInSequence, true);
 }
 
 OneReorganizeWidget::~OneReorganizeWidget()
@@ -21,14 +21,14 @@ OneReorganizeWidget::~OneReorganizeWidget()
 
 void OneReorganizeWidget::on_EditerButton_clicked()
 {
-    EditOrderSequence *editOrder = new EditOrderSequence(this,f);
+    EditOrderSequence *editOrder = new EditOrderSequence(this,myS);
     editOrder->show();
 }
 
 void OneReorganizeWidget::on_RemoveButton_clicked()
 {
-    Util::removeOneSeq(*f);
-    //myMem.listSequence.removeOne(*f);
+    Util::removeOneSeq(myS);
+    myMem.remove(myS);
     removeMe(this);
 
 }

@@ -9,6 +9,8 @@ class Sequence
 {
 
 public:
+    Sequence();
+    Sequence(Sequence *sq);
       QString name;
       QList<ImageInSequence> listImageInSequence;
       QByteArray toJson();

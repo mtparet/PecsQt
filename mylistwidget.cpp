@@ -13,6 +13,6 @@ MyListWidget::MyListWidget(QWidget *parent) :
 
 void MyListWidget::dropEvent(QDropEvent *event)
 {
-    qDebug() << "This is my custom dropEvent() method!";
+    //qDebug() << "This is my custom dropEvent() method!";
     QListWidget::dropEvent(event);
 }

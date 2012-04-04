@@ -9,9 +9,9 @@ EditOrderSequence::EditOrderSequence(QWidget *parent, Sequence *f) :
     ui(new Ui::EditOrderSequence)
 {
     ui->setupUi(this);
-    this->f = f;
-    ui->listWidget->chargeListImageInsequence(f->listImageInSequence);
-    ui->lineEdit->setText(f->name);
+    this->f = new Sequence(f);
+    ui->listWidget->chargeListImageInsequence(this->f->listImageInSequence,true);
+    ui->lineEdit->setText(this->f->name);
 }
 
 EditOrderSequence::~EditOrderSequence()
@@ -28,7 +28,8 @@ void EditOrderSequence::on_buttonBox_accepted()
     }
 
     f->setOrder(orderMap);
-    Util::saveOneSeq(*f);
+    myMem.replace(f);
+    Util::saveOneSeq(f);
     this->updateNewSeq();
 
 }

@@ -2,6 +2,15 @@
 #include "serializer.h"
 #include "parser.h"
 
+ImageInSequence::ImageInSequence(){
+
+}
+
+ImageInSequence::ImageInSequence(ImageInSequence *imIn){
+    this->img = new Images(imIn->img);
+    this->orderIn = imIn->orderIn;
+}
+
 QByteArray ImageInSequence::toJson(){
     QVariantMap imgsequence = this->toVariantMap();
     QJson::Serializer serializer;
@@ -34,5 +43,11 @@ bool ImageInSequence::fromVariant(QVariantMap variantMap){
     img.fromVariant(variantMap["img"].toMap());
     return true;
 }
+
+bool ImageInSequence::lessThan(ImageInSequence &a, ImageInSequence &b)
+{
+   return a.orderIn < b.orderIn;
+}
+
 
 

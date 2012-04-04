@@ -18,6 +18,7 @@ public:
     static bool removeOneSeq(Sequence sq);
     static bool removeAllSeq(QList<Sequence> listQ);
     static QList<Sequence> retrieveAllSeq();
+    static int random(int min, int max);
 
 
 

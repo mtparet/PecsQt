@@ -3,6 +3,15 @@
 #include "serializer.h"
 #include "parser.h"
 
+Images::Images(){
+
+}
+
+Images::Images(Images *img){
+    this->image_file = img->image_file;
+    this->name = img->image_file;
+}
+
 QByteArray Images::toJson(){
     QVariantMap image = this->toVariantMap();
     QJson::Serializer serializer;

@@ -116,4 +116,8 @@ bool Util::removeAllSeq(QList<Sequence> listQ){
     return true;
 }
 
+int Util::random(int min, int max){
+    return static_cast<int>(min + (static_cast<float>(qrand()) / RAND_MAX * (max - min + 1)));
+}
+
 

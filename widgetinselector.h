@@ -19,6 +19,7 @@ public:
     
 private:
     Ui::widgetInSelector *ui;
+    Sequence *myS;
 };
 
 #endif // WIDGETINSELECTOR_H

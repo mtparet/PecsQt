@@ -1,5 +1,7 @@
 #include "mybaselistwidget.h"
+#include "imageinsequence.h"
 #include "util.h"
+#include <QDebug>
 
 MyBaseListWidget::MyBaseListWidget(QWidget *parent) :
     QListWidget(parent)
@@ -29,8 +31,21 @@ void MyBaseListWidget::addImage(QString name,QIcon image, int order){
 }
 
 
-void MyBaseListWidget::chargeListImageInsequence(QList<ImageInSequence> listImg){
+void MyBaseListWidget::chargeListImageInsequence(QList<ImageInSequence> listImg, bool sorted){
     this->clear();
+    if(sorted){
+        qSort(listImg.begin(), listImg.end(), ImageInSequence::lessThan);
+    }else{
+        QList<ImageInSequence> randlistImg;
+        while(listImg.count() > 0){
+            int nb = listImg.count();
+            int rand = Util::random(0,nb);
+
+            randlistImg << listImg.value(rand);
+            listImg.removeAt(rand);
+        }
+        listImg = randlistImg;
+    }
     ImageInSequence imgSeq;
     foreach(imgSeq,listImg){
         this->addImage(imgSeq.img.name,Util::getIcon(imgSeq.img.image_file),imgSeq.orderIn);

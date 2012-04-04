@@ -71,10 +71,8 @@ void MainWindow::refreshData(){
 
     ui->scrollArea->setWidget(viewport);
 
-    ui->listWidget->chargeListImageInsequence(selectSeq.listImageInSequence);
-
     selectSeq = myMem.listSequence.first();
-    ui->listWidget_2->chargeListImageInsequence(selectSeq.listImageInSequence);
+    ui->listWidget_2->chargeListImageInsequence(selectSeq.listImageInSequence, false);
 
 }
 

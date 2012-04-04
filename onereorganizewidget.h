@@ -25,7 +25,7 @@ private slots:
 
 private:
     Ui::OneReorganizeWidget *ui;
-    Sequence *f;
+    Sequence *myS;
 };
 
 #endif // ONEREORGANIZEWIDGET_H
