@@ -22,11 +22,14 @@ public slots:
     
 private slots:
     void open_newsequence();
+    void open_organizesequence();
+
 
 
 private:
     Ui::MainWindow *ui;
     void chargeListSequenceInSelector(QList<Sequence> listSeq);
+    Sequence selectSeq;
 
 };
 

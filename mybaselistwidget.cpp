@@ -6,7 +6,7 @@ MyBaseListWidget::MyBaseListWidget(QWidget *parent) :
 {
     image_size = new QSize(100,100);
     this->setIconSize(*image_size);
-    this->setMaximumHeight(image_size->height());
+    this->setMaximumHeight(image_size->height()+8);
     this->setGridSize(*image_size);
 }
 
@@ -14,7 +14,7 @@ void MyBaseListWidget::setSizeIcon(QSize image_size2)
 {
     this->image_size = &image_size2;
     this->setIconSize(*image_size);
-    this->setMaximumHeight(image_size->height());
+    this->setMaximumHeight(image_size->height()+8);
     this->setGridSize(*image_size);
 }
 

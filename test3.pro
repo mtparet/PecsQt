@@ -24,7 +24,9 @@ SOURCES += main.cpp\
     mybaselistwidget.cpp \
     globval.cpp \
     mylistselector.cpp \
-    widgetinselector.cpp
+    widgetinselector.cpp \
+    organizedialog.cpp \
+    onereorganizewidget.cpp
 
 HEADERS  += mainwindow.h \
     mylistwidget.h \
@@ -40,12 +42,16 @@ HEADERS  += mainwindow.h \
     mybaselistwidget.h \
     globval.h \
     mylistselector.h \
-    widgetinselector.h
+    widgetinselector.h \
+    organizedialog.h \
+    onereorganizewidget.h
 
 FORMS    += mainwindow.ui \
     newsequence.ui \
     editordersequence.ui \
-    widgetinselector.ui
+    widgetinselector.ui \
+    organizedialog.ui \
+    onereorganizewidget.ui
 
 LIBS += -L/home/mtparet3/qjson/build/lib -lqjson
 INCLUDEPATH = /home/mtparet3/qjson/src/

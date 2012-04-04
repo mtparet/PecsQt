@@ -6,6 +6,7 @@
 #include "widgetinselector.h"
 #include "globval.h"
 #include "util.h"
+#include "organizedialog.h"
 #include <QMenu>
 #include <QMenuBar>
 #include <QLabel>
@@ -31,11 +32,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
       // Add a separator
       menuFile->addSeparator();
-
+      menuFile->addAction(QString("Organiser les séquences"), this, SLOT(open_organizesequence()));
+        menuFile->addSeparator();
       // Add an item "Bye" connected to the slot  "close" of the mainWindow
       menuFile->addAction("Quitter", this, SLOT(close()) );
 
     /* ---- */
+
 
     refreshData();
 
@@ -68,6 +71,11 @@ void MainWindow::refreshData(){
 
     ui->scrollArea->setWidget(viewport);
 
+    ui->listWidget->chargeListImageInsequence(selectSeq.listImageInSequence);
+
+    selectSeq = myMem.listSequence.first();
+    ui->listWidget_2->chargeListImageInsequence(selectSeq.listImageInSequence);
+
 }
 
 void MainWindow::chargeListSequenceInSelector(QList<Sequence> listSeq){
@@ -86,6 +94,13 @@ void MainWindow::open_newsequence()
 {
     NewSequence *newSequence = new NewSequence(this);
     connect(newSequence, SIGNAL(updateUi()), this, SLOT(updateUi()));
+    newSequence->show();
+}
+
+void MainWindow::open_organizesequence()
+{
+    OrganizeDialog *newSequence = new OrganizeDialog(this);
+    //connect(newSequence, SIGNAL(updateUi()), this, SLOT(updateUi()));
     newSequence->show();
 }
 
