@@ -31,8 +31,11 @@ void MyBaseListWidget::addImage(QString name,QIcon image, int order){
 }
 
 
-void MyBaseListWidget::chargeListImageInsequence(QList<ImageInSequence> listImg, bool sorted){
+void MyBaseListWidget::chargeListImageInsequence(Sequence sq, bool sorted){
+
     this->clear();
+    QList<ImageInSequence> listImg = sq.listImageInSequence;
+
     if(sorted){
         qSort(listImg.begin(), listImg.end(), ImageInSequence::lessThan);
     }else{
@@ -48,7 +51,7 @@ void MyBaseListWidget::chargeListImageInsequence(QList<ImageInSequence> listImg,
     }
     ImageInSequence imgSeq;
     foreach(imgSeq,listImg){
-        this->addImage(imgSeq.img.name,Util::getIcon(imgSeq.img.image_file),imgSeq.orderIn);
+        this->addImage(imgSeq.img.name,Util::getIcon(imgSeq.img.image_file, sq.name),imgSeq.orderIn);
     }
 
     this->setMaximumWidth(listImg.count() * (this->image_size->width() + 4));

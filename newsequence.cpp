@@ -26,7 +26,7 @@ void NewSequence::on_pushButton_clicked()
 
 void NewSequence::on_buttonBox_accepted()
 {
-    Util::saveFiles(fileList);
+    Util::saveImageFiles(fileList, name);
     QStringList listeName = Util::getFileName(fileList);
 
     sq.fromQMap(listeName,name);

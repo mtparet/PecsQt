@@ -8,7 +8,32 @@
 #include <QIcon>
 #include <QDebug>
 
-QString Util::folderImage = "images";
+QString Util::folderRacine = "ressources/";
+QString Util::folderImage = "images/";
+QString Util::folderSequence = "sequences/";
+
+bool Util::initFileSystem(){
+    bool result = true;
+
+    if(!QDir(Util::folderRacine).exists()){
+        if(!QDir().mkdir(Util::folderRacine)){
+            result = false;
+        }
+    }
+    if(!QDir(Util::folderRacine + Util::folderImage).exists()){
+        if(!QDir().mkdir(Util::folderRacine + Util::folderImage)){
+             result = false;
+        }
+    }
+    if(!QDir(Util::folderRacine + Util::folderSequence).exists()){
+        if(!QDir().mkdir(Util::folderRacine + Util::folderSequence)){
+             result = false;
+        }
+    }
+
+    return result;
+
+}
 
 QStringList Util::getFileName(QStringList fileList){
     QStringList nameList;
@@ -22,37 +47,44 @@ QStringList Util::getFileName(QStringList fileList){
     return nameList;
 }
 
-bool Util::saveFiles(QStringList fileList){
+bool Util::saveImageFiles(QStringList fileList,QString folder ){
     bool check;
+
+    if(!QDir(Util::folderRacine + Util::folderImage + folder ).exists()){
+        if(!QDir().mkdir(Util::folderRacine + Util::folderImage + folder)){
+            check = false;
+        }
+    }
+
     QFile file;
     QString str;
     foreach(str,fileList){
         file.setFileName(str);
         QFileInfo fileInfo(file);
-        check = file.copy(Util::folderImage + "/" + fileInfo.fileName());
+        check = file.copy( Util::folderRacine + Util::folderImage  + folder + "/" + fileInfo.fileName());
     }
 
 
     return check;
 }
 
-QImage Util::getImage(QString name){
-    QString image_location = Util::folderImage + "/" + name;
+QImage Util::getImageFile(QString name,QString folder){
+    QString image_location = Util::folderRacine + Util::folderImage + folder + "/" + name;
     QImage img;
     img.load(image_location);
     return img;
 }
 
-QIcon Util::getIcon(QString name){
-    QString image_location = Util::folderImage + "/" + name;
+QIcon Util::getIcon(QString name, QString folder){
+    QString image_location = Util::folderRacine + Util::folderImage + folder + "/" + name;
     QIcon img = QIcon(image_location);
     return img;
 }
 
 bool Util::saveOneSeq(Sequence f){
-    QByteArray json = f.toJson();
+     QByteArray json = f.toJson();
      QFile file;
-     QString location = f.name + ".json";
+     QString location = Util::folderRacine + Util::folderSequence + f.name + ".json";
      file.setFileName(location);
      bool test = file.open(QIODevice::WriteOnly);
      QDataStream out(&file);
@@ -67,13 +99,12 @@ bool Util::saveAllSeq(QList<Sequence> listQ){
     return true;
 }
 
-QList<Sequence> Util::retrieveAllSeq(){
+QList<Sequence> Util::retrieveSeqFiles(){
     QList<Sequence> listSq;
     QStringList fileJson;
-    QDir qDir;
+    QDir qDir(Util::folderRacine + Util::folderSequence);
     qDir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
     QFileInfoList listFile = qDir.entryInfoList();
-
 
     QFileInfo file1;
     foreach(file1,listFile){
@@ -87,7 +118,7 @@ QList<Sequence> Util::retrieveAllSeq(){
     QString str;
     foreach(str,fileJson){
         QFile file;
-        file.setFileName(str);
+        file.setFileName(Util::folderRacine + Util::folderSequence + str);
         file.open(QIODevice::ReadOnly);
         QDataStream in(&file);
         QByteArray json;
@@ -101,23 +132,54 @@ QList<Sequence> Util::retrieveAllSeq(){
     return listSq;
 }
 
-bool Util::removeOneSeq(Sequence sq){
+bool Util::removeSeqFile(Sequence sq){
     QFile file;
-    QString location = sq.name + ".json";
+    QString location = Util::folderRacine + Util::folderSequence + sq.name + ".json";
     file.setFileName(location);
     file.remove();
+    removeDir(Util::folderRacine + Util::folderImage + sq.name);
 }
 
-bool Util::removeAllSeq(QList<Sequence> listQ){
+bool Util::removeAllSeqFiles(QList<Sequence> listQ){
     Sequence sq;
     foreach(sq,listQ){
-        Util::removeOneSeq(sq);
+        Util::removeSeqFile(sq);
     }
     return true;
 }
 
 int Util::random(int min, int max){
     return static_cast<int>(min + (static_cast<float>(qrand()) / RAND_MAX * (max - min + 1)));
+}
+
+/*!
+   Delete a directory along with all of its contents.
+
+   \param dirName Path of directory to remove.
+   \return true on success; false on error.
+*/
+bool Util::removeDir(const QString &dirName)
+{
+    bool result = true;
+    QDir dir(dirName);
+
+    if (dir.exists(dirName)) {
+        Q_FOREACH(QFileInfo info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst)) {
+            if (info.isDir()) {
+                result = removeDir(info.absoluteFilePath());
+            }
+            else {
+                result = QFile::remove(info.absoluteFilePath());
+            }
+
+            if (!result) {
+                return result;
+            }
+        }
+        result = dir.rmdir(dirName);
+    }
+
+    return result;
 }
 
 

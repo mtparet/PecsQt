@@ -8,7 +8,7 @@ widgetInSelector::widgetInSelector(QWidget *parent,Sequence *f) :
     ui->setupUi(this);
     myS = new Sequence(f);
     ui->label->setText(myS->name);
-    ui->listWidget->chargeListImageInsequence(myS->listImageInSequence, false);
+    ui->listWidget->chargeListImageInsequence(myS, false);
 }
 
 widgetInSelector::~widgetInSelector()

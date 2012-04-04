@@ -11,7 +11,7 @@ OneReorganizeWidget::OneReorganizeWidget(QWidget *parent,Sequence *f) :
 {
     ui->setupUi(this);
     this->myS = new Sequence(f);
-    ui->listWidget->chargeListImageInsequence(myS->listImageInSequence, true);
+    ui->listWidget->chargeListImageInsequence(myS, true);
 }
 
 OneReorganizeWidget::~OneReorganizeWidget()
@@ -27,7 +27,7 @@ void OneReorganizeWidget::on_EditerButton_clicked()
 
 void OneReorganizeWidget::on_RemoveButton_clicked()
 {
-    Util::removeOneSeq(myS);
+    Util::removeSeqFile(myS);
     myMem.remove(myS);
     removeMe(this);
 

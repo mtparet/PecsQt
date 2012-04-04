@@ -9,16 +9,20 @@ class Util
 {
 public:
     static QString folderImage;
-    static bool saveFiles(QStringList fileList);
-    static QImage getImage(QString name);
+    static QString folderRacine;
+    static QString folderSequence;
+    static bool saveImageFiles(QStringList fileList,QString folder);
+    static QImage getImageFile(QString name,QString folder);
     static QStringList getFileName(QStringList fileList);
-    static QIcon getIcon(QString name);
+    static QIcon getIcon(QString name, QString folder);
     static bool saveOneSeq(Sequence f);
     static bool saveAllSeq(QList<Sequence> listQ);
-    static bool removeOneSeq(Sequence sq);
-    static bool removeAllSeq(QList<Sequence> listQ);
-    static QList<Sequence> retrieveAllSeq();
+    static bool removeSeqFile(Sequence sq);
+    static bool removeAllSeqFiles(QList<Sequence> listQ);
+    static QList<Sequence> retrieveSeqFiles();
     static int random(int min, int max);
+    static bool removeDir(const QString &dirName);
+    static bool initFileSystem();
 
 
 

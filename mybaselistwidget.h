@@ -2,13 +2,14 @@
 #define MYBASELISTWIDGET_H
 #include <QListWidget>
 #include "imageinsequence.h"
+#include "sequence.h"
 
 class MyBaseListWidget: public QListWidget
 {
     Q_OBJECT
 public:
     explicit MyBaseListWidget(QWidget *parent = 0);
-    void chargeListImageInsequence(QList<ImageInSequence> listImg, bool sorted);
+    void chargeListImageInsequence(Sequence sq, bool sorted);
     void addImage(QString name,QIcon image, int order);
     void setSizeIcon(QSize image_size);
 
