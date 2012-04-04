@@ -1,6 +1,6 @@
 #include "mylistselector.h"
 
-MListSelector::MListSelector(QWidget *parent): MyBaseListWidget(parent)
+MyListSelector::MyListSelector(QWidget *parent): MyBaseListWidget(parent)
 {
  setDragEnabled(false);
  setFlow(QListView::LeftToRight);

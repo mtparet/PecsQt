@@ -4,11 +4,11 @@
 #include "mybaselistwidget.h"
 
 
-class MListSelector : public MyBaseListWidget
+class MyListSelector : public MyBaseListWidget
 {
     Q_OBJECT
 public:
-    explicit MListSelector(QWidget *parent = 0);
+    explicit MyListSelector(QWidget *parent = 0);
 
 protected:
     QSize *qs;

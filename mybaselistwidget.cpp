@@ -50,4 +50,6 @@ void MyBaseListWidget::chargeListImageInsequence(QList<ImageInSequence> listImg,
     foreach(imgSeq,listImg){
         this->addImage(imgSeq.img.name,Util::getIcon(imgSeq.img.image_file),imgSeq.orderIn);
     }
+
+    this->setMaximumWidth(listImg.count() * (this->image_size->width() + 4));
 }

@@ -39,7 +39,7 @@
     <string>Editer</string>
    </property>
   </widget>
-  <widget class="MListSelector" name="listWidget">
+  <widget class="MyListSelector" name="listWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -52,9 +52,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>MListSelector</class>
+   <class>MyListSelector</class>
    <extends>QListWidget</extends>
-   <header>mlistselector.h</header>
+   <header>mylistselector.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
