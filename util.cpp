@@ -8,6 +8,7 @@
 #include <QIcon>
 #include <QDebug>
 
+
 QString Util::folderRacine = "ressources/";
 QString Util::folderImage = "images/";
 QString Util::folderSequence = "sequences/";
@@ -78,6 +79,12 @@ QImage Util::getImageFile(QString name,QString folder){
 QIcon Util::getIcon(QString name, QString folder){
     QString image_location = Util::folderRacine + Util::folderImage + folder + "/" + name;
     QIcon img = QIcon(image_location);
+    return img;
+}
+
+QPixmap Util::getPixmapFile(QString name, QString folder){
+    QString image_location = Util::folderRacine + Util::folderImage + folder + "/" + name;
+    QPixmap img = QPixmap(image_location);
     return img;
 }
 
@@ -180,6 +187,50 @@ bool Util::removeDir(const QString &dirName)
     }
 
     return result;
+}
+
+bool Util::extractRessources(const QString & filePath){
+    QDir dir(Util::folderRacine);
+
+        Util::cpDir(dir.absolutePath(),filePath);
+
+        return true;
+}
+
+
+bool Util::archiveRessources(const QString & filePath){
+        QDir qdirJ(Util::folderRacine + Util::folderSequence);
+        QDir qdirI(Util::folderRacine + Util::folderImage);
+        QString where = "sequences.zip";
+        QString where2 = "images.zip";
+
+        return true;
+}
+
+bool Util::cpDir(const QString &srcPath, const QString &dstPath)
+{
+    //rmDir(dstPath);
+    QDir parentDstDir(QFileInfo(dstPath).path());
+    if (!parentDstDir.mkdir(QFileInfo(dstPath).fileName()))
+        return false;
+
+    QDir srcDir(srcPath);
+    foreach(const QFileInfo &info, srcDir.entryInfoList(QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot)) {
+        QString srcItemPath = srcPath + "/" + info.fileName();
+        QString dstItemPath = dstPath + "/" + info.fileName();
+        if (info.isDir()) {
+            if (!cpDir(srcItemPath, dstItemPath)) {
+                return false;
+            }
+        } else if (info.isFile()) {
+            if (!QFile::copy(srcItemPath, dstItemPath)) {
+                return false;
+            }
+        } else {
+            qDebug() << "Unhandled item" << info.filePath() << "in cpDir";
+        }
+    }
+    return true;
 }
 
 

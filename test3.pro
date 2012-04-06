@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     mylistselector.cpp \
     widgetinselector.cpp \
     organizedialog.cpp \
-    onereorganizewidget.cpp
+    onereorganizewidget.cpp \
+    casewidget.cpp
 
 HEADERS  += mainwindow.h \
     mylistwidget.h \
@@ -44,15 +45,18 @@ HEADERS  += mainwindow.h \
     mylistselector.h \
     widgetinselector.h \
     organizedialog.h \
-    onereorganizewidget.h
+    onereorganizewidget.h \
+    casewidget.h
 
 FORMS    += mainwindow.ui \
     newsequence.ui \
     editordersequence.ui \
     widgetinselector.ui \
     organizedialog.ui \
-    onereorganizewidget.ui
+    onereorganizewidget.ui \
+    casewidget.ui
 
-LIBS += -L/home/mtparet3/qjson/build/lib -lqjson
-INCLUDEPATH = /home/mtparet3/qjson/src/
-
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/qjson/lib/release/ -lqjson
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/qjson/lib/debug/ -lqjson
+else:symbian: LIBS += -lqjson
+else:unix: LIBS += -L$$PWD/qjson/lib/ -lqjson

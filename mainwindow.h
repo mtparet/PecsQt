@@ -23,12 +23,18 @@ public slots:
 private slots:
     void open_newsequence();
     void open_organizesequence();
+    void open_export();
+    void open_import();
+
+
 
 
 
 private:
     Ui::MainWindow *ui;
     void chargeListSequenceInSelector(QList<Sequence> listSeq);
+    void initLayoutReceptor(Sequence sq);
+
     Sequence selectSeq;
 
 };
