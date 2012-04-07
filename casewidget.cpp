@@ -14,9 +14,8 @@ CaseWidget::CaseWidget(QWidget *parent, ImageInSequence *imS, int placeE, QStrin
     ui->setupUi(this);
     //QGraphicsPixmapItem item(Util::getPixmapFile(myS.img.image_file,myFolder));
     QPixmap qp = Util::getPixmapFile(myS.img.image_file,myFolder);
-    QGraphicsScene scene;
-    scene.addPixmap(qp);
-    ui->graphicsView_2->setScene(&scene);
+    ui->label->setPixmap(qp);
+    ui->label->setAcceptDrops(true);
 
     //ui->graphicsView_2->setAcceptDrops(true);
     //ui->graphicsView_2->setDragMode(QGraphicsView::ScrollHandDrag);

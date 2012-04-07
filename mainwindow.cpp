@@ -81,6 +81,7 @@ void MainWindow::chargeListSequenceInSelector(QList<Sequence> listSeq){
     Sequence seq;
     foreach(seq,listSeq){
         widgetInSelector *mylistSelector = new widgetInSelector(ui->centralWidget,&seq);
+        mylistSelector->setMinimumWidth(100);
         ui->verticalLayout->addWidget(mylistSelector);
     }
 }
