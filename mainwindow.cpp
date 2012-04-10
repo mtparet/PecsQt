@@ -8,6 +8,9 @@
 #include "util.h"
 #include "organizedialog.h"
 #include "casewidget.h"
+#include "utilnetwork.h"
+#include "apiparse.h"
+#include "importdialog.h"
 #include <QMenu>
 #include <QMenuBar>
 #include <QLabel>
@@ -121,7 +124,9 @@ void MainWindow::open_export()
 
 void MainWindow::open_import()
 {
-
+    ImportDialog *importDialog = new ImportDialog(this);
+    //connect(newSequence, SIGNAL(updateUi()), this, SLOT(updateUi()));
+    importDialog->show();
 }
 
 void MainWindow::updateUi(){

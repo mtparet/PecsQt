@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 TARGET = test3
 TEMPLATE = app
@@ -27,7 +27,9 @@ SOURCES += main.cpp\
     widgetinselector.cpp \
     organizedialog.cpp \
     onereorganizewidget.cpp \
-    casewidget.cpp
+    casewidget.cpp \
+    apiparse.cpp \
+    importdialog.cpp
 
 HEADERS  += mainwindow.h \
     mylistwidget.h \
@@ -46,7 +48,9 @@ HEADERS  += mainwindow.h \
     widgetinselector.h \
     organizedialog.h \
     onereorganizewidget.h \
-    casewidget.h
+    casewidget.h \
+    apiparse.h \
+    importdialog.h
 
 FORMS    += mainwindow.ui \
     newsequence.ui \
@@ -54,9 +58,7 @@ FORMS    += mainwindow.ui \
     widgetinselector.ui \
     organizedialog.ui \
     onereorganizewidget.ui \
-    casewidget.ui
+    casewidget.ui \
+    importdialog.ui
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/qjson/lib/release/ -lqjson
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/qjson/lib/debug/ -lqjson
-else:symbian: LIBS += -lqjson
-else:unix: LIBS += -L$$PWD/qjson/lib/ -lqjson
+unix|win32: LIBS += -lqjson
