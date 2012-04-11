@@ -94,19 +94,6 @@
     <string>Parcourir...</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushBtFile">
-   <property name="geometry">
-    <rect>
-     <x>310</x>
-     <y>30</y>
-     <width>80</width>
-     <height>26</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>OK</string>
-   </property>
-  </widget>
   <widget class="QProgressBar" name="progressBar">
    <property name="geometry">
     <rect>
@@ -120,31 +107,18 @@
     <number>0</number>
    </property>
   </widget>
-  <widget class="QScrollArea" name="scrollArea">
+  <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>160</y>
-     <width>221</width>
-     <height>171</height>
+     <x>130</x>
+     <y>210</y>
+     <width>181</width>
+     <height>16</height>
     </rect>
    </property>
-   <property name="horizontalScrollBarPolicy">
-    <enum>Qt::ScrollBarAsNeeded</enum>
+   <property name="text">
+    <string>0 séquence a importer</string>
    </property>
-   <property name="widgetResizable">
-    <bool>true</bool>
-   </property>
-   <widget class="QWidget" name="scrollAreaWidgetContents">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>217</width>
-      <height>167</height>
-     </rect>
-    </property>
-   </widget>
   </widget>
  </widget>
  <resources/>

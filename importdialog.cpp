@@ -4,6 +4,8 @@
 #include "apiparse.h"
 #include "globval.h"
 #include "memory.h"
+#include "util.h"
+#include <QFileDialog>
 
 ImportDialog::ImportDialog(QWidget *parent) :
     QDialog(parent),
@@ -34,13 +36,14 @@ void ImportDialog::afficher()
     QNetworkReply *r = qobject_cast<QNetworkReply*>(sender()); //On rcupre la rponse du serveur
     //QFile f("fichier.txt"); //On ouvre le fichier
     //f.open(QIODevice::WriteOnly);
-    json = r->readAll();
+    QByteArray json = r->readAll();
     //f.write(r->readAll()); ////On lit la rponse du serveur que l'on met dans un fichier
     //f.close(); //On ferme le fichier
     //r->deleteLater(); //IMPORTANT : on emploie la fonction deleteLater() pour supprimer la rponse du serveur.
     //Si vous ne le faites pas, vous risquez des fuites de mmoire ou autre.
+    listSeq = ApiParse::parseList(json);
+    ui->label_3->setText(listSeq.count() + " séquences à importer");
 
-    QMessageBox::information(this, "Fin de téléchargement", "téléchargement terminé !"); //On indique que tout s'est bien pass
 }
 
 void ImportDialog::messageErreur(QNetworkReply::NetworkError)
@@ -67,6 +70,12 @@ void ImportDialog::on_pushBtWeb_clicked()
 
 void ImportDialog::on_buttonBox_accepted()
 {
-    QList<Sequence> f = ApiParse::parseListFromROR(json);
-    myMem.listSequence.append(f);
+    myMem.listSequence.append(listSeq);
+}
+
+void ImportDialog::on_pushBtChoose_clicked()
+{
+    QString dir = QFileDialog::getExistingDirectory(this, tr("Sélectionner le répertoire contenant les fichiers "),QString(),QFileDialog::ShowDirsOnly| QFileDialog::DontResolveSymlinks);
+    listSeq = Util::retrieveSeqFiles(dir + "/" + Util::folderSequence);
+    ui->label_3->setText(listSeq.count() + " séquences à importer");
 }

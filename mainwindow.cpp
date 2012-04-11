@@ -8,12 +8,12 @@
 #include "util.h"
 #include "organizedialog.h"
 #include "casewidget.h"
-#include "utilnetwork.h"
 #include "apiparse.h"
 #include "importdialog.h"
 #include <QMenu>
 #include <QMenuBar>
 #include <QLabel>
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -119,7 +119,8 @@ void MainWindow::open_organizesequence()
 
 void MainWindow::open_export()
 {
-    Util::extractRessources("/home/mtparet3/testtest");
+    QString dir = QFileDialog::getExistingDirectory(this, tr("Sélectionner le répertoire contenant les fichiers "),QString(),QFileDialog::ShowDirsOnly| QFileDialog::DontResolveSymlinks);
+    Util::extractRessources(dir);
 }
 
 void MainWindow::open_import()

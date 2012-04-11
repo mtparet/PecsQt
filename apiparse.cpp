@@ -1,6 +1,24 @@
 #include "apiparse.h"
 #include <qjson/parser.h>
 #include <qjson/serializer.h>
+#include "util.h"
+
+
+QList<Sequence> ApiParse::parseList(QByteArray json){
+    QJson::Parser parser;
+    bool ok;
+
+    QVariantMap variantMap = parser.parse (json, &ok).toMap();
+    if (!ok) {
+        qFatal("An error occurred during parsing");
+    }
+
+    QString origin = variantMap["origin"].toString();
+    if (origin == "application_qt"){
+    }else{
+        return parseListFromROR(json);
+    }
+}
 
 
 QList<Sequence> ApiParse::parseListFromROR(QByteArray json){

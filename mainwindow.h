@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include "sequence.h"
-#include "utilnetwork.h"
 
 namespace Ui {
 class MainWindow;
@@ -36,7 +35,6 @@ private:
     Ui::MainWindow *ui;
     void chargeListSequenceInSelector(QList<Sequence> listSeq);
     void initLayoutReceptor(Sequence sq);
-    UtilNetwork ut;
     Sequence selectSeq;
 
 };

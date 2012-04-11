@@ -20,7 +20,7 @@ public:
     static bool saveAllSeq(QList<Sequence> listQ);
     static bool removeSeqFile(Sequence sq);
     static bool removeAllSeqFiles(QList<Sequence> listQ);
-    static QList<Sequence> retrieveSeqFiles();
+    static QList<Sequence> retrieveSeqFiles(QString pathFolder);
     static int random(int min, int max);
     static bool removeDir(const QString &dirName);
     static bool initFileSystem();

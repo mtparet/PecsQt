@@ -9,9 +9,9 @@
 #include <QDebug>
 
 
-QString Util::folderRacine = "ressources/";
-QString Util::folderImage = "images/";
-QString Util::folderSequence = "sequences/";
+QString Util::folderRacine = "ressources";
+QString Util::folderImage = "images";
+QString Util::folderSequence = "sequences";
 
 bool Util::initFileSystem(){
     bool result = true;
@@ -21,13 +21,13 @@ bool Util::initFileSystem(){
             result = false;
         }
     }
-    if(!QDir(Util::folderRacine + Util::folderImage).exists()){
-        if(!QDir().mkdir(Util::folderRacine + Util::folderImage)){
+    if(!QDir(Util::folderRacine + "/" + Util::folderImage).exists()){
+        if(!QDir().mkdir(Util::folderRacine + "/"+ Util::folderImage)){
              result = false;
         }
     }
-    if(!QDir(Util::folderRacine + Util::folderSequence).exists()){
-        if(!QDir().mkdir(Util::folderRacine + Util::folderSequence)){
+    if(!QDir(Util::folderRacine + "/" + Util::folderSequence).exists()){
+        if(!QDir().mkdir(Util::folderRacine + "/" + Util::folderSequence)){
              result = false;
         }
     }
@@ -51,8 +51,8 @@ QStringList Util::getFileName(QStringList fileList){
 bool Util::saveImageFiles(QStringList fileList,QString folder ){
     bool check;
 
-    if(!QDir(Util::folderRacine + Util::folderImage + folder ).exists()){
-        if(!QDir().mkdir(Util::folderRacine + Util::folderImage + folder)){
+    if(!QDir(Util::folderRacine + "/" + Util::folderImage + "/" + folder ).exists()){
+        if(!QDir().mkdir(Util::folderRacine + "/" + Util::folderImage + "/" + folder)){
             check = false;
         }
     }
@@ -62,7 +62,7 @@ bool Util::saveImageFiles(QStringList fileList,QString folder ){
     foreach(str,fileList){
         file.setFileName(str);
         QFileInfo fileInfo(file);
-        check = file.copy( Util::folderRacine + Util::folderImage  + folder + "/" + fileInfo.fileName());
+        check = file.copy( Util::folderRacine + "/" + Util::folderImage  + "/" + folder + "/" + fileInfo.fileName());
     }
 
 
@@ -70,20 +70,20 @@ bool Util::saveImageFiles(QStringList fileList,QString folder ){
 }
 
 QImage Util::getImageFile(QString name,QString folder){
-    QString image_location = Util::folderRacine + Util::folderImage + folder + "/" + name;
+    QString image_location = Util::folderRacine + "/" + Util::folderImage + "/" + folder + "/" + name;
     QImage img;
     img.load(image_location);
     return img;
 }
 
 QIcon Util::getIcon(QString name, QString folder){
-    QString image_location = Util::folderRacine + Util::folderImage + folder + "/" + name;
+    QString image_location = Util::folderRacine +"/"+ Util::folderImage + "/" + folder + "/" + name;
     QIcon img = QIcon(image_location);
     return img;
 }
 
 QPixmap Util::getPixmapFile(QString name, QString folder){
-    QString image_location = Util::folderRacine + Util::folderImage + folder + "/" + name;
+    QString image_location = Util::folderRacine +"/"+ Util::folderImage + "/" + folder + "/" + name;
     QPixmap img = QPixmap(image_location);
     return img;
 }
@@ -91,7 +91,7 @@ QPixmap Util::getPixmapFile(QString name, QString folder){
 bool Util::saveOneSeq(Sequence f){
      QByteArray json = f.toJson();
      QFile file;
-     QString location = Util::folderRacine + Util::folderSequence + f.name + ".json";
+     QString location = Util::folderRacine + "/" + Util::folderSequence + "/" + f.name + ".json";
      file.setFileName(location);
      bool test = file.open(QIODevice::WriteOnly);
      QDataStream out(&file);
@@ -106,10 +106,10 @@ bool Util::saveAllSeq(QList<Sequence> listQ){
     return true;
 }
 
-QList<Sequence> Util::retrieveSeqFiles(){
+QList<Sequence> Util::retrieveSeqFiles(QString pathFolder){
     QList<Sequence> listSq;
     QStringList fileJson;
-    QDir qDir(Util::folderRacine + Util::folderSequence);
+    QDir qDir(pathFolder);
     qDir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
     QFileInfoList listFile = qDir.entryInfoList();
 
@@ -125,7 +125,7 @@ QList<Sequence> Util::retrieveSeqFiles(){
     QString str;
     foreach(str,fileJson){
         QFile file;
-        file.setFileName(Util::folderRacine + Util::folderSequence + str);
+        file.setFileName(Util::folderRacine + "/" + Util::folderSequence + "/" + str);
         file.open(QIODevice::ReadOnly);
         QDataStream in(&file);
         QByteArray json;
@@ -141,10 +141,10 @@ QList<Sequence> Util::retrieveSeqFiles(){
 
 bool Util::removeSeqFile(Sequence sq){
     QFile file;
-    QString location = Util::folderRacine + Util::folderSequence + sq.name + ".json";
+    QString location = Util::folderRacine + "/" + Util::folderSequence + "/" + sq.name + ".json";
     file.setFileName(location);
     file.remove();
-    removeDir(Util::folderRacine + Util::folderImage + sq.name);
+    removeDir(Util::folderRacine + "/" + Util::folderImage + sq.name);
 }
 
 bool Util::removeAllSeqFiles(QList<Sequence> listQ){
@@ -192,15 +192,15 @@ bool Util::removeDir(const QString &dirName)
 bool Util::extractRessources(const QString & filePath){
     QDir dir(Util::folderRacine);
 
-        Util::cpDir(dir.absolutePath(),filePath);
+        Util::cpDir(dir.absolutePath(),filePath + "/" + Util::folderRacine);
 
         return true;
 }
 
 
 bool Util::archiveRessources(const QString & filePath){
-        QDir qdirJ(Util::folderRacine + Util::folderSequence);
-        QDir qdirI(Util::folderRacine + Util::folderImage);
+    QDir qdirJ(Util::folderRacine + "/" + Util::folderSequence);
+        QDir qdirI(Util::folderRacine + "/" + Util::folderImage);
         QString where = "sequences.zip";
         QString where2 = "images.zip";
 
@@ -211,6 +211,8 @@ bool Util::cpDir(const QString &srcPath, const QString &dstPath)
 {
     //rmDir(dstPath);
     QDir parentDstDir(QFileInfo(dstPath).path());
+    QString path = parentDstDir.path();
+    QString path2 = path;
     if (!parentDstDir.mkdir(QFileInfo(dstPath).fileName()))
         return false;
 
@@ -231,6 +233,10 @@ bool Util::cpDir(const QString &srcPath, const QString &dstPath)
         }
     }
     return true;
+}
+
+void Util::download(String url,QString where){
+
 }
 
 

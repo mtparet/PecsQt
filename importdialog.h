@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#include "sequence.h"
 
 namespace Ui {
 class ImportDialog;
@@ -19,7 +20,7 @@ public:
     
 private:
     Ui::ImportDialog *ui;
-    QByteArray json;
+    QList<Sequence> listSeq;
 
 private slots:
     void telechargement();
@@ -29,6 +30,7 @@ private slots:
 
     void on_pushBtWeb_clicked();
     void on_buttonBox_accepted();
+    void on_pushBtChoose_clicked();
 };
 
 #endif // IMPORTDIALOG_H

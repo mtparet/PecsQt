@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 
     Util::initFileSystem();
     QList<Sequence> listSq;
-    listSq = Util::retrieveSeqFiles();
+    listSq = Util::retrieveSeqFiles(Util::folderRacine + "/" + Util::folderSequence);
     myMem.listSequence = listSq;
     MainWindow w;
     w.show();

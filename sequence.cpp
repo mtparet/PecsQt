@@ -2,6 +2,7 @@
 #include <QStringList>
 #include <qjson/serializer.h>
 #include <qjson/parser.h>
+#include "util.h"
 
 Sequence::Sequence(){
 
@@ -108,6 +109,21 @@ bool  Sequence::fromQMap(QStringList listName,QString name){
     return true;
 }
 
+bool Sequence::changeAndSaveImageFile(QString baseurl){
+    ImageInSequence imgSeq;
+    int i = 0;
+    for(i = 0; i < listImageInSequence.count(); i++){
+        imgSeq = listImageInSequence.value(i);
+        QFile file(imgSeq.img.image_file);
+        QFileInfo fileInfo(file);
+        Util::download(baseurl + imgSeq.img.image_file,Util::folderRacine + "/" + Util::folderImage + "/" + fileInfo.fileName() );
+        imgSeq.img.image_file = fileInfo.fileName();
+        listImageInSequence.value = imgSeq;
+    }
+
+    return true;
+
+}
 
 
 

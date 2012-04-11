@@ -6,8 +6,13 @@
 class ApiParse
 {
 public:
-    static Sequence parseSeqFromROR(QVariantMap variantMap);
-    static QList<Sequence> parseListFromROR(QByteArray json);
+   static Sequence parseSeqFromROR(QVariantMap variantMap);
+   static QList<Sequence> parseListFromROR(QByteArray json);
+   static QList<Sequence> parseList(QByteArray json);
+   static QList<Sequence> parseListFromApp(QByteArray json);
+   QString folder;
+
+
 
 };
 
