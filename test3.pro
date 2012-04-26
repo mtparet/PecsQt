@@ -29,7 +29,8 @@ SOURCES += main.cpp\
     onereorganizewidget.cpp \
     casewidget.cpp \
     apiparse.cpp \
-    importdialog.cpp
+    importdialog.cpp \
+    imagewidget.cpp
 
 HEADERS  += mainwindow.h \
     mylistwidget.h \
@@ -50,7 +51,8 @@ HEADERS  += mainwindow.h \
     onereorganizewidget.h \
     casewidget.h \
     apiparse.h \
-    importdialog.h
+    importdialog.h \
+    imagewidget.h
 
 FORMS    += mainwindow.ui \
     newsequence.ui \
@@ -59,6 +61,20 @@ FORMS    += mainwindow.ui \
     organizedialog.ui \
     onereorganizewidget.ui \
     casewidget.ui \
-    importdialog.ui
+    importdialog.ui \
+    imagewidget.ui
 
 unix|win32: LIBS += -lqjson
+
+OTHER_FILES += \
+    javascript.js
+
+
+
+
+
+
+
+
+
+

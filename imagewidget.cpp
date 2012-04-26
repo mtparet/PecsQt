@@ -1,29 +1,26 @@
-#include "casewidget.h"
-#include "ui_casewidget.h"
+#include "imagewidget.h"
 #include "imageinsequence.h"
 #include "util.h"
+#include "ui_imagewidget.h"
 #include <QDragEnterEvent>
 
-CaseWidget::CaseWidget(QWidget *parent, ImageInSequence *imS, int placeE, QString *folder) :
+ImageWIdget::ImageWIdget(QWidget *parent, ImageInSequence *imS, int placeE, QString *folder) :
     QWidget(parent),
-    ui(new Ui::CaseWidget)
+    ui(new Ui::ImageWIdget)
 {
+    this->setAccessibleName(imS->img.image_file);
     myS = new ImageInSequence(imS);
     place = placeE;
-    QString myFolder = *folder;
+    myFolder = *folder;
 
     ui->setupUi(this);
-    if(imS->img.name == "null"){
-        myFolder = "null";
-    }
-
     QPixmap qp = Util::getPixmapFile(myS.img.image_file,myFolder);
     ui->label->setPixmap(qp);
     setAcceptDrops(true);
 
 }
 
-void CaseWidget::mouseMoveEvent(QMouseEvent *event)
+void ImageWIdget::mouseMoveEvent(QMouseEvent *event)
 {
     if (!(event->buttons() & Qt::LeftButton))
         return;
@@ -38,43 +35,53 @@ void CaseWidget::mouseMoveEvent(QMouseEvent *event)
     //...
 }
 
-void CaseWidget::makeDrag()
+void ImageWIdget::makeDrag()
 {
     QDrag *dr = new QDrag(this);
     // The data to be transferred by the drag and drop operation is contained in a QMimeData object
     QMimeData *data = new QMimeData;
     data->setText(myS.img.image_file);
+
+    // Assign ownership of the QMimeData object to the QDrag object.
+    dr->setMimeData(data);
     // Start the drag and drop operation
-    dr->start();
+    Qt::DropAction dropAction = dr->exec(Qt::MoveAction);
+
 }
 
-void CaseWidget::mousePressEvent(QMouseEvent *event)
+void ImageWIdget::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton)
         dragStartPosition = event->pos();
 }
 
-void CaseWidget::dragMoveEvent(QDragMoveEvent *de)
+void ImageWIdget::dragMoveEvent(QDragMoveEvent *de)
 {
     // The event needs to be accepted here
     de->accept();
 }
 
-void CaseWidget::dragEnterEvent(QDragEnterEvent *event)
+void ImageWIdget::dragEnterEvent(QDragEnterEvent *event)
 {
     // Set the drop action to be the proposed action.
     event->acceptProposedAction();
 }
 
-void CaseWidget::dropEvent(QDropEvent *de)
+void ImageWIdget::dropEvent(QDropEvent *de)
 {
-    de->accept();
-    QString name = de->mimeData()->text();
-    this->updateReceptor(name,this->place,name,false);
-    //this->updateLayoutSequence("name",false);
 }
 
-CaseWidget::~CaseWidget()
+void ImageWIdget::changeImage(bool present){
+    if(present){
+        QPixmap qp = Util::getPixmapFile(this->myS.img.image_file,myFolder);
+        ui->label->setPixmap(qp);
+    }else{
+        QPixmap qp;
+        ui->label->setPixmap(qp);
+    }
+}
+
+ImageWIdget::~ImageWIdget()
 {
     delete ui;
 }

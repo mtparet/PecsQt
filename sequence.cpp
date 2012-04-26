@@ -108,21 +108,45 @@ bool  Sequence::fromQMap(QStringList listName,QString name){
 
     return true;
 }
-
-bool Sequence::changeAndSaveImageFile(QString baseurl){
+/*
+  Récupère l'image distante (stocké dans image_file), la stocke dans le dossier de la séquence
+  Copie le image_file dans un image_origin
+  Mets à jour le image_file
+  */
+bool Sequence::changeAndSaveImageFile(){
+    /*TODO*/
     ImageInSequence imgSeq;
     int i = 0;
     for(i = 0; i < listImageInSequence.count(); i++){
-        imgSeq = listImageInSequence.value(i);
-        QFile file(imgSeq.img.image_file);
-        QFileInfo fileInfo(file);
-        Util::download(baseurl + imgSeq.img.image_file,Util::folderRacine + "/" + Util::folderImage + "/" + fileInfo.fileName() );
-        imgSeq.img.image_file = fileInfo.fileName();
-        listImageInSequence.value = imgSeq;
+        //imgSeq = listImageInSequence.value(i);
+        //QFile file(imgSeq.img.image_file);
+        //QFileInfo fileInfo(file);
+        //Util::download(baseurl + imgSeq.img.image_file,Util::folderRacine + "/" + Util::folderImage + "/" + fileInfo.fileName() );
+        //imgSeq.img.image_file = fileInfo.fileName();
+        //listImageInSequence.value = imgSeq;
     }
 
     return true;
 
+}
+
+ImageInSequence Sequence::getImageInsequence(QString name){
+    ImageInSequence ims;
+    ImageInSequence is;
+
+    if(name == "null"){
+        ims.img.image_file = "null.jpg";
+        ims.img.name = "null";
+        return ims;
+    }
+
+    foreach(is,listImageInSequence){
+        if(is.img.image_file == name){
+            ims = is;
+        }
+    }
+
+    return ims;
 }
 
 

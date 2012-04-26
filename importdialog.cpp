@@ -49,7 +49,7 @@ void ImportDialog::afficher()
 void ImportDialog::messageErreur(QNetworkReply::NetworkError)
 {
     QNetworkReply *r = qobject_cast<QNetworkReply*>(sender());
-    QMessageBox::critical(this, "Erreur", "Erreur lors du chargement. Vrifiez votre connexion internet ou ressayez plus tard <br /><br /> Code de l'erreur : <br /><em>" + r->errorString() + "</em>");
+    QMessageBox::critical(this, "Erreur", "Erreur lors du chargement. Vérifiez votre connexion internet ou ressayez plus tard <br /><br /> Code de l'erreur : <br /><em>" + r->errorString() + "</em>");
     close();
 }
 
@@ -70,6 +70,10 @@ void ImportDialog::on_pushBtWeb_clicked()
 
 void ImportDialog::on_buttonBox_accepted()
 {
+    /* TODO
+      Copier les images depuis le dossier d'import
+      Copier les images depuis le web et changer les liens dans image_file
+      */
     myMem.listSequence.append(listSeq);
 }
 

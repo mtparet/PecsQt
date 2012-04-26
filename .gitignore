@@ -1,3 +1,5 @@
 *.o
 moc*
 *.user
+qjson/*
+ressources/*

@@ -19,6 +19,8 @@ public:
 
 public slots:
         void updateUi();
+        void updateReceptor(QString id_name,int num_place,QString name,bool present);
+        void updateLayoutSequence(QString name,bool);
     
 private slots:
     void open_newsequence();
@@ -27,15 +29,15 @@ private slots:
     void open_import();
 
 
-
-
-
-
 private:
     Ui::MainWindow *ui;
     void chargeListSequenceInSelector(QList<Sequence> listSeq);
-    void initLayoutReceptor(Sequence sq);
+    void buildLayoutReceptor();
+    void initLayoutSequence(Sequence sq);
     Sequence selectSeq;
+
+    //tableau des images déjà mise, le nom de leur fichier est pris en compte
+    QList<QString> sequenceInReceptor;
 
 };
 
