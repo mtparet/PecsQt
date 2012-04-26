@@ -130,22 +130,15 @@ void MainWindow::buildLayoutReceptor(){
 
 void MainWindow::updateLayoutSequence(QString name, bool present){
 
-    if ( ui->horizontalLayout_8 != NULL )
-    {
-        QLayoutItem* item;
-        for(int i = 0; i< ui->horizontalLayout_8->count() ; i++){
-            item = ui->horizontalLayout_8->takeAt(i);
-            if(item != 0){
-                ImageWIdget *ims = (ImageWIdget*) item->widget();
-                if(ims->myS.img.name == name){
-                    ims->changeImage(present);
-                    //ui->horizontalLayout_8->in
-                }
-            }
-
+    ImageWIdget *ims;
+    foreach(ims,listImageWidget){
+        if(ims->myS.img.name == name){
+            ims->changeImage(present);
+            //ui->horizontalLayout_8->in
         }
-
     }
+
+
 
 }
 
@@ -156,6 +149,9 @@ void MainWindow::initLayoutSequence(Sequence sq){
     foreach(imS,sq.listImageInSequence){
         ImageWIdget *myWidgetReceptor = new ImageWIdget(ui->centralWidget,&imS,i,&sq.name);
         myWidgetReceptor->setAcceptDrops(true);
+
+        listImageWidget.append(myWidgetReceptor);
+
         ui->horizontalLayout_8->addWidget(myWidgetReceptor);
         i++;
     }

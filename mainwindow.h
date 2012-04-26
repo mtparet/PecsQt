@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "sequence.h"
+#include "imagewidget.h"
 
 namespace Ui {
 class MainWindow;
@@ -31,6 +32,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
     void chargeListSequenceInSelector(QList<Sequence> listSeq);
     void buildLayoutReceptor();
     void initLayoutSequence(Sequence sq);
@@ -38,6 +40,7 @@ private:
 
     //tableau des images déjà mise, le nom de leur fichier est pris en compte
     QList<QString> sequenceInReceptor;
+    QList<ImageWIdget*> listImageWidget;
 
 };
 
