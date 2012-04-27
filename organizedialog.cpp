@@ -26,7 +26,7 @@ void OrganizeDialog::removeMe(OneReorganizeWidget *one){
     this->layout()->removeWidget(one);
 }
 
-void OrganizeDialog::chargeListSequenceInSelector(QList<Sequence> listSeq){
+void OrganizeDialog::chargeListSequenceInSelector(QList<Sequence*> listSeq){
 
     ui->verticalLayout = new QVBoxLayout (this);
     Sequence seq;

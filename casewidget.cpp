@@ -44,6 +44,9 @@ void CaseWidget::makeDrag()
     // The data to be transferred by the drag and drop operation is contained in a QMimeData object
     QMimeData *data = new QMimeData;
     data->setText(myS.img.image_file);
+
+    // Assign ownership of the QMimeData object to the QDrag object.
+    dr->setMimeData(data);
     // Start the drag and drop operation
     dr->start();
 }

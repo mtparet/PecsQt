@@ -12,9 +12,13 @@ ImageWIdget::ImageWIdget(QWidget *parent, ImageInSequence *imS, int placeE, QStr
     myS = new ImageInSequence(imS);
     place = placeE;
     myFolder = *folder;
-
     ui->setupUi(this);
-    QPixmap qp = Util::getPixmapFile(myS.img.image_file,myFolder);
+
+    QPixmap qp;
+    if(myS.visible){
+        qp = Util::getPixmapFile(this->myS.img.image_file,myFolder);
+    }
+
     ui->label->setPixmap(qp);
     setAcceptDrops(true);
 
@@ -25,7 +29,7 @@ void ImageWIdget::mouseMoveEvent(QMouseEvent *event)
     if (!(event->buttons() & Qt::LeftButton))
         return;
     if ((event->pos() - dragStartPosition).manhattanLength()
-         < QApplication::startDragDistance())
+            < QApplication::startDragDistance())
         return;
 
     makeDrag();
@@ -45,7 +49,7 @@ void ImageWIdget::makeDrag()
     // Assign ownership of the QMimeData object to the QDrag object.
     dr->setMimeData(data);
     // Start the drag and drop operation
-    Qt::DropAction dropAction = dr->exec(Qt::MoveAction);
+    dr->start();
 
 }
 
@@ -69,17 +73,12 @@ void ImageWIdget::dragEnterEvent(QDragEnterEvent *event)
 
 void ImageWIdget::dropEvent(QDropEvent *de)
 {
+    de->accept();
+    QString name = de->mimeData()->text();
+    this->updateLayoutSequence(name,true);
 }
 
-void ImageWIdget::changeImage(bool present){
-    if(present){
-        QPixmap qp = Util::getPixmapFile(this->myS.img.image_file,myFolder);
-        ui->label->setPixmap(qp);
-    }else{
-        QPixmap qp;
-        ui->label->setPixmap(qp);
-    }
-}
+
 
 ImageWIdget::~ImageWIdget()
 {

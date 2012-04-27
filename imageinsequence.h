@@ -16,6 +16,7 @@ class ImageInSequence
   bool fromJson(QByteArray json);
   bool fromVariant(QVariantMap variantMap);
   static bool lessThan(ImageInSequence &a, ImageInSequence &b);
+  bool visible;
 
 
 

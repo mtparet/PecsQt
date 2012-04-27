@@ -21,7 +21,7 @@ public slots:
     
 private:
     Ui::OrganizeDialog *ui;
-    void chargeListSequenceInSelector(QList<Sequence> listSeq);
+    void chargeListSequenceInSelector(QList<Sequence*> listSeq);
 
 };
 

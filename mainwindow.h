@@ -33,9 +33,11 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    void chargeListSequenceInSelector(QList<Sequence> listSeq);
+    void chargeListSequenceInSelector(QList<Sequence*> listSeq);
     void buildLayoutReceptor();
-    void initLayoutSequence(Sequence sq);
+    void initLayoutSequence();
+    void selectOneSequence(Sequence *seq);
+
     Sequence selectSeq;
 
     //tableau des images déjà mise, le nom de leur fichier est pris en compte

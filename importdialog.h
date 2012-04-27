@@ -20,7 +20,7 @@ public:
     
 private:
     Ui::ImportDialog *ui;
-    QList<Sequence> listSeq;
+    QList<Sequence*> listSeq;
 
 private slots:
     void telechargement();

@@ -71,20 +71,32 @@ void MainWindow::refreshData(){
     ui->scrollArea->setWidget(viewport);
 
     if(!myMem.listSequence.isEmpty()){
-        selectSeq = myMem.listSequence.first();
-        initLayoutSequence(myMem.listSequence.first());
-
-        for(int i; i < selectSeq.listImageInSequence.length(); i++){
-            sequenceInReceptor.append("null");
-        }
-
-        buildLayoutReceptor();
+        Sequence *sq = myMem.listSequence.first();
+        selectOneSequence(sq);
     }
 
 
 }
 
-void MainWindow::chargeListSequenceInSelector(QList<Sequence> listSeq){
+void MainWindow::selectOneSequence(Sequence *seq){
+    selectSeq = seq;
+
+    //on les rends tous visibles
+    for(int i = 0; i < selectSeq.listImageInSequence.count(); i++){
+        selectSeq.listImageInSequence[i].visible = true;
+    }
+
+    initLayoutSequence();
+
+    for(int i = 0; i < selectSeq.listImageInSequence.length(); i++){
+        sequenceInReceptor.append("null");
+    }
+
+    buildLayoutReceptor();
+
+}
+
+void MainWindow::chargeListSequenceInSelector(QList<Sequence*> listSeq){
 
     ui->verticalLayout = new QVBoxLayout (ui->centralWidget);
     Sequence seq;
@@ -130,25 +142,34 @@ void MainWindow::buildLayoutReceptor(){
 
 void MainWindow::updateLayoutSequence(QString name, bool present){
 
-    ImageWIdget *ims;
-    foreach(ims,listImageWidget){
-        if(ims->myS.img.name == name){
-            ims->changeImage(present);
-            //ui->horizontalLayout_8->in
+
+    ImageInSequence imgS = this->selectSeq.getImageInsequence(name);
+    imgS.visible = present;
+    this->selectSeq.setImageInsequence(imgS);
+
+
+    if ( ui->horizontalLayout_8 != NULL )
+    {
+        QLayoutItem* item;
+        while ( ( item = ui->horizontalLayout_8->takeAt( 0 ) ) != NULL )
+        {
+            delete item->widget();
+            delete item;
         }
     }
 
-
+    initLayoutSequence();
 
 }
 
-void MainWindow::initLayoutSequence(Sequence sq){
+void MainWindow::initLayoutSequence(){
 
     ImageInSequence imS;
     int i = 0;
-    foreach(imS,sq.listImageInSequence){
-        ImageWIdget *myWidgetReceptor = new ImageWIdget(ui->centralWidget,&imS,i,&sq.name);
+    foreach(imS,selectSeq.listImageInSequence){
+        ImageWIdget *myWidgetReceptor = new ImageWIdget(ui->centralWidget,&imS,i,&selectSeq.name);
         myWidgetReceptor->setAcceptDrops(true);
+        connect(myWidgetReceptor, SIGNAL(updateLayoutSequence(QString,bool)), this, SLOT(updateLayoutSequence(QString,bool)));
 
         listImageWidget.append(myWidgetReceptor);
 

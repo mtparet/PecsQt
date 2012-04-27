@@ -55,9 +55,9 @@ bool Sequence::fromJson(QByteArray json){
 bool Sequence::fromVariant(QVariantMap variantMap){
     name = variantMap["name"].toString();
     foreach (QVariant imgSeqVariant, variantMap["listImageInSequence"].toList()) {
-       ImageInSequence imgSeq;
-       imgSeq.fromVariant(imgSeqVariant.toMap());
-       listImageInSequence << imgSeq;
+        ImageInSequence imgSeq;
+        imgSeq.fromVariant(imgSeqVariant.toMap());
+        listImageInSequence << imgSeq;
     }
     return true;
 }
@@ -147,6 +147,15 @@ ImageInSequence Sequence::getImageInsequence(QString name){
     }
 
     return ims;
+}
+
+void Sequence::setImageInsequence(ImageInSequence imgS){
+
+    for(int i = 0; i < listImageInSequence.count(); i++){
+        if(listImageInSequence[i].img.image_file == imgS.img.image_file){
+            listImageInSequence[i] = imgS;
+        }
+    }
 }
 
 

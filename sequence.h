@@ -22,6 +22,8 @@ public:
       bool fromVariant(QVariantMap variantMap);
       bool fromJson(QByteArray json);
       bool changeAndSaveImageFile();
+      void setImageInsequence(ImageInSequence imgS);
+
 
 
 

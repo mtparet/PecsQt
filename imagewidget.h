@@ -17,6 +17,9 @@ public:
     ImageInSequence myS;
     void changeImage(bool present);
     ~ImageWIdget();
+signals:
+    void updateLayoutSequence(QString id_name, bool present);
+
 public slots:
     void makeDrag();
 protected:

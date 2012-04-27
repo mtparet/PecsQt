@@ -41,7 +41,13 @@ void ImportDialog::afficher()
     //f.close(); //On ferme le fichier
     //r->deleteLater(); //IMPORTANT : on emploie la fonction deleteLater() pour supprimer la rponse du serveur.
     //Si vous ne le faites pas, vous risquez des fuites de mmoire ou autre.
-    listSeq = ApiParse::parseList(json);
+    QList<Sequence> listSq = ApiParse::parseList(json);
+
+    Sequence sq;
+    foreach(sq,listSq){
+        listSeq.append(&sq);
+    }
+
     ui->label_3->setText(listSeq.count() + " séquences à importer");
 
 }
@@ -80,6 +86,12 @@ void ImportDialog::on_buttonBox_accepted()
 void ImportDialog::on_pushBtChoose_clicked()
 {
     QString dir = QFileDialog::getExistingDirectory(this, tr("Sélectionner le répertoire contenant les fichiers "),QString(),QFileDialog::ShowDirsOnly| QFileDialog::DontResolveSymlinks);
-    listSeq = Util::retrieveSeqFiles(dir + "/" + Util::folderSequence);
+    QList<Sequence> listSq = Util::retrieveSeqFiles(dir + "/" + Util::folderSequence);
+
+    Sequence sq;
+    foreach(sq,listSq){
+        listSeq.append(&sq);
+    }
+
     ui->label_3->setText(listSeq.count() + " séquences à importer");
 }

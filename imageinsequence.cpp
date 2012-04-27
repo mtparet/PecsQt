@@ -3,7 +3,6 @@
 #include <qjson/serializer.h>
 
 ImageInSequence::ImageInSequence(){
-
 }
 
 ImageInSequence::ImageInSequence(ImageInSequence *imIn){
@@ -39,6 +38,7 @@ bool ImageInSequence::fromJson(QByteArray json){
 }
 
 bool ImageInSequence::fromVariant(QVariantMap variantMap){
+    ImageInSequence();
     orderIn = variantMap["orderIn"].toInt();
     img.fromVariant(variantMap["img"].toMap());
     return true;

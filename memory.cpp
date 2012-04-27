@@ -3,8 +3,8 @@
 bool Memory::replace(Sequence f){
     int i;
     for(i = 0; i < listSequence.count();i++){
-        if(listSequence[i].name == f.name){
-            listSequence[i] = f;
+        if(listSequence[i]->name == f.name){
+            listSequence[i] = &f;
         }
     }
 }
@@ -12,7 +12,7 @@ bool Memory::replace(Sequence f){
 bool Memory::remove(Sequence f){
     int i;
     for(i = 0; i < listSequence.count();i++){
-        if(listSequence[i].name == f.name){
+        if(listSequence[i]->name == f.name){
             listSequence.removeAt(i);
         }
     }
