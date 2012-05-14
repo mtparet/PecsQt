@@ -30,7 +30,10 @@ SOURCES += main.cpp\
     casewidget.cpp \
     apiparse.cpp \
     importdialog.cpp \
-    imagewidget.cpp
+    imagewidget.cpp \
+    imagereceptordelegate.cpp \
+    imageseqmodel.cpp \
+    mybaselistview.cpp
 
 HEADERS  += mainwindow.h \
     mylistwidget.h \
@@ -52,7 +55,10 @@ HEADERS  += mainwindow.h \
     casewidget.h \
     apiparse.h \
     importdialog.h \
-    imagewidget.h
+    imagewidget.h \
+    imagereceptordelegate.h \
+    imageseqmodel.h \
+    mybaselistview.h
 
 FORMS    += mainwindow.ui \
     newsequence.ui \
@@ -65,10 +71,6 @@ FORMS    += mainwindow.ui \
     imagewidget.ui
 
 unix|win32: LIBS += -lqjson
-
-OTHER_FILES += \
-    javascript.js
-
 
 
 

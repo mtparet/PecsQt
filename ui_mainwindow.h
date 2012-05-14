@@ -1,7 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.1
+** Created: Sat May 5 15:57:56 2012
+**      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -16,6 +17,7 @@
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
+#include <QtGui/QListView>
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenuBar>
 #include <QtGui/QScrollArea>
@@ -43,7 +45,7 @@ public:
     QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout_3;
     QSpacerItem *horizontalSpacer;
-    QHBoxLayout *horizontalLayout_2;
+    QListView *listView;
     QSpacerItem *horizontalSpacer_2;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
@@ -123,12 +125,17 @@ public:
 
         horizontalLayout_3->addItem(horizontalSpacer);
 
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setSpacing(0);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        horizontalLayout_2->setSizeConstraint(QLayout::SetMaximumSize);
+        listView = new QListView(verticalLayoutWidget_2);
+        listView->setObjectName(QString::fromUtf8("listView"));
+        sizePolicy.setHeightForWidth(listView->sizePolicy().hasHeightForWidth());
+        listView->setSizePolicy(sizePolicy);
+        listView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        listView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+        listView->setDragDropMode(QAbstractItemView::DragDrop);
+        listView->setDefaultDropAction(Qt::MoveAction);
+        listView->setFlow(QListView::LeftToRight);
 
-        horizontalLayout_3->addLayout(horizontalLayout_2);
+        horizontalLayout_3->addWidget(listView);
 
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Minimum);
 
@@ -154,7 +161,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1224, 23));
+        menuBar->setGeometry(QRect(0, 0, 1224, 25));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));

@@ -11,6 +11,8 @@
 #include "apiparse.h"
 #include "importdialog.h"
 #include "imagewidget.h"
+#include "imageseqmodel.h"
+#include "imagereceptordelegate.h"
 #include <QMenu>
 #include <QMenuBar>
 #include <QLabel>
@@ -81,11 +83,6 @@ void MainWindow::refreshData(){
 void MainWindow::selectOneSequence(Sequence *seq){
     selectSeq = seq;
 
-    //on les rends tous visibles
-    for(int i = 0; i < selectSeq.listImageInSequence.count(); i++){
-        selectSeq.listImageInSequence[i].visible = true;
-    }
-
     initLayoutSequence();
 
     for(int i = 0; i < selectSeq.listImageInSequence.length(); i++){
@@ -110,41 +107,28 @@ void MainWindow::chargeListSequenceInSelector(QList<Sequence*> listSeq){
 void MainWindow::updateReceptor(QString id_name,int num_place,QString name,bool present){
     this->sequenceInReceptor = Util::insert_at(id_name,num_place,this->sequenceInReceptor);
 
-    if ( ui->horizontalLayout_2 != NULL )
-    {
-        QLayoutItem* item;
-        while ( ( item = ui->horizontalLayout_2->takeAt( 0 ) ) != NULL )
-        {
-            delete item->widget();
-            delete item;
-        }
-    }
-
     buildLayoutReceptor();
     updateLayoutSequence(name,present);
 }
 
 void MainWindow::buildLayoutReceptor(){
 
-    QString name;
-    int i = 0;
-    foreach(name,this->sequenceInReceptor){
-        ImageInSequence imS = this->selectSeq.getImageInsequence(name);
-        CaseWidget *myWidgetReceptor = new CaseWidget(ui->centralWidget,&imS,i,&selectSeq.name);
-        myWidgetReceptor->setAcceptDrops(true);
-        connect(myWidgetReceptor, SIGNAL(updateReceptor(QString,int,QString,bool)), this, SLOT(updateReceptor(QString,int,QString,bool)));
-        connect(myWidgetReceptor, SIGNAL(updateLayoutSequence(QString,bool)), this, SLOT(updateLayoutSequence(QString,bool)));
+    ImageSeqModel *seqModel = new ImageSeqModel(this,&selectSeq.listImageInSequence);
+    ImageReceptorDelegate * seqDelegate = new ImageReceptorDelegate(this);
+        ui->listView->setItemDelegate(seqDelegate);
+        ui->listView->setModel(seqModel);
+        ui->listView->setSelectionMode(QAbstractItemView::ExtendedSelection);
+        ui->listView->setDragEnabled(true);
+        ui->listView->setAcceptDrops(true);
+        ui->listView->setDropIndicatorShown(true);
+        ui->listView->setDragDropMode(QAbstractItemView::InternalMove);
 
-        ui->horizontalLayout_2->addWidget(myWidgetReceptor);
-        i++;
-    }
 }
 
 void MainWindow::updateLayoutSequence(QString name, bool present){
 
 
     ImageInSequence imgS = this->selectSeq.getImageInsequence(name);
-    imgS.visible = present;
     this->selectSeq.setImageInsequence(imgS);
 
 

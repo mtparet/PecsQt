@@ -15,9 +15,7 @@ ImageWIdget::ImageWIdget(QWidget *parent, ImageInSequence *imS, int placeE, QStr
     ui->setupUi(this);
 
     QPixmap qp;
-    if(myS.visible){
         qp = Util::getPixmapFile(this->myS.img.image_file,myFolder);
-    }
 
     ui->label->setPixmap(qp);
     setAcceptDrops(true);

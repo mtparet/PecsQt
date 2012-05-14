@@ -8,6 +8,7 @@ ImageInSequence::ImageInSequence(){
 ImageInSequence::ImageInSequence(ImageInSequence *imIn){
     this->img = new Images(imIn->img);
     this->orderIn = imIn->orderIn;
+    this->folder = imIn->folder;
 }
 
 QByteArray ImageInSequence::toJson(){
@@ -21,6 +22,7 @@ QVariantMap ImageInSequence::toVariantMap(){
     QVariantMap imgsequence;
     imgsequence.insert("orderIn",orderIn);
     imgsequence.insert("img",img.toVariantMap());
+    imgsequence.insert("folder",folder);
     return imgsequence;
 }
 
@@ -41,6 +43,7 @@ bool ImageInSequence::fromVariant(QVariantMap variantMap){
     ImageInSequence();
     orderIn = variantMap["orderIn"].toInt();
     img.fromVariant(variantMap["img"].toMap());
+    folder = variantMap["folder"].toString();
     return true;
 }
 
