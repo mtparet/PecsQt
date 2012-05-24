@@ -117,11 +117,10 @@ void MainWindow::buildLayoutReceptor(){
     ImageReceptorDelegate * seqDelegate = new ImageReceptorDelegate(this);
         ui->listView->setItemDelegate(seqDelegate);
         ui->listView->setModel(seqModel);
-        ui->listView->setSelectionMode(QAbstractItemView::ExtendedSelection);
+
         ui->listView->setDragEnabled(true);
         ui->listView->setAcceptDrops(true);
         ui->listView->setDropIndicatorShown(true);
-        ui->listView->setDragDropMode(QAbstractItemView::InternalMove);
 
 }
 

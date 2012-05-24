@@ -156,7 +156,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QListView" name="listView">
+        <widget class="MyBaseListView" name="listView">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
            <horstretch>0</horstretch>
@@ -243,7 +243,7 @@
      <x>0</x>
      <y>0</y>
      <width>1224</width>
-     <height>25</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
@@ -258,6 +258,13 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>MyBaseListView</class>
+   <extends>QListView</extends>
+   <header>mybaselistview.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

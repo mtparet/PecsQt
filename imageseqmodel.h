@@ -18,6 +18,9 @@ public:
     bool insertColumns ( int column, int count, const QModelIndex & parent = QModelIndex() );
     bool setData ( const QModelIndex & index, const QVariant & value, int role = Qt::EditRole );
     bool setItemData ( const QModelIndex & index, const QMap<int, QVariant> & roles );
+    bool removeRows(int row, int count, const QModelIndex &parent);
+    Qt::DropActions supportedDragActions() const;
+
 protected:
     QList<ImageInSequence> li;
 signals:

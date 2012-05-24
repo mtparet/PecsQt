@@ -36,6 +36,11 @@ Qt::DropActions ImageSeqModel::supportedDropActions() const
      return Qt::CopyAction | Qt::MoveAction;
  }
 
+Qt::DropActions ImageSeqModel::supportedDragActions() const
+ {
+     return Qt::CopyAction | Qt::MoveAction;
+ }
+
  Qt::ItemFlags ImageSeqModel::flags(const QModelIndex &index) const{
      Qt::ItemFlags defaultFlags = 0;
 
@@ -67,13 +72,14 @@ Qt::DropActions ImageSeqModel::supportedDropActions() const
  }
 
 QStringList ImageSeqModel::mimeTypes() const{
-    QStringList s;
-    return s;
+    QStringList types;
+    types << "application/x-myowncustomdata";
+    return types;
 }
 
 QMimeData * ImageSeqModel::mimeData ( const QModelIndexList & indexes ) const{
     QMimeData *mimeData = new QMimeData;
-    mimeData->setText("bonjour");
+    mimeData->setData("application/x-myowncustomdata", "bonjour");
     return mimeData;
 }
 
@@ -90,5 +96,9 @@ bool ImageSeqModel::setData ( const QModelIndex & index, const QVariant & value,
 }
 
 bool ImageSeqModel::setItemData ( const QModelIndex & index, const QMap<int, QVariant> & roles ){
+
+}
+
+bool ImageSeqModel::removeRows(int row, int count, const QModelIndex &parent){
 
 }
