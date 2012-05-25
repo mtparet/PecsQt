@@ -155,7 +155,7 @@ void MainWindow::open_newsequence()
 void MainWindow::open_organizesequence()
 {
     OrganizeDialog *newSequence = new OrganizeDialog(this);
-    //connect(newSequence, SIGNAL(updateUi()), this, SLOT(updateUi()));
+    connect(newSequence, SIGNAL(updateUi()), this, SLOT(updateUi()));
     newSequence->show();
 }
 
