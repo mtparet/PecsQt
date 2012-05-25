@@ -2,6 +2,7 @@
 #include "imageinsequence.h"
 #include "QMimeData"
 #include "QStringList"
+#include "QVariantMap"
 
 ImageSeqModel::ImageSeqModel(QObject *parent, QList<ImageInSequence> *li) :
     QAbstractListModel(parent)
@@ -23,7 +24,31 @@ QVariant ImageSeqModel::data(const QModelIndex &index, int role) const {
     if ((index.column() == 0) && (row >= 0) && (row < rowCount()))
     {
       ImageInSequence is = li.at(index.row());
-      return is.toVariantMap();
+      int right,left;
+
+      if(is.folder != "null"){
+          if(row == 0 || li.at(index.row()-1).orderIn == (is.orderIn -1)){
+              left = 1;
+          }else{
+              left = 2;
+          }
+
+          if( (row == (li.count() - 1) && (is.orderIn == li.last().orderIn)) || li.at(index.row()+1).orderIn == (is.orderIn +1)){
+              right = 1;
+          }else{
+              right = 2;
+          }
+      }else{
+          left = right = 0;
+      }
+
+
+      QVariantMap vm;
+      vm.insert("li",is.toVariantMap());
+      vm.insert("right",right);
+      vm.insert("left",left);
+
+      return vm;
     }
     return (QVariant::Invalid);
 }
@@ -70,8 +95,15 @@ Qt::DropActions ImageSeqModel::supportedDragActions() const
       QByteArray encodedData = data->data("application/x-myowncustomdata");
       QDataStream stream(&encodedData, QIODevice::ReadOnly);
 
-      QVariant  isVariant;
-        stream >> isVariant;
+      QVariant  variant;
+        stream >> variant;
+
+       QVariantMap  variantMap = variant.toMap();
+       int right,left;
+
+        QVariant isVariant = variantMap["li"];
+        right = variantMap["left"].toInt();
+        left = variantMap["right"].toInt();
 
 
       QModelIndex idx = index(beginRow, 0, QModelIndex());
@@ -117,6 +149,9 @@ bool ImageSeqModel::setData ( const QModelIndex & index, const QVariant & value,
     //Si l'objet n'est pas contenu on l'insert sinon on le déplace
     if(li.contains(is)){
         li.removeOne(is);
+        li.insert(row,is);
+    }else if( li.at(row).folder == "null" ){
+        li.removeAt(row);
         li.insert(row,is);
     }else{
        li.insert(row,is);

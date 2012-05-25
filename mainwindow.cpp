@@ -114,6 +114,7 @@ void MainWindow::buildLayoutReceptor(){
 
     for(int i = 0; i < selectSeq.listImageInSequence.length(); i++){
         ImageInSequence is;
+        is.folder = "null";
         listIs->append(is);
     }
 
