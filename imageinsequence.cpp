@@ -52,5 +52,14 @@ bool ImageInSequence::lessThan(ImageInSequence &a, ImageInSequence &b)
    return a.orderIn < b.orderIn;
 }
 
+bool ImageInSequence::operator == (const ImageInSequence & is){
+    if(is.img.image_file == this->img.image_file){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+
 
 

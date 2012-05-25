@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "sequence.h"
 #include "imagewidget.h"
+#include "imageseqmodel.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,8 +21,6 @@ public:
 
 public slots:
         void updateUi();
-        void updateReceptor(QString id_name,int num_place,QString name,bool present);
-        void updateLayoutSequence(QString name,bool);
     
 private slots:
     void open_newsequence();
@@ -41,7 +40,7 @@ private:
     Sequence selectSeq;
 
     //tableau des images déjà mise, le nom de leur fichier est pris en compte
-    QList<QString> sequenceInReceptor;
+    ImageSeqModel *sequenceReceptor;
     QList<ImageWIdget*> listImageWidget;
 
 };

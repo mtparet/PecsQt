@@ -11,8 +11,6 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    mylistwidget.cpp \
-    mylistwidgetreceptor.cpp \
     images.cpp \
     imageinsequence.cpp \
     sequence.cpp \
@@ -20,24 +18,21 @@ SOURCES += main.cpp\
     util.cpp \
     memory.cpp \
     editordersequence.cpp \
-    mylistwidgetinternalchange.cpp \
-    mybaselistwidget.cpp \
     globval.cpp \
     mylistselector.cpp \
     widgetinselector.cpp \
     organizedialog.cpp \
     onereorganizewidget.cpp \
-    casewidget.cpp \
     apiparse.cpp \
     importdialog.cpp \
     imagewidget.cpp \
     imagereceptordelegate.cpp \
     imageseqmodel.cpp \
-    mybaselistview.cpp
+    mybaselistview.cpp \
+    mylistwidgetinternalchange.cpp \
+    mybaselistwidget.cpp
 
 HEADERS  += mainwindow.h \
-    mylistwidget.h \
-    mylistwidgetreceptor.h \
     images.h \
     imageinsequence.h \
     sequence.h \
@@ -45,20 +40,19 @@ HEADERS  += mainwindow.h \
     util.h \
     memory.h \
     editordersequence.h \
-    mylistwidgetinternalchange.h \
     mybaselistwidget.h \
     globval.h \
     mylistselector.h \
     widgetinselector.h \
     organizedialog.h \
     onereorganizewidget.h \
-    casewidget.h \
     apiparse.h \
     importdialog.h \
     imagewidget.h \
     imagereceptordelegate.h \
     imageseqmodel.h \
-    mybaselistview.h
+    mybaselistview.h \
+    mylistwidgetinternalchange.h
 
 FORMS    += mainwindow.ui \
     newsequence.ui \
@@ -66,7 +60,6 @@ FORMS    += mainwindow.ui \
     widgetinselector.ui \
     organizedialog.ui \
     onereorganizewidget.ui \
-    casewidget.ui \
     importdialog.ui \
     imagewidget.ui
 

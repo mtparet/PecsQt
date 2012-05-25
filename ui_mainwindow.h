@@ -1,8 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Sat May 5 15:57:56 2012
-**      by: Qt User Interface Compiler version 4.8.1
+** Created by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -17,7 +16,6 @@
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
-#include <QtGui/QListView>
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenuBar>
 #include <QtGui/QScrollArea>
@@ -26,6 +24,7 @@
 #include <QtGui/QToolBar>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
+#include "mybaselistview.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -40,12 +39,12 @@ public:
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer_4;
-    QHBoxLayout *horizontalLayout_8;
+    MyBaseListView *listView_2;
     QSpacerItem *horizontalSpacer_3;
     QSpacerItem *verticalSpacer;
     QHBoxLayout *horizontalLayout_3;
     QSpacerItem *horizontalSpacer;
-    QListView *listView;
+    MyBaseListView *listView;
     QSpacerItem *horizontalSpacer_2;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
@@ -97,12 +96,17 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer_4);
 
-        horizontalLayout_8 = new QHBoxLayout();
-        horizontalLayout_8->setSpacing(0);
-        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
-        horizontalLayout_8->setSizeConstraint(QLayout::SetMaximumSize);
+        listView_2 = new MyBaseListView(verticalLayoutWidget_2);
+        listView_2->setObjectName(QString::fromUtf8("listView_2"));
+        sizePolicy.setHeightForWidth(listView_2->sizePolicy().hasHeightForWidth());
+        listView_2->setSizePolicy(sizePolicy);
+        listView_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        listView_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+        listView_2->setDragDropMode(QAbstractItemView::DragDrop);
+        listView_2->setDefaultDropAction(Qt::MoveAction);
+        listView_2->setFlow(QListView::LeftToRight);
 
-        horizontalLayout->addLayout(horizontalLayout_8);
+        horizontalLayout->addWidget(listView_2);
 
         horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Minimum);
 
@@ -125,7 +129,7 @@ public:
 
         horizontalLayout_3->addItem(horizontalSpacer);
 
-        listView = new QListView(verticalLayoutWidget_2);
+        listView = new MyBaseListView(verticalLayoutWidget_2);
         listView->setObjectName(QString::fromUtf8("listView"));
         sizePolicy.setHeightForWidth(listView->sizePolicy().hasHeightForWidth());
         listView->setSizePolicy(sizePolicy);
@@ -161,7 +165,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1224, 25));
+        menuBar->setGeometry(QRect(0, 0, 1224, 23));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));

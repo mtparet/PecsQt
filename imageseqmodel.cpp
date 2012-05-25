@@ -7,7 +7,6 @@ ImageSeqModel::ImageSeqModel(QObject *parent, QList<ImageInSequence> *li) :
     QAbstractListModel(parent)
 {
     this->li = *li;
-    reset();
 }
 
 int ImageSeqModel::rowCount(const QModelIndex &parent) const {
@@ -28,7 +27,6 @@ QVariant ImageSeqModel::data(const QModelIndex &index, int role) const {
     }
     return (QVariant::Invalid);
 }
-
 
 
 Qt::DropActions ImageSeqModel::supportedDropActions() const
@@ -69,6 +67,17 @@ Qt::DropActions ImageSeqModel::supportedDragActions() const
       else
           beginRow = rowCount(QModelIndex());
 
+      QByteArray encodedData = data->data("application/x-myowncustomdata");
+      QDataStream stream(&encodedData, QIODevice::ReadOnly);
+
+      QVariant  isVariant;
+        stream >> isVariant;
+
+
+      QModelIndex idx = index(beginRow, 0, QModelIndex());
+      setData(idx, isVariant);
+      return true;
+
  }
 
 QStringList ImageSeqModel::mimeTypes() const{
@@ -78,27 +87,56 @@ QStringList ImageSeqModel::mimeTypes() const{
 }
 
 QMimeData * ImageSeqModel::mimeData ( const QModelIndexList & indexes ) const{
-    QMimeData *mimeData = new QMimeData;
-    mimeData->setData("application/x-myowncustomdata", "bonjour");
+    QMimeData *mimeData = new QMimeData();
+    QByteArray encodedData;
+
+    QDataStream stream(&encodedData, QIODevice::WriteOnly);
+
+
+    stream << data(indexes.first(), Qt::DisplayRole);
+
+
+    mimeData->setData("application/x-myowncustomdata", encodedData);
     return mimeData;
 }
 
-bool ImageSeqModel::insertRows ( int row, int count, const QModelIndex & parent  ){
-
-}
-
-bool ImageSeqModel::insertColumns ( int column, int count, const QModelIndex & parent ){
-
-}
 
 bool ImageSeqModel::setData ( const QModelIndex & index, const QVariant & value, int role  ){
+    if (!index.isValid() )
+    {
+        return false;
+    }
+    int row = index.row();
 
-}
+    if(row < 0){
+            return false;
+    }
+    ImageInSequence is;
+    is.fromVariant(value.toMap());
 
-bool ImageSeqModel::setItemData ( const QModelIndex & index, const QMap<int, QVariant> & roles ){
+    //Si l'objet n'est pas contenu on l'insert sinon on le déplace
+    if(li.contains(is)){
+        li.removeOne(is);
+        li.insert(row,is);
+    }else{
+       li.insert(row,is);
+    }
 
+    emit dataChanged(index,index);
+    return true;
 }
 
 bool ImageSeqModel::removeRows(int row, int count, const QModelIndex &parent){
+    if(row > li.count() || row < 0){
+        return false;
+    }
 
+    li.removeAt(row);
+
+    QModelIndex startIndex = index(0,0);
+   QModelIndex endIndex =  index(li.count(),0);
+
+    emit dataChanged(startIndex,endIndex);
+
+    return true;
 }

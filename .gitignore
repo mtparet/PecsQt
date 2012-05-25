@@ -3,3 +3,4 @@ moc*
 *.user
 qjson*
 ressources*
+Makefile

@@ -1,13 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "newsequence.h"
-#include "mylistwidget.h"
 #include "sequence.h"
 #include "widgetinselector.h"
 #include "globval.h"
 #include "util.h"
 #include "organizedialog.h"
-#include "casewidget.h"
 #include "apiparse.h"
 #include "importdialog.h"
 #include "imagewidget.h"
@@ -85,10 +83,6 @@ void MainWindow::selectOneSequence(Sequence *seq){
 
     initLayoutSequence();
 
-    for(int i = 0; i < selectSeq.listImageInSequence.length(); i++){
-        sequenceInReceptor.append("null");
-    }
-
     buildLayoutReceptor();
 
 }
@@ -104,61 +98,48 @@ void MainWindow::chargeListSequenceInSelector(QList<Sequence*> listSeq){
     }
 }
 
+/*
+  Drepcated
 void MainWindow::updateReceptor(QString id_name,int num_place,QString name,bool present){
-    this->sequenceInReceptor = Util::insert_at(id_name,num_place,this->sequenceInReceptor);
+    this->sequenceReceptor = Util::insert_at(id_name,num_place,this->sequenceReceptor);
 
     buildLayoutReceptor();
     updateLayoutSequence(name,present);
 }
+*/
 
 void MainWindow::buildLayoutReceptor(){
 
-    ImageSeqModel *seqModel = new ImageSeqModel(this,&selectSeq.listImageInSequence);
-    ImageReceptorDelegate * seqDelegate = new ImageReceptorDelegate(this);
-        ui->listView->setItemDelegate(seqDelegate);
-        ui->listView->setModel(seqModel);
+    QList<ImageInSequence> *listIs = new QList<ImageInSequence>();
 
-        ui->listView->setDragEnabled(true);
-        ui->listView->setAcceptDrops(true);
-        ui->listView->setDropIndicatorShown(true);
-
-}
-
-void MainWindow::updateLayoutSequence(QString name, bool present){
-
-
-    ImageInSequence imgS = this->selectSeq.getImageInsequence(name);
-    this->selectSeq.setImageInsequence(imgS);
-
-
-    if ( ui->horizontalLayout_8 != NULL )
-    {
-        QLayoutItem* item;
-        while ( ( item = ui->horizontalLayout_8->takeAt( 0 ) ) != NULL )
-        {
-            delete item->widget();
-            delete item;
-        }
+    for(int i = 0; i < selectSeq.listImageInSequence.length(); i++){
+        ImageInSequence is;
+        listIs->append(is);
     }
 
-    initLayoutSequence();
+    sequenceReceptor = new ImageSeqModel(this,listIs);
+
+
+    ImageReceptorDelegate * seqDelegate = new ImageReceptorDelegate(this);
+    ui->listView->setItemDelegate(seqDelegate);
+    ui->listView->setModel(sequenceReceptor);
+
+    ui->listView->setDragEnabled(true);
+    ui->listView->setAcceptDrops(true);
+    ui->listView->setDropIndicatorShown(true);
 
 }
 
 void MainWindow::initLayoutSequence(){
 
-    ImageInSequence imS;
-    int i = 0;
-    foreach(imS,selectSeq.listImageInSequence){
-        ImageWIdget *myWidgetReceptor = new ImageWIdget(ui->centralWidget,&imS,i,&selectSeq.name);
-        myWidgetReceptor->setAcceptDrops(true);
-        connect(myWidgetReceptor, SIGNAL(updateLayoutSequence(QString,bool)), this, SLOT(updateLayoutSequence(QString,bool)));
+    ImageSeqModel *seqModel = new ImageSeqModel(this,&selectSeq.listImageInSequence);
+    ImageReceptorDelegate * seqDelegate = new ImageReceptorDelegate(this);
+    ui->listView_2->setItemDelegate(seqDelegate);
+    ui->listView_2->setModel(seqModel);
 
-        listImageWidget.append(myWidgetReceptor);
-
-        ui->horizontalLayout_8->addWidget(myWidgetReceptor);
-        i++;
-    }
+    ui->listView_2->setDragEnabled(true);
+    ui->listView_2->setAcceptDrops(true);
+    ui->listView_2->setDropIndicatorShown(true);
 }
 
 

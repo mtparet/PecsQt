@@ -14,10 +14,7 @@ public:
     bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent);
     QStringList mimeTypes() const;
     QMimeData * mimeData ( const QModelIndexList & indexes ) const;
-    bool insertRows ( int row, int count, const QModelIndex & parent = QModelIndex() );
-    bool insertColumns ( int column, int count, const QModelIndex & parent = QModelIndex() );
     bool setData ( const QModelIndex & index, const QVariant & value, int role = Qt::EditRole );
-    bool setItemData ( const QModelIndex & index, const QMap<int, QVariant> & roles );
     bool removeRows(int row, int count, const QModelIndex &parent);
     Qt::DropActions supportedDragActions() const;
 

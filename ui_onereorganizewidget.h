@@ -1,8 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'onereorganizewidget.ui'
 **
-** Created: Sat May 5 15:08:31 2012
-**      by: Qt User Interface Compiler version 4.8.1
+** Created by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
