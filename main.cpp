@@ -7,16 +7,22 @@
 #include "memory.h"
 #include "globval.h"
 #include <QMetaObject>
+#include <QTextCodec>
 
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
+    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
     Util::initFileSystem();
     QList<Sequence> listSq;
-    listSq = Util::retrieveSeqFiles();
-    myMem.listSequence = listSq;
+    listSq = Util::retrieveSeqFiles(Util::folderRacine + "/" + Util::folderSequence);
+
+    Sequence sq;
+    foreach(sq,listSq){
+        myMem.listSequence.append(&sq);
+    }
+
     MainWindow w;
     w.show();
 

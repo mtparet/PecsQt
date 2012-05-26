@@ -54,5 +54,5 @@ void MyBaseListWidget::chargeListImageInsequence(Sequence sq, bool sorted){
         this->addImage(imgSeq.img.name,Util::getIcon(imgSeq.img.image_file, sq.name),imgSeq.orderIn);
     }
 
-    this->setMaximumWidth(listImg.count() * (this->image_size->width() + 4));
+    //this->setMaximumWidth(listImg.count() * (this->image_size->width() + 4));
 }

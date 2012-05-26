@@ -1,15 +1,20 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "newsequence.h"
-#include "mylistwidget.h"
 #include "sequence.h"
 #include "widgetinselector.h"
 #include "globval.h"
 #include "util.h"
 #include "organizedialog.h"
+#include "apiparse.h"
+#include "importdialog.h"
+#include "imagewidget.h"
+#include "imageseqmodel.h"
+#include "imagereceptordelegate.h"
 #include <QMenu>
 #include <QMenuBar>
 #include <QLabel>
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -20,41 +25,35 @@ MainWindow::MainWindow(QWidget *parent) :
 
     /* menu */
 
-      // Creating a menu "File"
-      QMenu* menuFile = new QMenu("Fichier");
+    // Creating a menu "File"
+    QMenu* menuFile = new QMenu("Fichier");
 
-      // And adding the menu "File" in the menu bar
-      ui->menuBar->addMenu(menuFile);
+    // And adding the menu "File" in the menu bar
+    ui->menuBar->addMenu(menuFile);
 
-      // Now we add our items
-      // Add an item "Open"
-      menuFile->addAction(QString("Nouvelle sequence"), this, SLOT(open_newsequence()));
+    // Now we add our items
+    // Add an item "Open"
+    menuFile->addAction(QString("Nouvelle sequence"), this, SLOT(open_newsequence()));
 
-      // Add a separator
-      menuFile->addSeparator();
-      menuFile->addAction(QString("Organiser les séquences"), this, SLOT(open_organizesequence()));
-        menuFile->addSeparator();
-      // Add an item "Bye" connected to the slot  "close" of the mainWindow
-      menuFile->addAction("Quitter", this, SLOT(close()) );
+    // Add a separator
+    menuFile->addSeparator();
+    menuFile->addAction(QString("Organiser les séquences"), this, SLOT(open_organizesequence()));
+    menuFile->addSeparator();
+
+    menuFile->addAction(QString("exporter"), this, SLOT(open_export()));
+    menuFile->addSeparator();
+
+    menuFile->addAction(QString("importer"), this, SLOT(open_import()));
+    menuFile->addSeparator();
+
+    // Add an item "Bye" connected to the slot  "close" of the mainWindow
+    menuFile->addAction("Quitter", this, SLOT(close()) );
 
     /* ---- */
 
 
     refreshData();
 
-
-    /* TODO réimpliément QDropEvent
-    fonction */
-    //QDropEvent *myQdropEvent = new QDropEvent();
-
-    /* TODO réimpliément QDragEvent */
-
-    //ui->listView->flow(QListView::LeftToRight);
-
-    //QLabel  *label_img  = new QLabel(this);
-    //QPixmap *pixmap_img = new QPixmap("/home/mtparet3/QtSDK/test3/images/1.jpg");
-    //label_img->setPixmap(*pixmap_img);
-    //ui->gridLayout->addWidget(label_img);
 }
 
 MainWindow::~MainWindow()
@@ -72,21 +71,76 @@ void MainWindow::refreshData(){
     ui->scrollArea->setWidget(viewport);
 
     if(!myMem.listSequence.isEmpty()){
-        selectSeq = myMem.listSequence.first();
-        ui->listWidget_2->chargeListImageInsequence(selectSeq, false);
+        Sequence *sq = myMem.listSequence.first();
+        selectOneSequence(sq);
     }
 
 
 }
 
-void MainWindow::chargeListSequenceInSelector(QList<Sequence> listSeq){
+void MainWindow::selectOneSequence(Sequence *seq){
+    selectSeq = seq;
+
+    initLayoutSequence();
+
+    buildLayoutReceptor();
+
+}
+
+void MainWindow::chargeListSequenceInSelector(QList<Sequence*> listSeq){
 
     ui->verticalLayout = new QVBoxLayout (ui->centralWidget);
     Sequence seq;
     foreach(seq,listSeq){
         widgetInSelector *mylistSelector = new widgetInSelector(ui->centralWidget,&seq);
+        mylistSelector->setMinimumWidth(100);
         ui->verticalLayout->addWidget(mylistSelector);
     }
+}
+
+/*
+  Drepcated
+void MainWindow::updateReceptor(QString id_name,int num_place,QString name,bool present){
+    this->sequenceReceptor = Util::insert_at(id_name,num_place,this->sequenceReceptor);
+
+    buildLayoutReceptor();
+    updateLayoutSequence(name,present);
+}
+*/
+
+void MainWindow::buildLayoutReceptor(){
+
+    QList<ImageInSequence> *listIs = new QList<ImageInSequence>();
+
+    for(int i = 0; i < selectSeq.listImageInSequence.length(); i++){
+        ImageInSequence is;
+        is.folder = "null";
+        listIs->append(is);
+    }
+
+    sequenceReceptor = new ImageSeqModel(this,listIs);
+
+
+    ImageReceptorDelegate * seqDelegate = new ImageReceptorDelegate(this);
+    ui->listView->setItemDelegate(seqDelegate);
+    ui->listView->setModel(sequenceReceptor);
+
+    ui->listView->setDragEnabled(true);
+    ui->listView->setAcceptDrops(true);
+    ui->listView->setDropIndicatorShown(true);
+
+}
+
+void MainWindow::initLayoutSequence(){
+
+    ImageSeqModel *seqModel = new ImageSeqModel(this,&selectSeq.listImageInSequence);
+    ImageReceptorDelegate * seqDelegate = new ImageReceptorDelegate(this);
+    ui->listView_2->setItemDelegate(seqDelegate);
+    ui->listView_2->setModel(seqModel);
+
+    ui->listView_2->setDragEnabled(true);
+    ui->listView_2->setAcceptDrops(true);
+    ui->listView_2->setDropIndicatorShown(true);
 }
 
 
@@ -101,8 +155,21 @@ void MainWindow::open_newsequence()
 void MainWindow::open_organizesequence()
 {
     OrganizeDialog *newSequence = new OrganizeDialog(this);
-    //connect(newSequence, SIGNAL(updateUi()), this, SLOT(updateUi()));
+    connect(newSequence, SIGNAL(updateUi()), this, SLOT(updateUi()));
     newSequence->show();
+}
+
+void MainWindow::open_export()
+{
+    QString dir = QFileDialog::getExistingDirectory(this, tr("Sélectionner le répertoire contenant les fichiers "),QString(),QFileDialog::ShowDirsOnly| QFileDialog::DontResolveSymlinks);
+    Util::extractRessources(dir);
+}
+
+void MainWindow::open_import()
+{
+    ImportDialog *importDialog = new ImportDialog(this);
+    //connect(newSequence, SIGNAL(updateUi()), this, SLOT(updateUi()));
+    importDialog->show();
 }
 
 void MainWindow::updateUi(){

@@ -30,7 +30,7 @@ void NewSequence::on_buttonBox_accepted()
     QStringList listeName = Util::getFileName(fileList);
 
     sq.fromQMap(listeName,name);
-    myMem.listSequence << sq;
+    myMem.listSequence << &sq;
 
     EditOrderSequence *editOrder = new EditOrderSequence(this,&sq);
     connect(editOrder, SIGNAL(updateNewSeq()), this, SLOT(updateNewSeq()));

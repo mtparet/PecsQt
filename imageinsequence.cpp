@@ -1,14 +1,14 @@
 #include "imageinsequence.h"
-#include "serializer.h"
-#include "parser.h"
+#include <qjson/parser.h>
+#include <qjson/serializer.h>
 
 ImageInSequence::ImageInSequence(){
-
 }
 
 ImageInSequence::ImageInSequence(ImageInSequence *imIn){
     this->img = new Images(imIn->img);
     this->orderIn = imIn->orderIn;
+    this->folder = imIn->folder;
 }
 
 QByteArray ImageInSequence::toJson(){
@@ -22,6 +22,7 @@ QVariantMap ImageInSequence::toVariantMap(){
     QVariantMap imgsequence;
     imgsequence.insert("orderIn",orderIn);
     imgsequence.insert("img",img.toVariantMap());
+    imgsequence.insert("folder",folder);
     return imgsequence;
 }
 
@@ -39,8 +40,10 @@ bool ImageInSequence::fromJson(QByteArray json){
 }
 
 bool ImageInSequence::fromVariant(QVariantMap variantMap){
+    ImageInSequence();
     orderIn = variantMap["orderIn"].toInt();
     img.fromVariant(variantMap["img"].toMap());
+    folder = variantMap["folder"].toString();
     return true;
 }
 
@@ -48,6 +51,15 @@ bool ImageInSequence::lessThan(ImageInSequence &a, ImageInSequence &b)
 {
    return a.orderIn < b.orderIn;
 }
+
+bool ImageInSequence::operator == (const ImageInSequence & is){
+    if(is.img.image_file == this->img.image_file){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 
 
 

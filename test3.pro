@@ -4,15 +4,13 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 TARGET = test3
 TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    mylistwidget.cpp \
-    mylistwidgetreceptor.cpp \
     images.cpp \
     imageinsequence.cpp \
     sequence.cpp \
@@ -20,17 +18,21 @@ SOURCES += main.cpp\
     util.cpp \
     memory.cpp \
     editordersequence.cpp \
-    mylistwidgetinternalchange.cpp \
-    mybaselistwidget.cpp \
     globval.cpp \
     mylistselector.cpp \
     widgetinselector.cpp \
     organizedialog.cpp \
-    onereorganizewidget.cpp
+    onereorganizewidget.cpp \
+    apiparse.cpp \
+    importdialog.cpp \
+    imagewidget.cpp \
+    imagereceptordelegate.cpp \
+    imageseqmodel.cpp \
+    mybaselistview.cpp \
+    mylistwidgetinternalchange.cpp \
+    mybaselistwidget.cpp
 
 HEADERS  += mainwindow.h \
-    mylistwidget.h \
-    mylistwidgetreceptor.h \
     images.h \
     imageinsequence.h \
     sequence.h \
@@ -38,21 +40,36 @@ HEADERS  += mainwindow.h \
     util.h \
     memory.h \
     editordersequence.h \
-    mylistwidgetinternalchange.h \
     mybaselistwidget.h \
     globval.h \
     mylistselector.h \
     widgetinselector.h \
     organizedialog.h \
-    onereorganizewidget.h
+    onereorganizewidget.h \
+    apiparse.h \
+    importdialog.h \
+    imagewidget.h \
+    imagereceptordelegate.h \
+    imageseqmodel.h \
+    mybaselistview.h \
+    mylistwidgetinternalchange.h
 
 FORMS    += mainwindow.ui \
     newsequence.ui \
     editordersequence.ui \
     widgetinselector.ui \
     organizedialog.ui \
-    onereorganizewidget.ui
+    onereorganizewidget.ui \
+    importdialog.ui \
+    imagewidget.ui
 
-LIBS += -L/home/mtparet3/qjson/build/lib -lqjson
-INCLUDEPATH = /home/mtparet3/qjson/src/
+unix|win32: LIBS += -lqjson
+
+
+
+
+
+
+
+
 

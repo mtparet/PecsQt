@@ -1,7 +1,8 @@
 #include <sequence.h>
 #include <QStringList>
-#include "serializer.h"
-#include "parser.h"
+#include <qjson/serializer.h>
+#include <qjson/parser.h>
+#include "util.h"
 
 Sequence::Sequence(){
 
@@ -54,9 +55,10 @@ bool Sequence::fromJson(QByteArray json){
 bool Sequence::fromVariant(QVariantMap variantMap){
     name = variantMap["name"].toString();
     foreach (QVariant imgSeqVariant, variantMap["listImageInSequence"].toList()) {
-       ImageInSequence imgSeq;
-       imgSeq.fromVariant(imgSeqVariant.toMap());
-       listImageInSequence << imgSeq;
+        ImageInSequence imgSeq;
+        imgSeq.fromVariant(imgSeqVariant.toMap());
+        imgSeq.folder = name;
+        listImageInSequence << imgSeq;
     }
     return true;
 }
@@ -107,7 +109,55 @@ bool  Sequence::fromQMap(QStringList listName,QString name){
 
     return true;
 }
+/*
+  Récupère l'image distante (stocké dans image_file), la stocke dans le dossier de la séquence
+  Copie le image_file dans un image_origin
+  Mets à jour le image_file
+  */
+bool Sequence::changeAndSaveImageFile(){
+    /*TODO*/
+    ImageInSequence imgSeq;
+    int i = 0;
+    for(i = 0; i < listImageInSequence.count(); i++){
+        //imgSeq = listImageInSequence.value(i);
+        //QFile file(imgSeq.img.image_file);
+        //QFileInfo fileInfo(file);
+        //Util::download(baseurl + imgSeq.img.image_file,Util::folderRacine + "/" + Util::folderImage + "/" + fileInfo.fileName() );
+        //imgSeq.img.image_file = fileInfo.fileName();
+        //listImageInSequence.value = imgSeq;
+    }
 
+    return true;
+
+}
+
+ImageInSequence Sequence::getImageInsequence(QString name){
+    ImageInSequence ims;
+    ImageInSequence is;
+
+    if(name == "null"){
+        ims.img.image_file = "null.jpg";
+        ims.img.name = "null";
+        return ims;
+    }
+
+    foreach(is,listImageInSequence){
+        if(is.img.image_file == name){
+            ims = is;
+        }
+    }
+
+    return ims;
+}
+
+void Sequence::setImageInsequence(ImageInSequence imgS){
+
+    for(int i = 0; i < listImageInSequence.count(); i++){
+        if(listImageInSequence[i].img.image_file == imgS.img.image_file){
+            listImageInSequence[i] = imgS;
+        }
+    }
+}
 
 
 

@@ -9,3 +9,9 @@ test3.r*
 test3.pro.*
 test3.aps
 *.dll
+*.o
+moc*
+*.user
+qjson*
+ressources*
+Makefile

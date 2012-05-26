@@ -1,7 +1,7 @@
 #include "images.h"
 #include <QVariantMap>
-#include "serializer.h"
-#include "parser.h"
+#include <qjson/parser.h>
+#include <qjson/serializer.h>
 
 Images::Images(){
 
