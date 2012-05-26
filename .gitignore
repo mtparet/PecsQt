@@ -1,0 +1,11 @@
+Win32/*
+Release/*
+ipch/*
+Debug/*
+GeneratedFiles/*
+test3.v*
+test3.s*
+test3.r*
+test3.pro.*
+test3.aps
+*.dll
