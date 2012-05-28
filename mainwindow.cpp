@@ -87,6 +87,11 @@ void MainWindow::selectOneSequence(Sequence *seq){
 
 }
 
+void MainWindow::selectedSequence(Sequence *f){
+    selectOneSequence(f);
+}
+
+
 void MainWindow::chargeListSequenceInSelector(QList<Sequence*> listSeq){
 
     ui->verticalLayout = new QVBoxLayout (ui->centralWidget);
@@ -94,6 +99,7 @@ void MainWindow::chargeListSequenceInSelector(QList<Sequence*> listSeq){
     foreach(seq,listSeq){
         widgetInSelector *mylistSelector = new widgetInSelector(ui->centralWidget,&seq);
         mylistSelector->setMinimumWidth(100);
+        connect(mylistSelector, SIGNAL(setSequence(Sequence *)), this, SLOT(selectedSequence(Sequence*)));
         ui->verticalLayout->addWidget(mylistSelector);
     }
 }
@@ -125,7 +131,11 @@ void MainWindow::initLayoutSequence(){
 
     ImageSeqModel *seqModel = new ImageSeqModel(this,&selectSeq.listImageInSequence);
     ImageReceptorDelegate * seqDelegate = new ImageReceptorDelegate(this);
+
+    ui->listView_2->reset();
+
     ui->listView_2->setItemDelegate(seqDelegate);
+
     ui->listView_2->setModel(seqModel);
 
     ui->listView_2->setDragEnabled(true);
@@ -158,7 +168,6 @@ void MainWindow::open_export()
 void MainWindow::open_import()
 {
     ImportDialog *importDialog = new ImportDialog(this);
-    //connect(newSequence, SIGNAL(updateUi()), this, SLOT(updateUi()));
     importDialog->show();
 }
 

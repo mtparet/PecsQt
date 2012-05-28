@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 
     Sequence sq;
     foreach(sq,listSq){
-        myMem.listSequence.append(&sq);
+        myMem.add(sq);
     }
 
     MainWindow w;

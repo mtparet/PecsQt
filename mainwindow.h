@@ -21,6 +21,7 @@ public:
 
 public slots:
         void updateUi();
+        void selectedSequence(Sequence *f);
     
 private slots:
     void open_newsequence();
@@ -39,7 +40,7 @@ private:
 
     Sequence selectSeq;
 
-    //tableau des images déjà mise, le nom de leur fichier est pris en compte
+    //tableau des images déj�  mise, le nom de leur fichier est pris en compte
     ImageSeqModel *sequenceReceptor;
     QList<ImageWIdget*> listImageWidget;
 

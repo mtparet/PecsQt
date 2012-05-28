@@ -8,3 +8,8 @@ MyListSelector::MyListSelector(QWidget *parent): MyBaseListWidget(parent)
  setSizeIcon(*image_size);
 
 }
+
+void MyListSelector::mousePressEvent(QMouseEvent *event){
+    emit setSequence();
+}
+

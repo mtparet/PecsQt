@@ -13,9 +13,13 @@ public:
 protected:
     QSize *qs;
 
-signals:
+signals :
+        void setSequence();
 
 public slots:
+
+private:
+    void mousePressEvent(QMouseEvent *event);
 };
 
 #endif // MYLISTSELECTOR_H
