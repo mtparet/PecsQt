@@ -22,7 +22,6 @@ EditOrderSequence::~EditOrderSequence()
 void EditOrderSequence::on_buttonBox_accepted()
 {
     QMap<QString,int> orderMap;
-    int i = 0;
     for(int i = 0; i < ui->listWidget->count(); i ++){
         orderMap.insert(ui->listWidget->item(i)->data(31).toString(),i);
     }

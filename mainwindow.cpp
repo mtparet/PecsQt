@@ -98,16 +98,6 @@ void MainWindow::chargeListSequenceInSelector(QList<Sequence*> listSeq){
     }
 }
 
-/*
-  Drepcated
-void MainWindow::updateReceptor(QString id_name,int num_place,QString name,bool present){
-    this->sequenceReceptor = Util::insert_at(id_name,num_place,this->sequenceReceptor);
-
-    buildLayoutReceptor();
-    updateLayoutSequence(name,present);
-}
-*/
-
 void MainWindow::buildLayoutReceptor(){
 
     QList<ImageInSequence> *listIs = new QList<ImageInSequence>();

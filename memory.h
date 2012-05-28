@@ -9,6 +9,8 @@ public:
     QList<Sequence *> listSequence;
     bool replace(Sequence f);
     bool remove(Sequence f);
+    bool add(Sequence f);
+
 
 };
 
