@@ -99,6 +99,7 @@ void MainWindow::chargeListSequenceInSelector(QList<Sequence*> listSeq){
     foreach(seq,listSeq){
         widgetInSelector *mylistSelector = new widgetInSelector(ui->centralWidget,&seq);
         mylistSelector->setMinimumWidth(100);
+        mylistSelector->setFixedHeight(140);
         connect(mylistSelector, SIGNAL(setSequence(Sequence *)), this, SLOT(selectedSequence(Sequence*)));
         ui->verticalLayout->addWidget(mylistSelector);
     }
@@ -155,7 +156,7 @@ void MainWindow::open_newsequence()
 void MainWindow::open_organizesequence()
 {
     OrganizeDialog *newSequence = new OrganizeDialog(this);
-    connect(newSequence, SIGNAL(updateUi()), this, SLOT(updateUi()));
+    connect(newSequence, SIGNAL(updateMainWindows()), this, SLOT(updateUi()));
     newSequence->show();
 }
 

@@ -19,6 +19,12 @@ public:
 public slots:
    void removeMe(OneReorganizeWidget *one);
     
+private slots:
+   void on_buttonBox_accepted();
+
+signals:
+   void updateMainWindows();
+
 private:
     Ui::OrganizeDialog *ui;
     void chargeListSequenceInSelector(QList<Sequence*> listSeq);

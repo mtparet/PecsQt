@@ -27,8 +27,11 @@ void EditOrderSequence::on_buttonBox_accepted()
     }
 
     f->setOrder(orderMap);
+
     f->name = ui->lineEdit->text();
+
     myMem.replace(f);
+
     Util::saveOneSeq(f);
     this->updateNewSeq();
 

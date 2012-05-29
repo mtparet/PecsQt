@@ -6,6 +6,7 @@ MyListSelector::MyListSelector(QWidget *parent): MyBaseListWidget(parent)
  setFlow(QListView::LeftToRight);
  image_size= new QSize(30,30);
  setSizeIcon(*image_size);
+ this->setSelectionMode(QAbstractItemView::NoSelection);
 
 }
 

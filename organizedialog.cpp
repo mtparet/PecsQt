@@ -23,15 +23,21 @@ OrganizeDialog::~OrganizeDialog()
 }
 
 void OrganizeDialog::removeMe(OneReorganizeWidget *one){
-    this->layout()->removeWidget(one);
+    delete ui->verticalLayout;
+    chargeListSequenceInSelector(myMem.listSequence);
 }
 
 void OrganizeDialog::chargeListSequenceInSelector(QList<Sequence*> listSeq){
-
     ui->verticalLayout = new QVBoxLayout (this);
     Sequence seq;
     foreach(seq,listSeq){
         OneReorganizeWidget *myReorganizeWidget = new OneReorganizeWidget(this,&seq);
+        connect(myReorganizeWidget, SIGNAL(removeMe(OneReorganizeWidget *)), this, SLOT(removeMe(OneReorganizeWidget *)));
         ui->verticalLayout->addWidget(myReorganizeWidget);
     }
+}
+
+void OrganizeDialog::on_buttonBox_accepted()
+{
+    emit updateMainWindows();
 }

@@ -10,7 +10,7 @@ class MyBaseListWidget: public QListWidget
 public:
     explicit MyBaseListWidget(QWidget *parent = 0);
     void chargeListImageInsequence(Sequence sq, bool sorted);
-    void addImage(QString name,QIcon image, int order);
+    void addImage(QString name,QIcon image);
     void setSizeIcon(QSize image_size);
 
 
