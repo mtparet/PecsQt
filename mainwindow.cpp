@@ -79,7 +79,7 @@ void MainWindow::refreshData(){
 }
 
 void MainWindow::selectOneSequence(Sequence *seq){
-    selectSeq = seq;
+    selectSeq = new Sequence(seq);
 
     initLayoutSequence();
 
@@ -107,15 +107,15 @@ void MainWindow::chargeListSequenceInSelector(QList<Sequence*> listSeq){
 
 void MainWindow::buildLayoutReceptor(){
 
-    QList<ImageInSequence> *listIs = new QList<ImageInSequence>();
+    Sequence *sequence_vide = new Sequence();
 
     for(int i = 0; i < selectSeq.listImageInSequence.length(); i++){
         ImageInSequence is;
         is.folder = "null";
-        listIs->append(is);
+        sequence_vide->listImageInSequence.append(is);
     }
 
-    sequenceReceptor = new ImageSeqModel(this,listIs);
+    sequenceReceptor = new ImageSeqModel(this,sequence_vide);
 
 
     ImageReceptorDelegate * seqDelegate = new ImageReceptorDelegate(this);
@@ -130,7 +130,7 @@ void MainWindow::buildLayoutReceptor(){
 
 void MainWindow::initLayoutSequence(){
 
-    ImageSeqModel *seqModel = new ImageSeqModel(this,&selectSeq.listImageInSequence);
+    ImageSeqModel *seqModel = new ImageSeqModel(this,&selectSeq);
     ImageReceptorDelegate * seqDelegate = new ImageReceptorDelegate(this);
 
     ui->listView_2->reset();

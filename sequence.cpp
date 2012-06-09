@@ -5,7 +5,6 @@
 #include "util.h"
 
 Sequence::Sequence(){
-
 }
 
 Sequence::Sequence(Sequence *sq){

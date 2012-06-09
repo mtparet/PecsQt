@@ -4,15 +4,15 @@
 #include "QStringList"
 #include "QVariantMap"
 
-ImageSeqModel::ImageSeqModel(QObject *parent, QList<ImageInSequence> *li) :
+ImageSeqModel::ImageSeqModel(QObject *parent, Sequence *seq) :
     QAbstractListModel(parent)
 {
-    this->li = *li;
+    this->seq = *seq;
 }
 
 int ImageSeqModel::rowCount(const QModelIndex &parent) const {
     Q_UNUSED(parent);
-    return li.count();
+    return this->seq.listImageInSequence.count();
 }
 
 QVariant ImageSeqModel::data(const QModelIndex &index, int role) const {
@@ -23,17 +23,17 @@ QVariant ImageSeqModel::data(const QModelIndex &index, int role) const {
     }
     if ((index.column() == 0) && (row >= 0) && (row < rowCount()))
     {
-      ImageInSequence is = li.at(index.row());
+      ImageInSequence is = seq.listImageInSequence.at(index.row());
       int right,left;
 
       if(is.folder != "null"){
-          if(row == 0 || li.at(index.row()-1).orderIn == (is.orderIn -1)){
+          if(row == 0 || seq.listImageInSequence.at(index.row()-1).orderIn == (is.orderIn -1)){
               left = 1;
           }else{
               left = 2;
           }
 
-          if( (row == (li.count() - 1) && (is.orderIn == li.last().orderIn)) || li.at(index.row()+1).orderIn == (is.orderIn +1)){
+          if( (row == (seq.listImageInSequence.count() - 1) && (is.orderIn == seq.listImageInSequence.last().orderIn)) || seq.listImageInSequence.at(index.row()+1).orderIn == (is.orderIn +1)){
               right = 1;
           }else{
               right = 2;
@@ -147,14 +147,14 @@ bool ImageSeqModel::setData ( const QModelIndex & index, const QVariant & value,
     is.fromVariant(value.toMap());
 
     //Si l'objet n'est pas contenu on l'insert sinon on le déplace
-    if(li.contains(is)){
-        li.removeOne(is);
-        li.insert(row,is);
-    }else if( li.at(row).folder == "null" ){
-        li.removeAt(row);
-        li.insert(row,is);
+    if(seq.listImageInSequence.contains(is)){
+        seq.listImageInSequence.removeOne(is);
+        seq.listImageInSequence.insert(row,is);
+    }else if( seq.listImageInSequence.at(row).folder == "null" ){
+        seq.listImageInSequence.removeAt(row);
+        seq.listImageInSequence.insert(row,is);
     }else{
-       li.insert(row,is);
+       seq.listImageInSequence.insert(row,is);
     }
 
     emit dataChanged(index,index);
@@ -162,14 +162,14 @@ bool ImageSeqModel::setData ( const QModelIndex & index, const QVariant & value,
 }
 
 bool ImageSeqModel::removeRows(int row, int count, const QModelIndex &parent){
-    if(row > li.count() || row < 0){
+    if(row > seq.listImageInSequence.count() || row < 0){
         return false;
     }
 
-    li.removeAt(row);
+    seq.listImageInSequence.removeAt(row);
 
     QModelIndex startIndex = index(0,0);
-   QModelIndex endIndex =  index(li.count(),0);
+   QModelIndex endIndex =  index(seq.listImageInSequence.count(),0);
 
     emit dataChanged(startIndex,endIndex);
 
