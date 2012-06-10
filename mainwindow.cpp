@@ -97,9 +97,7 @@ void MainWindow::chargeListSequenceInSelector(QList<Sequence*> listSeq){
     ui->verticalLayout = new QVBoxLayout (ui->centralWidget);
     Sequence seq;
     foreach(seq,listSeq){
-        widgetInSelector *mylistSelector = new widgetInSelector(ui->centralWidget,&seq);
-        mylistSelector->setMinimumWidth(100);
-        mylistSelector->setFixedHeight(140);
+        widgetInSelector *mylistSelector = new widgetInSelector(ui->centralWidget,&seq,myMem.size_in_widget);
         connect(mylistSelector, SIGNAL(setSequence(Sequence *)), this, SLOT(selectedSequence(Sequence*)));
         ui->verticalLayout->addWidget(mylistSelector);
     }
@@ -176,3 +174,8 @@ void MainWindow::updateUi(){
     this->refreshData();
 }
 
+
+void MainWindow::on_zoom_in_clicked()
+{
+    //TODO : faire un extend de Qboxlayout pour pouvoir rajouter une fonction setZoom dessus.
+}

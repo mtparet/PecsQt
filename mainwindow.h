@@ -30,6 +30,8 @@ private slots:
     void open_import();
 
 
+    void on_zoom_in_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -40,7 +42,7 @@ private:
 
     Sequence selectSeq;
 
-    //tableau des images déj�  mise, le nom de leur fichier est pris en compte
+    //tableau des images déj  mise, le nom de leur fichier est pris en compte
     ImageSeqModel *sequenceReceptor;
     QList<ImageWIdget*> listImageWidget;
 

@@ -1,12 +1,13 @@
 #include "mylistselector.h"
+#include "globval.h"
 
 MyListSelector::MyListSelector(QWidget *parent): MyBaseListWidget(parent)
 {
  setDragEnabled(false);
  setFlow(QListView::LeftToRight);
- image_size= new QSize(30,30);
- setSizeIcon(*image_size);
- this->setSelectionMode(QAbstractItemView::NoSelection);
+ setMinimumWidth(100);
+ setFixedHeight(140);
+ setSelectionMode(QAbstractItemView::NoSelection);
 
 }
 

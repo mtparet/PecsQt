@@ -8,6 +8,7 @@
 #include "globval.h"
 #include <QMetaObject>
 #include <QTextCodec>
+#include <QSize>
 
 
 int main(int argc, char *argv[])
@@ -22,6 +23,9 @@ int main(int argc, char *argv[])
     foreach(sq,listSq){
         myMem.add(sq);
     }
+
+    myMem.size_in_view = new QSize(100,100);
+    myMem.size_in_widget = new QSize(100,100);
 
     MainWindow w;
     w.show();
