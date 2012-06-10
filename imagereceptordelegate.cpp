@@ -2,6 +2,8 @@
 #include "QPainter"
 #include "imageinsequence.h"
 #include "util.h"
+#include <iostream>
+
 ImageReceptorDelegate::ImageReceptorDelegate(QWidget *parent ) : QStyledItemDelegate(parent) {}
 
 void ImageReceptorDelegate::paint ( QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex & index ) const{
@@ -38,6 +40,7 @@ void ImageReceptorDelegate::paint ( QPainter * painter, const QStyleOptionViewIt
 
     painter->drawRect(index.row()*100, 0, 92, 110);
 
+    std::cout << "image_file:" << is.img.image_file.toStdString() << " folder:" << is.folder.toStdString() << std::endl;
 
     QPixmap image = Util::getPixmapFile(is.img.image_file,is.folder);
     painter->drawPixmap(index.row()*100,10,90,100,image);

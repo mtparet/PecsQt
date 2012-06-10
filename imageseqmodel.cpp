@@ -25,18 +25,26 @@ QVariant ImageSeqModel::data(const QModelIndex &index, int role) const {
     {
       ImageInSequence is = seq.listImageInSequence.at(index.row());
       int right,left;
+      right = left = 2;
 
       if(is.folder != "null"){
-          if(row == 0 || seq.listImageInSequence.at(index.row()-1).orderIn == (is.orderIn -1)){
+
+          if(is.orderIn == 0 && row == 0){
               left = 1;
-          }else{
-              left = 2;
+              right = 1;
           }
 
-          if( (row == (seq.listImageInSequence.count() - 1) && (is.orderIn == seq.listImageInSequence.last().orderIn)) || seq.listImageInSequence.at(index.row()+1).orderIn == (is.orderIn +1)){
+          if(is.orderIn == (seq.listImageInSequence.count() - 1) && row == (seq.listImageInSequence.count() - 1)  ){
+              left = 1;
               right = 1;
-          }else{
-              right = 2;
+          }
+
+          if(is.orderIn != 0 && seq.listImageInSequence.at(index.row() -1).orderIn == (is.orderIn - 1)){
+              left = 1;
+          }
+
+          if(is.orderIn != (seq.listImageInSequence.count() - 1) && seq.listImageInSequence.at(index.row() + 1).orderIn == (is.orderIn + 1)){
+              right = 1;
           }
       }else{
           left = right = 0;
