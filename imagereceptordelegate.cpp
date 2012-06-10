@@ -40,7 +40,7 @@ void ImageReceptorDelegate::paint ( QPainter * painter, const QStyleOptionViewIt
 
     painter->drawRect(index.row()*100, 0, 92, 110);
 
-    std::cout << "image_file:" << is.img.image_file.toStdString() << " folder:" << is.folder.toStdString() << std::endl;
+    std::cout << "DELGATE " <<  "image_file:" << is.img.image_file.toStdString() << " folder:" << is.folder.toStdString() << std::endl;
 
     QPixmap image = Util::getPixmapFile(is.img.image_file,is.folder);
     painter->drawPixmap(index.row()*100,10,90,100,image);

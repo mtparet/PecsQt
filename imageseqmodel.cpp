@@ -3,6 +3,8 @@
 #include "QMimeData"
 #include "QStringList"
 #include "QVariantMap"
+#include <iostream>
+
 
 ImageSeqModel::ImageSeqModel(QObject *parent, Sequence *seq) :
     QAbstractListModel(parent)
@@ -27,7 +29,7 @@ QVariant ImageSeqModel::data(const QModelIndex &index, int role) const {
       int right,left;
       right = left = 2;
 
-      if(is.folder != "null"){
+      if(is.img.image_file != "null"){
 
           if(is.orderIn == 0 && row == 0){
               left = 1;
@@ -39,17 +41,18 @@ QVariant ImageSeqModel::data(const QModelIndex &index, int role) const {
               right = 1;
           }
 
-          if(is.orderIn != 0 && seq.listImageInSequence.at(index.row() -1).orderIn == (is.orderIn - 1)){
+          if(index.row() != 0 && seq.listImageInSequence.at(index.row() -1).orderIn == (is.orderIn - 1)){
               left = 1;
           }
 
-          if(is.orderIn != (seq.listImageInSequence.count() - 1) && seq.listImageInSequence.at(index.row() + 1).orderIn == (is.orderIn + 1)){
+          if(index.row() != (seq.listImageInSequence.count() - 1) && seq.listImageInSequence.at(index.row() + 1).orderIn == (is.orderIn + 1)){
               right = 1;
           }
       }else{
           left = right = 0;
       }
 
+      std::cout << "MODEL " <<  "image_file:" << is.img.image_file.toStdString() << " folder:" << is.folder.toStdString() << std::endl;
 
       QVariantMap vm;
       vm.insert("li",is.toVariantMap());
@@ -154,11 +157,14 @@ bool ImageSeqModel::setData ( const QModelIndex & index, const QVariant & value,
     ImageInSequence is;
     is.fromVariant(value.toMap());
 
+    std::cout << "MODEL DROP " <<  "image_file:" << is.img.image_file.toStdString() << " folder:" << is.folder.toStdString() << std::endl;
+
+
     //Si l'objet n'est pas contenu on l'insert sinon on le déplace
     if(seq.listImageInSequence.contains(is)){
         seq.listImageInSequence.removeOne(is);
         seq.listImageInSequence.insert(row,is);
-    }else if( seq.listImageInSequence.at(row).folder == "null" ){
+    }else if( seq.listImageInSequence.at(row).img.image_file == "null" ){
         seq.listImageInSequence.removeAt(row);
         seq.listImageInSequence.insert(row,is);
     }else{
