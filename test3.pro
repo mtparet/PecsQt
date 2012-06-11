@@ -63,7 +63,12 @@ FORMS    += mainwindow.ui \
     importdialog.ui \
     imagewidget.ui
 
-unix|win32: LIBS += -lqjson
+#unix|win32: LIBS += -lqjson
+
+INCLUDEPATH += $$PWD/../qjson
+DEPENDPATH += $$PWD/../qjson
+LIBS += $$PWD/../qjson/build/lib/libqjson.dll
+INCLUDEPATH += $$PWD/../qjson/src/
 
 
 

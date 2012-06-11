@@ -1,6 +1,6 @@
 #include "apiparse.h"
-#include <qjson/parser.h>
-#include <qjson/serializer.h>
+#include "parser.h"
+#include "serializer.h"
 #include "util.h"
 
 

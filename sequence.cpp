@@ -1,7 +1,7 @@
 #include <sequence.h>
 #include <QStringList>
-#include <qjson/serializer.h>
-#include <qjson/parser.h>
+#include "parser.h"
+#include "serializer.h"
 #include "util.h"
 
 Sequence::Sequence(){
@@ -112,7 +112,7 @@ bool  Sequence::fromQMap(QStringList listName,QString name){
 /*
   Récupère l'image distante (stocké dans image_file), la stocke dans le dossier de la séquence
   Copie le image_file dans un image_origin
-  Mets à jour le image_file
+  Mets �  jour le image_file
   */
 bool Sequence::changeAndSaveImageFile(){
     /*TODO*/
