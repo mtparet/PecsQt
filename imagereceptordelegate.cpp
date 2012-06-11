@@ -4,7 +4,9 @@
 #include "util.h"
 #include <iostream>
 
-ImageReceptorDelegate::ImageReceptorDelegate(QWidget *parent ) : QStyledItemDelegate(parent) {}
+ImageReceptorDelegate::ImageReceptorDelegate(QWidget *parent,QSize *size) : QStyledItemDelegate(parent) {
+this->size = size;
+}
 
 void ImageReceptorDelegate::paint ( QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex & index ) const{
 
@@ -38,12 +40,14 @@ void ImageReceptorDelegate::paint ( QPainter * painter, const QStyleOptionViewIt
 
     painter->setPen(pen);
 
-    painter->drawRect(index.row()*100, 0, 92, 110);
+    painter->drawRect(index.row()*size->width(), 0, size->width() - 8, size->height() + 10);
 
     std::cout << "DELGATE " <<  "image_file:" << is.img.image_file.toStdString() << " folder:" << is.folder.toStdString() << std::endl;
 
     QPixmap image = Util::getPixmapFile(is.img.image_file,is.folder);
-    painter->drawPixmap(index.row()*100,10,90,100,image);
+
+    //TODO externaliser les valeurs pour povoir mettre un zoom
+    painter->drawPixmap(index.row()*size->width(),10,size->width() - 10,size->width(),image);
 
 
     //painter->restore();
@@ -53,4 +57,9 @@ QSize ImageReceptorDelegate::sizeHint(const QStyleOptionViewItem &option,
                 const QModelIndex &index) const{
     return QSize(100, 120);
 }
+
+void ImageReceptorDelegate::setSize(QSize *size){
+    this->size = size;
+}
+
 

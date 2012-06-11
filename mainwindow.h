@@ -5,6 +5,7 @@
 #include "sequence.h"
 #include "imagewidget.h"
 #include "imageseqmodel.h"
+#include "imagereceptordelegate.h"
 
 namespace Ui {
 class MainWindow;
@@ -32,10 +33,12 @@ private slots:
 
     void on_zoom_in_clicked();
 
+    void on_zoom_out_clicked();
+
 private:
     Ui::MainWindow *ui;
 
-    void chargeListSequenceInSelector(QList<Sequence*> listSeq);
+    void updateListSequenceInSelector(QList<Sequence*> listSeq,QSize *size);
     void buildLayoutReceptor();
     void initLayoutSequence();
     void selectOneSequence(Sequence *seq);
@@ -45,6 +48,7 @@ private:
     //tableau des images déj  mise, le nom de leur fichier est pris en compte
     ImageSeqModel *sequenceReceptor;
     QList<ImageWIdget*> listImageWidget;
+    ImageReceptorDelegate *seqDelegate;
 
 };
 

@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
         myMem.add(sq);
     }
 
-    myMem.size_in_view = new QSize(100,100);
+    myMem.size_in_view =  new QSize(100,100);
     myMem.size_in_widget = new QSize(100,100);
 
     MainWindow w;
