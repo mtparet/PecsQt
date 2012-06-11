@@ -5,7 +5,6 @@
 #include "util.h"
 
 Sequence::Sequence(){
-
 }
 
 Sequence::Sequence(Sequence *sq){
@@ -57,7 +56,6 @@ bool Sequence::fromVariant(QVariantMap variantMap){
     foreach (QVariant imgSeqVariant, variantMap["listImageInSequence"].toList()) {
         ImageInSequence imgSeq;
         imgSeq.fromVariant(imgSeqVariant.toMap());
-        imgSeq.folder = name;
         listImageInSequence << imgSeq;
     }
     return true;

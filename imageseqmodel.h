@@ -2,11 +2,12 @@
 #define IMAGESEQMODEL_H
 #include "imageinsequence.h"
 #include "QAbstractListModel"
+#include "sequence.h"
 class ImageSeqModel: public QAbstractListModel
 {   
     Q_OBJECT
 public:
-    explicit ImageSeqModel(QObject *parent=0,QList<ImageInSequence> *li = 0);
+    explicit ImageSeqModel(QObject *parent=0,Sequence *seq = 0);
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role) const;
     Qt::DropActions supportedDropActions() const;
@@ -19,7 +20,7 @@ public:
     Qt::DropActions supportedDragActions() const;
 
 protected:
-    QList<ImageInSequence> li;
+    Sequence seq;
 signals:
 
 public slots:

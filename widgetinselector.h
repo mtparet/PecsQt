@@ -13,7 +13,7 @@ class widgetInSelector : public QWidget
 {
     Q_OBJECT
 public:
-    explicit widgetInSelector(QWidget *parent = 0, Sequence *f = 0);
+    explicit widgetInSelector(QWidget *parent = 0, Sequence *f = 0,QSize *size = 0);
     ~widgetInSelector();
 
 public slots:

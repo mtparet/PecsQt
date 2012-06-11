@@ -1,7 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.1
+** Created: Mon Jun 11 10:45:58 2012
+**      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -18,6 +19,7 @@
 #include <QtGui/QLabel>
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenuBar>
+#include <QtGui/QPushButton>
 #include <QtGui/QScrollArea>
 #include <QtGui/QSpacerItem>
 #include <QtGui/QStatusBar>
@@ -49,6 +51,10 @@ public:
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
     QLabel *label;
+    QWidget *horizontalLayoutWidget;
+    QHBoxLayout *horizontalLayout_2;
+    QPushButton *zoom_in;
+    QPushButton *zoom_out;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -162,10 +168,30 @@ public:
         sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
         label->setSizePolicy(sizePolicy);
         label->setMinimumSize(QSize(0, 72));
+        horizontalLayoutWidget = new QWidget(centralWidget);
+        horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
+        horizontalLayoutWidget->setGeometry(QRect(0, 10, 181, 31));
+        horizontalLayout_2 = new QHBoxLayout(horizontalLayoutWidget);
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
+        zoom_in = new QPushButton(horizontalLayoutWidget);
+        zoom_in->setObjectName(QString::fromUtf8("zoom_in"));
+        sizePolicy.setHeightForWidth(zoom_in->sizePolicy().hasHeightForWidth());
+        zoom_in->setSizePolicy(sizePolicy);
+
+        horizontalLayout_2->addWidget(zoom_in);
+
+        zoom_out = new QPushButton(horizontalLayoutWidget);
+        zoom_out->setObjectName(QString::fromUtf8("zoom_out"));
+
+        horizontalLayout_2->addWidget(zoom_out);
+
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1224, 23));
+        menuBar->setGeometry(QRect(0, 0, 1224, 25));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -183,6 +209,8 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("MainWindow", "S\303\251quence choisie :", 0, QApplication::UnicodeUTF8));
+        zoom_in->setText(QApplication::translate("MainWindow", "+", 0, QApplication::UnicodeUTF8));
+        zoom_out->setText(QApplication::translate("MainWindow", "-", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

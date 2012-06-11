@@ -62,7 +62,8 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::refreshData(){
-    chargeListSequenceInSelector(myMem.listSequence);
+    QSize *size = myMem.size_in_widget;
+    updateListSequenceInSelector(myMem.listSequence,size);
 
 
     QWidget *viewport = new QWidget;
@@ -79,7 +80,9 @@ void MainWindow::refreshData(){
 }
 
 void MainWindow::selectOneSequence(Sequence *seq){
-    selectSeq = seq;
+    seqDelegate = new ImageReceptorDelegate(this, myMem.size_in_view);
+
+    selectSeq = new Sequence(seq);
 
     initLayoutSequence();
 
@@ -92,14 +95,12 @@ void MainWindow::selectedSequence(Sequence *f){
 }
 
 
-void MainWindow::chargeListSequenceInSelector(QList<Sequence*> listSeq){
+void MainWindow::updateListSequenceInSelector(QList<Sequence*> listSeq,QSize *size){
 
-    ui->verticalLayout = new QVBoxLayout (ui->centralWidget);
+    ui->verticalLayout = new QVBoxLayout(ui->centralWidget);
     Sequence seq;
     foreach(seq,listSeq){
-        widgetInSelector *mylistSelector = new widgetInSelector(ui->centralWidget,&seq);
-        mylistSelector->setMinimumWidth(100);
-        mylistSelector->setFixedHeight(140);
+        widgetInSelector *mylistSelector = new widgetInSelector(ui->centralWidget,&seq,size);
         connect(mylistSelector, SIGNAL(setSequence(Sequence *)), this, SLOT(selectedSequence(Sequence*)));
         ui->verticalLayout->addWidget(mylistSelector);
     }
@@ -107,18 +108,16 @@ void MainWindow::chargeListSequenceInSelector(QList<Sequence*> listSeq){
 
 void MainWindow::buildLayoutReceptor(){
 
-    QList<ImageInSequence> *listIs = new QList<ImageInSequence>();
+    Sequence *sequence_vide = new Sequence();
 
     for(int i = 0; i < selectSeq.listImageInSequence.length(); i++){
         ImageInSequence is;
-        is.folder = "null";
-        listIs->append(is);
+        is.img.image_file = "null";
+        sequence_vide->listImageInSequence.append(is);
     }
 
-    sequenceReceptor = new ImageSeqModel(this,listIs);
+    sequenceReceptor = new ImageSeqModel(this,sequence_vide);
 
-
-    ImageReceptorDelegate * seqDelegate = new ImageReceptorDelegate(this);
     ui->listView->setItemDelegate(seqDelegate);
     ui->listView->setModel(sequenceReceptor);
 
@@ -130,9 +129,7 @@ void MainWindow::buildLayoutReceptor(){
 
 void MainWindow::initLayoutSequence(){
 
-    ImageSeqModel *seqModel = new ImageSeqModel(this,&selectSeq.listImageInSequence);
-    ImageReceptorDelegate * seqDelegate = new ImageReceptorDelegate(this);
-
+    ImageSeqModel *seqModel = new ImageSeqModel(this,&selectSeq);
     ui->listView_2->reset();
 
     ui->listView_2->setItemDelegate(seqDelegate);
@@ -176,3 +173,42 @@ void MainWindow::updateUi(){
     this->refreshData();
 }
 
+
+void MainWindow::on_zoom_in_clicked()
+{
+    myMem.size_in_widget = new QSize(myMem.size_in_widget->width() + 5, myMem.size_in_widget->height() + 5);
+    myMem.size_in_view = new QSize(myMem.size_in_view->width() + 5, myMem.size_in_view->height() + 5);
+
+    QSize *size = myMem.size_in_widget;
+    updateListSequenceInSelector(myMem.listSequence, size);
+    QWidget *viewport = new QWidget;
+    viewport->setLayout(ui->verticalLayout);
+
+    ui->scrollArea->setWidget(viewport);
+
+    QSize *size_view = myMem.size_in_view;
+
+    seqDelegate->setSize(size_view);
+    ui->listView->repaint();
+    ui->listView_2->repaint();
+}
+
+void MainWindow::on_zoom_out_clicked()
+{
+    myMem.size_in_widget = new QSize(myMem.size_in_widget->width() - 5, myMem.size_in_widget->height() - 5);
+    myMem.size_in_view = new QSize(myMem.size_in_view->width() - 5, myMem.size_in_view->height() - 5);
+
+    QSize *size = myMem.size_in_widget;
+    updateListSequenceInSelector(myMem.listSequence, size);
+    QWidget *viewport = new QWidget;
+    viewport->setLayout(ui->verticalLayout);
+
+    ui->scrollArea->setWidget(viewport);
+
+    QSize *size_view = myMem.size_in_view;
+
+    seqDelegate->setSize(size_view);
+    ui->listView->repaint();
+    ui->listView_2->repaint();
+
+}

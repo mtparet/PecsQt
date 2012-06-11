@@ -30,6 +30,12 @@ void NewSequence::on_buttonBox_accepted()
     QStringList listeName = Util::getFileName(fileList);
 
     sq.fromQMap(listeName,name);
+
+    //add folder name to image_file
+    for(int i = 0; i < sq.listImageInSequence.count(); i++){
+        sq.listImageInSequence[i].folder = name;
+    }
+
     myMem.add(sq);
 
     EditOrderSequence *editOrder = new EditOrderSequence(this,&sq);

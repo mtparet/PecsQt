@@ -5,10 +5,13 @@
 class ImageReceptorDelegate : public QStyledItemDelegate
 {
 public:
-    explicit ImageReceptorDelegate(QWidget *parent = 0);
+    explicit ImageReceptorDelegate(QWidget *parent = 0,QSize *size = 0);
     void paint ( QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex & index ) const;
     QSize sizeHint(const QStyleOptionViewItem &option,
                     const QModelIndex &index) const;
+    void setSize(QSize *size);
+private:
+    QSize *size;
 };
 
 #endif // IMAGERECEPTORDELEGATE_H

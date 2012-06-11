@@ -11,7 +11,7 @@ public:
     explicit MyBaseListWidget(QWidget *parent = 0);
     void chargeListImageInsequence(Sequence sq, bool sorted);
     void addImage(QString name,QIcon image);
-    void setSizeIcon(QSize image_size);
+    void setSizeIcon(QSize *image_size);
 
 
 protected:

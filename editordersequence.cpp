@@ -1,4 +1,4 @@
-#include "editordersequence.h"
+ #include "editordersequence.h"
 #include "ui_editordersequence.h"
 #include "globval.h"
 #include "util.h"
