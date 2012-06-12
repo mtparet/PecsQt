@@ -9,7 +9,7 @@ widgetInSelector::widgetInSelector(QWidget *parent,Sequence *f,QSize *size) :
     myS = new Sequence(f);
     ui->label->setText(myS->name);
     ui->listWidget->setSizeIcon(size);
-    ui->listWidget->chargeListImageInsequence(myS, false);
+    ui->listWidget->chargeListImageInsequence(myS, false,3);
     connect(ui->listWidget,SIGNAL(setSequence()),this,SLOT(selectedSequence()));
 }
 

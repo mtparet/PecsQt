@@ -29,10 +29,7 @@ private slots:
     void open_organizesequence();
     void open_export();
     void open_import();
-
-
     void on_zoom_in_clicked();
-
     void on_zoom_out_clicked();
 
 private:

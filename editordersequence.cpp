@@ -10,7 +10,7 @@ EditOrderSequence::EditOrderSequence(QWidget *parent, Sequence *f) :
 {
     ui->setupUi(this);
     this->f = new Sequence(f);
-    ui->listWidget->chargeListImageInsequence(this->f,true);
+    ui->listWidget->chargeListImageInsequence(this->f,true,f->listImageInSequence.count());
     ui->lineEdit->setText(this->f->name);
 }
 

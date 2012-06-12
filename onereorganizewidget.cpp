@@ -11,7 +11,7 @@ OneReorganizeWidget::OneReorganizeWidget(QWidget *parent,Sequence *f) :
 {
     ui->setupUi(this);
     this->myS = new Sequence(f);
-    ui->listWidget->chargeListImageInsequence(myS, true);
+    ui->listWidget->chargeListImageInsequence(myS, true,f->listImageInSequence.count());
 }
 
 OneReorganizeWidget::~OneReorganizeWidget()

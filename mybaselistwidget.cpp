@@ -29,7 +29,7 @@ void MyBaseListWidget::addImage(QString name,QIcon image){
 }
 
 
-void MyBaseListWidget::chargeListImageInsequence(Sequence sq, bool sorted){
+void MyBaseListWidget::chargeListImageInsequence(Sequence sq, bool sorted, int nb_image_charge){
 
     this->clear();
     QList<ImageInSequence> listImg = sq.listImageInSequence;
@@ -47,8 +47,10 @@ void MyBaseListWidget::chargeListImageInsequence(Sequence sq, bool sorted){
             }
             listImg = randlistImg;
         }
-    ImageInSequence imgSeq;
-    foreach(imgSeq,listImg){
+    int i = 0;
+    while(i < listImg.count() && i < nb_image_charge){
+        ImageInSequence imgSeq = listImg.at(i);
         this->addImage(imgSeq.img.name,Util::getIcon(imgSeq.img.image_file, sq.name));
+        ++i;
     }
 }

@@ -177,7 +177,6 @@ void MainWindow::updateUi(){
 void MainWindow::on_zoom_in_clicked()
 {
     myMem.size_in_widget = new QSize(myMem.size_in_widget->width() + 5, myMem.size_in_widget->height() + 5);
-    myMem.size_in_view = new QSize(myMem.size_in_view->width() + 5, myMem.size_in_view->height() + 5);
 
     QSize *size = myMem.size_in_widget;
     updateListSequenceInSelector(myMem.listSequence, size);
@@ -186,6 +185,8 @@ void MainWindow::on_zoom_in_clicked()
 
     ui->scrollArea->setWidget(viewport);
 
+    //---
+    myMem.size_in_view = new QSize(myMem.size_in_view->width() + 5, myMem.size_in_view->height() + 5);
     QSize *size_view = myMem.size_in_view;
 
     seqDelegate->setSize(size_view);
@@ -196,7 +197,6 @@ void MainWindow::on_zoom_in_clicked()
 void MainWindow::on_zoom_out_clicked()
 {
     myMem.size_in_widget = new QSize(myMem.size_in_widget->width() - 5, myMem.size_in_widget->height() - 5);
-    myMem.size_in_view = new QSize(myMem.size_in_view->width() - 5, myMem.size_in_view->height() - 5);
 
     QSize *size = myMem.size_in_widget;
     updateListSequenceInSelector(myMem.listSequence, size);
@@ -205,10 +205,12 @@ void MainWindow::on_zoom_out_clicked()
 
     ui->scrollArea->setWidget(viewport);
 
+    myMem.size_in_view = new QSize(myMem.size_in_view->width() - 5, myMem.size_in_view->height() - 5);
+
     QSize *size_view = myMem.size_in_view;
 
     seqDelegate->setSize(size_view);
+    qApp->processEvents();
     ui->listView->repaint();
     ui->listView_2->repaint();
-
 }
