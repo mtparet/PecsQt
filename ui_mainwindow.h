@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Mon Jun 11 10:45:58 2012
-**      by: Qt User Interface Compiler version 4.8.1
+** Created: Sat 16. Jun 19:05:54 2012
+**      by: Qt User Interface Compiler version 4.8.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -34,8 +34,6 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QScrollArea *scrollArea;
-    QWidget *scrollAreaWidgetContents;
     QWidget *verticalLayoutWidget_2;
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout_3;
@@ -48,9 +46,11 @@ public:
     QSpacerItem *horizontalSpacer;
     MyBaseListView *listView;
     QSpacerItem *horizontalSpacer_2;
-    QWidget *verticalLayoutWidget;
-    QVBoxLayout *verticalLayout;
     QLabel *label;
+    QScrollArea *scrollArea;
+    QWidget *scrollAreaWidgetContents;
+    QWidget *horizontalLayoutWidget_2;
+    QHBoxLayout *horizontalLayout_selector;
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout_2;
     QPushButton *zoom_in;
@@ -63,7 +63,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1224, 645);
+        MainWindow->resize(1240, 690);
         QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -71,25 +71,14 @@ public:
         MainWindow->setSizePolicy(sizePolicy);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-        scrollArea = new QScrollArea(centralWidget);
-        scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
-        scrollArea->setGeometry(QRect(10, 130, 181, 351));
-        scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-        scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        scrollArea->setWidgetResizable(true);
-        scrollAreaWidgetContents = new QWidget();
-        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setEnabled(true);
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 164, 349));
-        scrollArea->setWidget(scrollAreaWidgetContents);
         verticalLayoutWidget_2 = new QWidget(centralWidget);
         verticalLayoutWidget_2->setObjectName(QString::fromUtf8("verticalLayoutWidget_2"));
-        verticalLayoutWidget_2->setGeometry(QRect(190, 30, 1039, 551));
+        verticalLayoutWidget_2->setGeometry(QRect(20, 170, 1039, 554));
         verticalLayout_2 = new QVBoxLayout(verticalLayoutWidget_2);
         verticalLayout_2->setSpacing(3);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
+        verticalLayout_2->setContentsMargins(20, 40, 0, 0);
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
@@ -154,23 +143,34 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout_3);
 
-        verticalLayoutWidget = new QWidget(centralWidget);
-        verticalLayoutWidget->setObjectName(QString::fromUtf8("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(10, 490, 160, 80));
-        verticalLayout = new QVBoxLayout(verticalLayoutWidget);
-        verticalLayout->setSpacing(6);
-        verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
         label = new QLabel(centralWidget);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(190, -20, 1021, 72));
+        label->setGeometry(QRect(20, 90, 761, 72));
         sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
         label->setSizePolicy(sizePolicy);
         label->setMinimumSize(QSize(0, 72));
+        scrollArea = new QScrollArea(centralWidget);
+        scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
+        scrollArea->setGeometry(QRect(0, 0, 1041, 91));
+        scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+        scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+        scrollArea->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setEnabled(true);
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1039, 89));
+        horizontalLayoutWidget_2 = new QWidget(scrollAreaWidgetContents);
+        horizontalLayoutWidget_2->setObjectName(QString::fromUtf8("horizontalLayoutWidget_2"));
+        horizontalLayoutWidget_2->setGeometry(QRect(20, 10, 160, 80));
+        horizontalLayout_selector = new QHBoxLayout(horizontalLayoutWidget_2);
+        horizontalLayout_selector->setSpacing(6);
+        horizontalLayout_selector->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_selector->setObjectName(QString::fromUtf8("horizontalLayout_selector"));
+        horizontalLayout_selector->setContentsMargins(0, 0, 0, 0);
+        scrollArea->setWidget(scrollAreaWidgetContents);
         horizontalLayoutWidget = new QWidget(centralWidget);
         horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(0, 10, 181, 31));
+        horizontalLayoutWidget->setGeometry(QRect(1060, 10, 160, 80));
         horizontalLayout_2 = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -178,8 +178,6 @@ public:
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
         zoom_in = new QPushButton(horizontalLayoutWidget);
         zoom_in->setObjectName(QString::fromUtf8("zoom_in"));
-        sizePolicy.setHeightForWidth(zoom_in->sizePolicy().hasHeightForWidth());
-        zoom_in->setSizePolicy(sizePolicy);
 
         horizontalLayout_2->addWidget(zoom_in);
 
@@ -191,7 +189,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1224, 25));
+        menuBar->setGeometry(QRect(0, 0, 1240, 21));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));

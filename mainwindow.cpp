@@ -67,7 +67,7 @@ void MainWindow::refreshData(){
 
 
     QWidget *viewport = new QWidget;
-    viewport->setLayout(ui->verticalLayout);
+    viewport->setLayout(ui->horizontalLayout_selector);
 
     ui->scrollArea->setWidget(viewport);
 
@@ -97,12 +97,12 @@ void MainWindow::selectedSequence(Sequence *f){
 
 void MainWindow::updateListSequenceInSelector(QList<Sequence*> listSeq,QSize *size){
 
-    ui->verticalLayout = new QVBoxLayout(ui->centralWidget);
+    ui->horizontalLayout_selector = new QHBoxLayout(ui->centralWidget);
     Sequence seq;
     foreach(seq,listSeq){
         widgetInSelector *mylistSelector = new widgetInSelector(ui->centralWidget,&seq,size);
         connect(mylistSelector, SIGNAL(setSequence(Sequence *)), this, SLOT(selectedSequence(Sequence*)));
-        ui->verticalLayout->addWidget(mylistSelector);
+        ui->horizontalLayout_selector->addWidget(mylistSelector);
     }
 }
 
@@ -181,7 +181,7 @@ void MainWindow::on_zoom_in_clicked()
     QSize *size = myMem.size_in_widget;
     updateListSequenceInSelector(myMem.listSequence, size);
     QWidget *viewport = new QWidget;
-    viewport->setLayout(ui->verticalLayout);
+    viewport->setLayout(ui->horizontalLayout_selector);
 
     ui->scrollArea->setWidget(viewport);
 
@@ -201,7 +201,7 @@ void MainWindow::on_zoom_out_clicked()
     QSize *size = myMem.size_in_widget;
     updateListSequenceInSelector(myMem.listSequence, size);
     QWidget *viewport = new QWidget;
-    viewport->setLayout(ui->verticalLayout);
+    viewport->setLayout(ui->horizontalLayout_selector);
 
     ui->scrollArea->setWidget(viewport);
 
