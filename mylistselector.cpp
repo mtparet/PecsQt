@@ -6,7 +6,8 @@ MyListSelector::MyListSelector(QWidget *parent): MyBaseListWidget(parent)
  setDragEnabled(false);
  setFlow(QListView::LeftToRight);
  setMinimumWidth(100);
- setFixedHeight(140);
+ QSize *size_view = myMem.size_in_view;
+ setIconSize(*size_view);
  setSelectionMode(QAbstractItemView::NoSelection);
 
 }

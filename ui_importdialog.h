@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'importdialog.ui'
 **
-** Created: Sat 16. Jun 19:01:52 2012
+** Created: Mon 18. Jun 12:12:26 2012
 **      by: Qt User Interface Compiler version 4.8.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -67,7 +67,7 @@ public:
         progressBar->setValue(0);
         label_3 = new QLabel(ImportDialog);
         label_3->setObjectName(QString::fromUtf8("label_3"));
-        label_3->setGeometry(QRect(130, 210, 181, 16));
+        label_3->setGeometry(QRect(70, 210, 241, 20));
 
         retranslateUi(ImportDialog);
         QObject::connect(buttonBox, SIGNAL(accepted()), ImportDialog, SLOT(accept()));
@@ -79,7 +79,7 @@ public:
     void retranslateUi(QDialog *ImportDialog)
     {
         ImportDialog->setWindowTitle(QApplication::translate("ImportDialog", "Dialog", 0, QApplication::UnicodeUTF8));
-        lineEdit->setText(QApplication::translate("ImportDialog", "http://127.0.0.1:3000/images_sequentielles.json", 0, QApplication::UnicodeUTF8));
+        lineEdit->setText(QApplication::translate("ImportDialog", "http://serveur.paret.fr/images_sequentielles.json", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("ImportDialog", "Depuis internet:", 0, QApplication::UnicodeUTF8));
         pushBtWeb->setText(QApplication::translate("ImportDialog", "OK", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("ImportDialog", "Depuis un fichier:", 0, QApplication::UnicodeUTF8));

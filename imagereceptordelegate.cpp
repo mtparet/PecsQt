@@ -42,8 +42,6 @@ void ImageReceptorDelegate::paint ( QPainter * painter, const QStyleOptionViewIt
 
     painter->drawRect(index.row()*size->width(), 0, size->width() - 8, size->height() + 10);
 
-    std::cout << "DELGATE " <<  "image_file:" << is.img.image_file.toStdString() << " folder:" << is.folder.toStdString() << std::endl;
-
     QPixmap image = Util::getPixmapFile(is.img.image_file,is.folder);
 
     //TODO externaliser les valeurs pour povoir mettre un zoom

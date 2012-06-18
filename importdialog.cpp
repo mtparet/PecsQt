@@ -34,22 +34,41 @@ void ImportDialog::telechargement()
 void ImportDialog::afficher()
 {
     QNetworkReply *r = qobject_cast<QNetworkReply*>(sender()); //On rcupre la rponse du serveur
-    //QFile f("fichier.txt"); //On ouvre le fichier
-    //f.open(QIODevice::WriteOnly);
+    QString url_base = r->url().path();
+
     QByteArray json = r->readAll();
-    //f.write(r->readAll()); ////On lit la rponse du serveur que l'on met dans un fichier
-    //f.close(); //On ferme le fichier
-    //r->deleteLater(); //IMPORTANT : on emploie la fonction deleteLater() pour supprimer la rponse du serveur.
-    //Si vous ne le faites pas, vous risquez des fuites de mmoire ou autre.
     QList<Sequence> listSq = ApiParse::parseList(json);
+
+
 
     Sequence sq;
     foreach(sq,listSq){
         listSeq.append(&sq);
+
+        QStringList fileList;
+
+        ImageInSequence is;
+        foreach(is,sq.listImageInSequence){
+            fileList.append(url_base + is.img.image_file);
+        }
+
+        Util::saveImageFiles(fileList, sq.name);
+
+        QStringList listeName = Util::getFileName(fileList);
+
+        sq.fromQMap(listeName,sq.name);
+
+        //add folder name to image_file
+        for(int i = 0; i < sq.listImageInSequence.count(); i++){
+            sq.listImageInSequence[i].folder = sq.name;
+        }
     }
 
-    ui->label_3->setText(listSeq.count() + " s√©quences √† importer");
+    myMem.add(sq);
 
+    ui->label_3->setText(listSeq.count() + " sÈquences ‡ importer");
+
+    r->deleteLater();
 }
 
 void ImportDialog::messageErreur(QNetworkReply::NetworkError)
@@ -93,5 +112,5 @@ void ImportDialog::on_pushBtChoose_clicked()
         listSeq.append(&sq);
     }
 
-    ui->label_3->setText(listSeq.count() + " s√©quences √† importer");
+    ui->label_3->setText(listSeq.count() + " s√©quences √  importer");
 }

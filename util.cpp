@@ -7,7 +7,10 @@
 #include <QImage>
 #include <QIcon>
 #include <QDebug>
-
+#include <QNetworkAccessManager>
+#include <QUrl>
+#include <QEventLoop>
+#include <QNetworkRequest>
 
 QString Util::folderRacine = "ressources";
 QString Util::folderImage = "images";
@@ -67,6 +70,46 @@ bool Util::saveImageFiles(QStringList fileList,QString folder ){
 
 
     return check;
+}
+
+void Util::saveImageFilesFromNetwork(QStringList urlString,QString folder){
+   /*
+    QNetworkAccessManager* mNetworkManager = new QNetworkAccessManager(this);
+    QObject::connect(mNetworkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(onNetworkReply(QNetworkReply*)));
+
+    QUrl url = "http://someurl.com";
+    QNetworkReply* reply = mNetworkManager->get(QNetworkRequest(url));
+
+    void onNetworkReply(QNetworkReply* reply)
+    {
+        QString replyString;
+        if(reply->error() == QNetworkReply::NoError)
+        {
+            int httpstatuscode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toUInt();
+            switch(httpstatuscode)
+            {
+            case RESPONSE_OK:
+            if (reply->isReadable())
+            {
+                QFileInfo fileInfo(fileurl.path());
+
+                QFile file(Util::folderRacine + "/" + Util::folderImage  + "/" + folder + "/" + fileInfo.fileName());
+                file.open(QIODevice::WriteOnly);
+                file.write(reply->readAll());
+                //Assuming this is a human readable file replyString now contains the file
+                replyString = QString::fromUtf8(reply->readAll().data());
+            }
+            break;
+            case RESPONSE_ERROR:
+            case RESPONSE_BAD_REQUEST:
+            default:
+                break;
+            }
+        }
+
+        reply->deleteLater();
+    }
+    */
 }
 
 QImage Util::getImageFile(QString name,QString folder){
@@ -242,13 +285,13 @@ bool Util::cpDir(const QString &srcPath, const QString &dstPath)
 }
 
 
-/* Insérer dans tableau de taille fixe de l'élément id_name à la place num_place
+/* Insérer dans tableau de taille fixe de l'élément id_name �  la place num_place
     Si la place en dehors du tableau on ne fait rien
-    Si la place était avant vide on a simplement une insertion à cette place
+    Si la place était avant vide on a simplement une insertion �  cette place
     Si la place était occupée, le reste du tableau est déplacé:
-        soit sur la droite ou la gauche en fonction du plus grand nombre de place vide restant à la fin du tableau
-        Si il ne reste plus de place à la toute fin du tableau de chaque côté, il est déplacé :
-          soit à droite ou gauche en fonction des places vides non finales */
+        soit sur la droite ou la gauche en fonction du plus grand nombre de place vide restant �  la fin du tableau
+        Si il ne reste plus de place �  la toute fin du tableau de chaque côté, il est déplacé :
+          soit �  droite ou gauche en fonction des places vides non finales */
 QList<QString> Util::insert_at(QString id_name,int num_place, QList<QString> tab){
 
     if(num_place < tab.length()){
@@ -258,12 +301,12 @@ QList<QString> Util::insert_at(QString id_name,int num_place, QList<QString> tab
             QList<int> free_right = what_free("right", true, num_place, tab);
             QList<int> free_left = what_free("left", true, num_place, tab);
 
-            // on test si le nombre d'élément dans free_left est > à celui dans free_right et qu'il n'est donc pas égal à 0
+            // on test si le nombre d'élément dans free_left est > �  celui dans free_right et qu'il n'est donc pas égal �  0
             if(free_left.length() > free_right.length()){
                 tab.removeAt(free_left[0]);
                 tab.insert(num_place,id_name);
             }else{
-                // si on vérifie que l'un des deux ne sont pas égal à 0 (et donc que free_right n'est pas égal à 0)
+                // si on vérifie que l'un des deux ne sont pas égal �  0 (et donc que free_right n'est pas égal �  0)
                 if(free_right.length() != 0 || free_left.length() != 0){
                     tab.removeAt(free_right[0]);
                     tab.insert(num_place,id_name);
@@ -272,12 +315,12 @@ QList<QString> Util::insert_at(QString id_name,int num_place, QList<QString> tab
                 {
                     QList<int> free_right_all = what_free("right", false, num_place, tab);
                     QList<int> free_left_all = what_free("left", false, num_place, tab);
-                    // on test si le nombre d'élément dans free_left est > à celui dans free_right et qu'il n'est donc pas égal à 0
+                    // on test si le nombre d'élément dans free_left est > �  celui dans free_right et qu'il n'est donc pas égal �  0
                     if(free_left_all.length() > free_right_all.length()){
                         tab.removeAt(free_left_all[0]);
                         tab.insert(num_place,id_name);
                     }else{
-                        // si on vérifie que l'un des deux ne sont pas égal à 0 (et donc que free_right n'est pas égal à 0)
+                        // si on vérifie que l'un des deux ne sont pas égal �  0 (et donc que free_right n'est pas égal �  0)
                         if(free_right_all.length() != 0 || free_left_all.length() != 0){
                             tab.removeAt(free_right_all[0]);
                             tab.insert(num_place,id_name);
@@ -292,14 +335,14 @@ QList<QString> Util::insert_at(QString id_name,int num_place, QList<QString> tab
 }
 
 
-/* calcul le nombre de place vide à partir d'une certaine place dans un tableau :
-    à gauche, droite, qu'à la fin, de partout
+/* calcul le nombre de place vide �  partir d'une certaine place dans un tableau :
+    �  gauche, droite, qu'�  la fin, de partout
   side : left ou right
   only_end : true or false
   num_place : le numéro de la place
   tab : le tableau
   renvoit un tableau avec les numéros des places libres suivant les conditions
-  l'odre des places dans le tableau est indicatif pour le premier élément à supprimer si réorganisation du tableau
+  l'odre des places dans le tableau est indicatif pour le premier élément �  supprimer si réorganisation du tableau
   */
 QList<int> Util::what_free(QString side, bool only_end, int num_place,QList<QString> tab){
     QList<int> tab_free;
@@ -349,8 +392,8 @@ QList<int> Util::what_free(QString side, bool only_end, int num_place,QList<QStr
     }
 }
 
-/* on déplace id_name à la place num_place
-        pour se faire on stocke l'élément à déplacer, on libère la place où il était
+/* on déplace id_name �  la place num_place
+        pour se faire on stocke l'élément �  déplacer, on libère la place où il était
         et on appelle la fonction d'insertion */
 QList<QString> Util::move_at(QString id_name,int num_place, QList<QString> tab_order){
     int index_id = tab_order.indexOf(id_name);

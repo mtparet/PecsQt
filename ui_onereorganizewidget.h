@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'onereorganizewidget.ui'
 **
-** Created: Sat 16. Jun 19:01:52 2012
+** Created: Mon 18. Jun 14:32:05 2012
 **      by: Qt User Interface Compiler version 4.8.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -49,7 +49,7 @@ public:
 
         horizontalLayout->addWidget(listWidget);
 
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer);
 

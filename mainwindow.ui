@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1240</width>
-    <height>690</height>
+    <width>1246</width>
+    <height>783</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -23,10 +23,10 @@
    <widget class="QWidget" name="verticalLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>28</x>
       <y>170</y>
-      <width>1039</width>
-      <height>554</height>
+      <width>1031</width>
+      <height>531</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -192,8 +192,8 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>90</y>
+      <x>10</x>
+      <y>110</y>
       <width>761</width>
       <height>72</height>
      </rect>
@@ -220,7 +220,7 @@
       <x>0</x>
       <y>0</y>
       <width>1041</width>
-      <height>91</height>
+      <height>131</height>
      </rect>
     </property>
     <property name="verticalScrollBarPolicy">
@@ -241,7 +241,7 @@
        <x>0</x>
        <y>0</y>
        <width>1039</width>
-       <height>89</height>
+       <height>129</height>
       </rect>
      </property>
      <widget class="QWidget" name="horizontalLayoutWidget_2">
@@ -253,7 +253,11 @@
         <height>80</height>
        </rect>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_selector"/>
+      <layout class="QHBoxLayout" name="horizontalLayout_selector">
+       <property name="sizeConstraint">
+        <enum>QLayout::SetMinimumSize</enum>
+       </property>
+      </layout>
      </widget>
     </widget>
    </widget>
@@ -289,7 +293,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1240</width>
+     <width>1246</width>
      <height>21</height>
     </rect>
    </property>

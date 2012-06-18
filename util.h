@@ -24,6 +24,7 @@ public:
     static int random(int min, int max);
     static bool removeDir(const QString &dirName);
     static bool initFileSystem();
+    static void saveImageFilesFromNetwork(QStringList urlString,QString folder);
     static QPixmap getPixmapFile(QString name, QString folder);
     static bool extractRessources(const QString & filePath);
     static bool archiveRessources(const QString & filePath);

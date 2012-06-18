@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'widgetinselector.ui'
 **
-** Created: Sat 16. Jun 19:01:52 2012
+** Created: Mon 18. Jun 15:03:45 2012
 **      by: Qt User Interface Compiler version 4.8.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -17,7 +17,6 @@
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
-#include <QtGui/QSpacerItem>
 #include <QtGui/QWidget>
 #include "mylistselector.h"
 
@@ -30,34 +29,36 @@ public:
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout;
     MyListSelector *listWidget;
-    QSpacerItem *horizontalSpacer;
 
     void setupUi(QWidget *widgetInSelector)
     {
         if (widgetInSelector->objectName().isEmpty())
             widgetInSelector->setObjectName(QString::fromUtf8("widgetInSelector"));
-        widgetInSelector->resize(525, 220);
-        widgetInSelector->setMinimumSize(QSize(525, 220));
-        widgetInSelector->setMaximumSize(QSize(525, 16777215));
+        widgetInSelector->resize(525, 132);
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(widgetInSelector->sizePolicy().hasHeightForWidth());
+        widgetInSelector->setSizePolicy(sizePolicy);
+        widgetInSelector->setMinimumSize(QSize(525, 100));
+        widgetInSelector->setMaximumSize(QSize(525, 220));
         label = new QLabel(widgetInSelector);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(40, 20, 61, 15));
+        label->setGeometry(QRect(10, 0, 61, 15));
         label->setMidLineWidth(1);
         horizontalLayoutWidget = new QWidget(widgetInSelector);
         horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(0, 40, 521, 103));
+        horizontalLayoutWidget->setGeometry(QRect(0, 20, 521, 103));
         horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
         listWidget = new MyListSelector(horizontalLayoutWidget);
         listWidget->setObjectName(QString::fromUtf8("listWidget"));
         listWidget->setMinimumSize(QSize(471, 101));
+        listWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        listWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
         horizontalLayout->addWidget(listWidget);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer);
 
 
         retranslateUi(widgetInSelector);

@@ -52,8 +52,6 @@ QVariant ImageSeqModel::data(const QModelIndex &index, int role) const {
           left = right = 0;
       }
 
-      std::cout << "MODEL " <<  "image_file:" << is.img.image_file.toStdString() << " folder:" << is.folder.toStdString() << std::endl;
-
       QVariantMap vm;
       vm.insert("li",is.toVariantMap());
       vm.insert("right",right);
@@ -157,7 +155,6 @@ bool ImageSeqModel::setData ( const QModelIndex & index, const QVariant & value,
     ImageInSequence is;
     is.fromVariant(value.toMap());
 
-    std::cout << "MODEL DROP " <<  "image_file:" << is.img.image_file.toStdString() << " folder:" << is.folder.toStdString() << std::endl;
 
 
     //Si l'objet n'est pas contenu on l'insert sinon on le déplace
