@@ -45,7 +45,7 @@ void ImageReceptorDelegate::paint ( QPainter * painter, const QStyleOptionViewIt
     QPixmap image = Util::getPixmapFile(is.img.image_file,is.folder);
 
     //TODO externaliser les valeurs pour povoir mettre un zoom
-    painter->drawPixmap(index.row()*size->width(),10,size->width() - 10,size->width(),image);
+    painter->drawPixmap(index.row()*size->width(),10,size->width() - 10,size->height(),image);
 
 
     //painter->restore();
@@ -53,7 +53,7 @@ void ImageReceptorDelegate::paint ( QPainter * painter, const QStyleOptionViewIt
 
 QSize ImageReceptorDelegate::sizeHint(const QStyleOptionViewItem &option,
                 const QModelIndex &index) const{
-    return QSize(100, 120);
+    return QSize(size->width(),size->height() + 10);
 }
 
 void ImageReceptorDelegate::setSize(QSize *size){
