@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'newsequence.ui'
 **
-** Created: Mon 18. Jun 12:01:46 2012
+** Created: Tue 19. Jun 12:52:43 2012
 **      by: Qt User Interface Compiler version 4.8.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -64,7 +64,7 @@ public:
 
     void retranslateUi(QDialog *NewSequence)
     {
-        NewSequence->setWindowTitle(QApplication::translate("NewSequence", "Dialog", 0, QApplication::UnicodeUTF8));
+        NewSequence->setWindowTitle(QApplication::translate("NewSequence", "Nouvelle s\303\251quence", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("NewSequence", "Nom de la s\303\251quence :", 0, QApplication::UnicodeUTF8));
         pushButton->setText(QApplication::translate("NewSequence", "Choisir les images", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("NewSequence", "Aucune image choisie", 0, QApplication::UnicodeUTF8));

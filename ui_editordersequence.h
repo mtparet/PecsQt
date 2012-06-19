@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'editordersequence.ui'
 **
-** Created: Mon 18. Jun 12:01:46 2012
+** Created: Tue 19. Jun 12:52:43 2012
 **      by: Qt User Interface Compiler version 4.8.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -64,7 +64,7 @@ public:
 
     void retranslateUi(QDialog *EditOrderSequence)
     {
-        EditOrderSequence->setWindowTitle(QApplication::translate("EditOrderSequence", "Dialog", 0, QApplication::UnicodeUTF8));
+        EditOrderSequence->setWindowTitle(QApplication::translate("EditOrderSequence", "R\303\251orgarniser la s\303\251quence", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("EditOrderSequence", "Nom de la s\303\251quence :", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("EditOrderSequence", "Modifier l'ordre de la s\303\251quence :", 0, QApplication::UnicodeUTF8));
     } // retranslateUi

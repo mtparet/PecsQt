@@ -6,10 +6,11 @@
 #include <iostream>
 
 
-ImageSeqModel::ImageSeqModel(QObject *parent, Sequence *seq) :
+ImageSeqModel::ImageSeqModel(QObject *parent, Sequence *seq, bool display_cadre) :
     QAbstractListModel(parent)
 {
     this->seq = *seq;
+    this->display_cadre = display_cadre;
 }
 
 int ImageSeqModel::rowCount(const QModelIndex &parent) const {
@@ -29,7 +30,7 @@ QVariant ImageSeqModel::data(const QModelIndex &index, int role) const {
       int right,left;
       right = left = 2;
 
-      if(is.img.image_file != "null"){
+      if(is.img.image_file != "null" && display_cadre){
 
           if(is.orderIn == 0 && row == 0){
               left = 1;

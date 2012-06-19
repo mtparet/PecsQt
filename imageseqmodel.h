@@ -7,7 +7,7 @@ class ImageSeqModel: public QAbstractListModel
 {   
     Q_OBJECT
 public:
-    explicit ImageSeqModel(QObject *parent=0,Sequence *seq = 0);
+    explicit ImageSeqModel(QObject *parent=0,Sequence *seq = 0,bool display_cadre = true);
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role) const;
     Qt::DropActions supportedDropActions() const;
@@ -21,6 +21,7 @@ public:
 
 protected:
     Sequence seq;
+    bool display_cadre;
 signals:
 
 public slots:

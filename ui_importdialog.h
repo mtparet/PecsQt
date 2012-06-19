@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'importdialog.ui'
 **
-** Created: Mon 18. Jun 12:12:26 2012
+** Created: Tue 19. Jun 12:52:43 2012
 **      by: Qt User Interface Compiler version 4.8.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -78,7 +78,7 @@ public:
 
     void retranslateUi(QDialog *ImportDialog)
     {
-        ImportDialog->setWindowTitle(QApplication::translate("ImportDialog", "Dialog", 0, QApplication::UnicodeUTF8));
+        ImportDialog->setWindowTitle(QApplication::translate("ImportDialog", "Importer des s\303\251quences", 0, QApplication::UnicodeUTF8));
         lineEdit->setText(QApplication::translate("ImportDialog", "http://serveur.paret.fr/images_sequentielles.json", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("ImportDialog", "Depuis internet:", 0, QApplication::UnicodeUTF8));
         pushBtWeb->setText(QApplication::translate("ImportDialog", "OK", 0, QApplication::UnicodeUTF8));

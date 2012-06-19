@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'organizedialog.ui'
 **
-** Created: Mon 18. Jun 12:01:46 2012
+** Created: Tue 19. Jun 12:52:43 2012
 **      by: Qt User Interface Compiler version 4.8.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -48,7 +48,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 857, 367));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 859, 369));
         scrollArea->setWidget(scrollAreaWidgetContents);
         verticalLayoutWidget = new QWidget(OrganizeDialog);
         verticalLayoutWidget->setObjectName(QString::fromUtf8("verticalLayoutWidget"));
@@ -66,7 +66,7 @@ public:
 
     void retranslateUi(QDialog *OrganizeDialog)
     {
-        OrganizeDialog->setWindowTitle(QApplication::translate("OrganizeDialog", "Dialog", 0, QApplication::UnicodeUTF8));
+        OrganizeDialog->setWindowTitle(QApplication::translate("OrganizeDialog", "Organiser les s\303\251quences", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

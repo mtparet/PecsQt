@@ -116,7 +116,7 @@ void MainWindow::buildLayoutReceptor(){
         sequence_vide->listImageInSequence.append(is);
     }
 
-    sequenceReceptor = new ImageSeqModel(this,sequence_vide);
+    sequenceReceptor = new ImageSeqModel(this,sequence_vide,true);
 
     ui->listView->setItemDelegate(seqDelegate);
     ui->listView->setModel(sequenceReceptor);
@@ -129,7 +129,7 @@ void MainWindow::buildLayoutReceptor(){
 
 void MainWindow::initLayoutSequence(){
 
-    ImageSeqModel *seqModel = new ImageSeqModel(this,&selectSeq);
+    ImageSeqModel *seqModel = new ImageSeqModel(this,&selectSeq,false);
     ui->listView_2->reset();
 
     ui->listView_2->setItemDelegate(seqDelegate);

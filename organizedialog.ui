@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Organiser les séquences</string>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
@@ -46,8 +46,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>857</width>
-      <height>367</height>
+      <width>859</width>
+      <height>369</height>
      </rect>
     </property>
    </widget>
