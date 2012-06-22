@@ -1,6 +1,6 @@
 #include "imageinsequence.h"
-#include "parser.h"
-#include "serializer.h"
+#include "qjson/parser.h"
+#include "qjson/serializer.h"
 
 ImageInSequence::ImageInSequence(){
 }

@@ -1,8 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'widgetinselector.ui'
 **
-** Created: Mon 18. Jun 15:03:45 2012
-**      by: Qt User Interface Compiler version 4.8.2
+** Created by: Qt User Interface Compiler version 4.8.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/

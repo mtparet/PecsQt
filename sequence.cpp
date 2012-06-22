@@ -1,7 +1,7 @@
 #include <sequence.h>
 #include <QStringList>
-#include "parser.h"
-#include "serializer.h"
+#include "qjson/parser.h"
+#include "qjson/serializer.h"
 #include "util.h"
 
 Sequence::Sequence(){
